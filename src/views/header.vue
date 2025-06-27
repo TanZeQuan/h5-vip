@@ -81,21 +81,15 @@ onUnmounted(() => {
         </div>
       </nav>
     </aside>
-
-    <!-- Main Content -->
-    <main class="main-content" :class="{ shift: isMenuOpen }">
-      <!-- Your page content -->
-      <p style="color: white;">Main content here</p>
-    </main>
   </div>
 </template>
 
 <style scoped>
 .logo {
-  width: 120px; /* Adjust this value to make logo smaller/larger */
+  width: 130px; /* Adjust this value to make logo smaller/larger */
   height: auto; /* Maintain aspect ratio */
   margin-right: auto; /* Pushes everything else to the right */
-  margin-left:20px;
+  margin-left:10px;
 }
 
 .logo img {
@@ -117,5 +111,120 @@ onUnmounted(() => {
   width: 24px; /* Same size as your original icon */
   height: 24px;
   display: block;
+}
+/* Sidebar */
+.sidebar-wrapper {
+  position: relative;
+}
+
+.overlay {
+  position: fixed;
+  top: 3.75rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+}
+
+.sidebar {
+  background-color: #1a1a1f;
+  color: #fff;
+  width: 15rem;
+  height: calc(100vh - 3.75rem);
+  overflow-y: auto;
+  position: fixed;
+  top: 3.75rem;
+  left: 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 95;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar.desktop {
+  transform: translateX(0) !important;
+  z-index: 80;
+}
+
+.menu-group {
+  padding: 1rem 0;
+}
+
+.menu-item {
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.2s;
+}
+
+.menu-item:hover,
+.menu-item.active {
+  background-color: #2c2c36;
+  color: #f5e7cc;
+}
+
+.sidebar-footer {
+  padding: 1rem;
+  border-top: 1px solid #333;
+}
+
+.language-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2c2c36;
+  padding: 0.625rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size:15px;
+}
+
+/* Medium Devices */
+@media screen and (min-width: 768px) {
+  .sidebar {
+    width: 18rem;
+  }
+
+  .menu-item {
+    font-size: 1.3rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .language-selector {
+    font-size: 1.1rem;
+  }
+}
+
+/* Large Devices */
+@media screen and (min-width: 1024px) {
+  .sidebar {
+    width: 22rem;
+  }
+
+  .menu-item {
+    font-size: 1.5rem;
+    padding: 1.25rem 2rem;
+  }
+
+  .language-selector {
+    font-size: 1.25rem;
+  }
+}
+.sidebar {
+  background-color: #1a1a1f;
+  color: #fff;
+  width: 15rem;
+  height: calc(100vh - 3.75rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: fixed;
+  top: 3.75rem;
+  left: 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 95;
 }
 </style>

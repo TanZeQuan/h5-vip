@@ -39,7 +39,6 @@ const footerList = ref([
 
 
 <style scoped>
-
 /* Special Share button styles */
 .share-item {
   position: relative;
@@ -77,9 +76,46 @@ const footerList = ref([
 
 .share-item p {
   color: #000;
-  font-weight: bold;
   position: absolute;
   bottom: 12px;
   width: 100%;
 }
+@media screen and (min-width: 768px) {
+  .share-item .link {
+    width: 200px;
+    height: 200px;
+    margin-top:-5rem;
+  }
+
+  .share-icon {
+    width: 120px !important;
+    height: 120px !important;
+    margin-top: -1rem;
+  }
+
+  .share-item p {
+    font-size: 1.5rem;
+    bottom: 1rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .share-item .link {
+    width: 200px;
+    height: 200px;
+    margin-top:-6rem;
+  }
+
+  .share-icon {
+    width: 150px !important;
+    height: 150px !important;
+    margin-top: -2rem;
+  }
+
+  .share-item p {
+    font-size: 2.2rem;
+    bottom: 1rem;
+  }
+}
+
 </style>

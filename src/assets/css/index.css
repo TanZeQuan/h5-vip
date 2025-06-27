@@ -1,114 +1,7 @@
-/* footer */
-.footer {
-  height: 60px;
-  position: relative;
-  z-index: 100;
+:root {
+  font-size: 16px;
 }
 
-.footer-seat {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background-image: url('@/assets/img/footer.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
-.footer-list {
-  max-width: 1080px;
-  height: 60px;
-  margin: 0 auto;
-}
-
-.footer-list ul {
-  display: flex;
-  justify-content: space-around; /* Changed from space-between to space-around */
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  height: 100%;
-}
-
-.footer-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex: 1; /* Equal width for all items */
-  position: relative;
-}
-
-.link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  width: 100%;
-  height: 100%;
-}
-
-.icon {
-  width: 30px; /* Slightly reduced from 30px */
-  height: 30px;
-  object-fit: contain;
-  margin-bottom: 2px;
-}
-
-.footer-list p {
-  font-size: 12px;
-  color: rgb(255, 246, 197);
-  margin: 0;
-  text-align: center;
-  white-space: nowrap;
-}
-
-/* Active state styling */
-.router-link-active .icon {
-  filter: brightness(1.2);
-}
-
-.router-link-active p {
-  font-weight: bold;
-  text-shadow: 0 0 3px rgba(255, 246, 197, 0.5);
-}
-
-
-.home-link .icon {
-  margin-left:-1rem;
-}
-.home-link p{
-  margin-left:-1rem;
-}
-
-.promotion-link .icon {
-  margin-left:-4rem;
-}
-.promotion-link p{
-  margin-left:-4rem;
-}
-
-.reward-link .icon {
-  margin-right:-4rem;
-}
-.reward-link p{
-  margin-right:-4rem;
-}
-
-.account-link .icon {
-  margin-right:-1rem;
-}
-.account-link p{
-  margin-right:-1rem;
-}
-
-
-/* header */
 /* Layout Base */
 .layout-container {
   display: flex;
@@ -123,12 +16,12 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 60px;
-  background-color: #1e1e24;
+  height: 3.75rem; /* 60px */
+  background-color: #282b34;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 0 1rem;
   z-index: 1000;
   color: white;
 }
@@ -137,14 +30,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
+  padding: 0.375rem;
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 1001; /* above sidebar */
+  z-index: 1001;
 }
 
-
+/* Auth Buttons */
 .auth-buttons {
   display: flex;
 }
@@ -155,10 +48,9 @@
   padding: 0;
   cursor: pointer;
   position: relative;
-  width:100px;
-  height:100px;
+  width: 6.25rem; /* 100px */
+  height: 6.25rem;
 }
-
 
 .border-img-wrapper {
   position: relative;
@@ -179,17 +71,18 @@
   color: white;
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: clamp(0.75rem, 0.9vw, 1rem);
 }
 
-/* Specific styles for each button */
 .register .btn-content {
   color: rgb(255, 246, 197);
+  font-size:13px;
+  margin-left:-3px;
 }
 
 .login .btn-content {
-  color: #000; /* White color for login */
-
+  color: #000;
+  font-size:13px;
 }
 
 /* Sidebar */
@@ -199,66 +92,331 @@
 
 .overlay {
   position: fixed;
-  top: 60px;
+  top: 3.75rem;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 90;
 }
 
-/* Sidebar container */
 .sidebar {
   background-color: #1a1a1f;
   color: #fff;
-  width: 240px;
-  height: calc(100vh - 60px);
+  width: 15rem;
+  height: calc(100vh - 3.75rem);
   overflow-y: auto;
   position: fixed;
-  top: 60px;
+  top: 3.75rem;
   left: 0;
   transform: translateX(-100%);
   transition: transform 0.3s ease;
   z-index: 95;
-  position: fixed;
 }
 
 .sidebar.open {
   transform: translateX(0);
 }
+
 .sidebar.desktop {
   transform: translateX(0) !important;
   z-index: 80;
 }
 
-/* Menu Groups */
 .menu-group {
-  padding: 16px 0;
+  padding: 1rem 0;
 }
+
 .menu-item {
-  padding: 12px 20px;
+  padding: 0.75rem 1.25rem;
   cursor: pointer;
-  font-size: 15px;
+  font-size: clamp(0.9rem, 1vw, 1.1rem);
   transition: background-color 0.2s;
 }
-.menu-item:hover {
-  background-color: #2c2c36;
-}
+
+.menu-item:hover,
 .menu-item.active {
   background-color: #2c2c36;
   color: #f5e7cc;
 }
 
-/* Footer Language */
+/* Sidebar Footer */
 .sidebar-footer {
-  padding: 16px;
+  padding: 1rem;
   border-top: 1px solid #333;
 }
+
 .language-selector {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #2c2c36;
-  padding: 10px;
+  padding: 0.625rem;
   border-radius: 4px;
   cursor: pointer;
+}
+
+/* Footer */
+.footer {
+  height: 3.75rem;
+  position: relative;
+  z-index: 100;
+}
+
+.footer-seat {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3.75rem;
+  background-image: url('@/assets/img/footer.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-top-left-radius: 0.625rem;
+  border-top-right-radius: 0.625rem;
+}
+
+.footer-list {
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.footer-list ul {
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  height: 100%;
+}
+
+.footer-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  position: relative;
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+}
+
+.icon {
+  width: 1.875rem; /* 30px */
+  height: 1.875rem;
+  object-fit: contain;
+  margin-bottom: 0.125rem;
+}
+
+.footer-list p {
+  font-size: clamp(0.75rem, 1vw, 1rem);
+  color: rgb(255, 246, 197);
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Active Footer Icon */
+.router-link-active .icon {
+  filter: brightness(1.2);
+}
+
+.router-link-active p {
+  font-weight: bold;
+  text-shadow: 0 0 3px rgba(255, 246, 197, 0.5);
+}
+
+/* Custom Alignment Adjustments */
+.home-link .icon,
+.home-link p {
+  margin-left: -1rem;
+}
+
+.promotion-link .icon,
+.promotion-link p {
+  margin-left: -4rem;
+}
+
+.reward-link .icon,
+.reward-link p {
+  margin-right: -4rem;
+}
+
+.account-link .icon,
+.account-link p {
+  margin-right: -1rem;
+}
+
+/* === Small Devices (Default Mobile Styles) === */
+.icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.btn {
+  width: 6rem;
+  height: 6rem;
+}
+
+.btn-content {
+  font-size: 1rem;
+}
+
+.menu-item {
+  font-size: 1rem;
+}
+
+.footer {
+  height: 3.75rem; /* 60px */
+}
+
+.footer-seat {
+  height: 4.85rem;
+}
+
+.footer-list p {
+  font-size: 1rem;
+}
+
+
+/* === Medium Devices (Tablets, >=768px) === */
+@media screen and (min-width: 768px) {
+  .icon {
+    width: 4em;
+    height: 4rem;
+  }
+
+  .btn {
+    width: 9rem;
+    height: 9rem;
+  }
+
+  .btn-content {
+    font-size: 1.25rem;
+  }
+
+  .menu-item {
+    font-size: 1.3rem;
+  }
+
+  .footer {
+    height: 6rem;
+  }
+
+  .footer-seat {
+    height: 8rem;
+  }
+
+  .footer-list p {
+    font-size: 1.2rem;
+  }
+}
+
+
+/* === Large Devices (Desktops, >=1024px) === */
+@media screen and (min-width: 1024px) {
+  .icon {
+    width: 7.5rem;
+    height: 7.5rem;
+  }
+
+  .btn {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .btn-content {
+    font-size: 1.5rem;
+  }
+
+  .menu-item {
+    font-size: 1.5rem;
+  }
+
+  .footer {
+    height: 6rem;
+  }
+
+  .footer-seat {
+    height: 15rem;
+  }
+
+  .footer-list p {
+    font-size: 2.4rem;
+  }
+}
+
+/* === header Small Devices (Default Mobile) === */
+.header {
+  height: 3.75rem; /* 60px */
+  padding: 0 1rem;
+  font-size: 1rem;
+}
+
+.menu-toggle {
+  padding: 0.375rem;
+}
+
+.btn {
+  width: 6rem;
+  height: 6rem;
+}
+
+.btn-content {
+  font-size: 1rem;
+}
+
+
+/* === Medium Devices (Tablet ≥768px) === */
+@media screen and (min-width: 768px) {
+  .header {
+    height: 10rem;
+    padding: 0 1.5rem;
+    font-size: 1.2rem;
+  }
+
+  .menu-toggle {
+    padding: 0.5rem;
+  }
+
+  .btn {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .btn-content {
+    font-size: 1.05rem;
+  }
+}
+
+
+/* === Large Devices (Desktop ≥1024px) === */
+@media screen and (min-width: 1024px) {
+  .header {
+    height: 5rem;
+    padding: 0 2rem;
+    font-size: 1.4rem;
+  }
+
+  .menu-toggle {
+    padding: 0.75rem;
+  }
+
+  .btn {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .btn-content {
+    font-size: 1rem;
+  }
 }
