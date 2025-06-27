@@ -29,7 +29,8 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
+  // linkActiveClass:'selected' //navbottomlink 跳转颜色固定
 });
 
 export default router;

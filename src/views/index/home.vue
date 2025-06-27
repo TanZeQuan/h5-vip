@@ -1,9 +1,10 @@
 <script setup>
-
+import {ref} from 'vue'
+import Header from '../header.vue'
 </script>
 
 <template>
-    <h1>首页</h1>
+    <Header />
 </template>
 
 <style scoped>
