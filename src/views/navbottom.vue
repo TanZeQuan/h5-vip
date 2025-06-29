@@ -82,14 +82,14 @@ const footerList = ref([
 }
 @media screen and (min-width: 768px) {
   .share-item .link {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     margin-top:-5rem;
   }
 
   .share-icon {
-    width: 120px !important;
-    height: 120px !important;
+    width: 100px !important;
+    height: 100px !important;
     margin-top: -1rem;
   }
 

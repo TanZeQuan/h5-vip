@@ -31,57 +31,52 @@ const activeTab = ref('popular');
 </script>
 
 <template>
-<div class="container-bg">
-  <div class="banner-container">
-    <van-swipe
-      class="promo-swipe"
-      :autoplay="3000"
-      indicator-color="transparent"
-    >
-      <van-swipe-item v-for="item in bannerList" :key="item.id">
-        <img
-          :src="item.imgUrl"
-          class="swipe-image"
-          alt="Promotion Banner"
-        />
-      </van-swipe-item>
-    </van-swipe>
-  </div>
-  
-    <div class="marquee-container">
-    <van-icon name="bell" class="bell-icon shake" />
-    <div class="marquee-wrapper">
-      <div class="marquee-content">
-        <span class="marquee-text">a nsiéuwu uagaaufizdu 0.99% danrisdin } Dpsuiua</span>
-        <span class="marquee-text">a nsiéuwu uagaaufizdu 0.99% danrisdin } Dpsuiua</span>
-        <span class="marquee-text">a nsiéuwu uagaaufizdu 0.99% danrisdin } Dpsuiua</span>
+    <div class="banner-container">
+      <van-swipe
+        class="promo-swipe"
+        :autoplay="3000"
+        indicator-color="transparent"
+      >
+        <van-swipe-item v-for="item in bannerList" :key="item.id">
+          <img
+            :src="item.imgUrl"
+            class="swipe-image"
+            alt="Promotion Banner"
+          />
+        </van-swipe-item>
+      </van-swipe>
+    </div>
+    
+      <div class="marquee-container">
+        <van-icon name="bell" class="bell-icon shake" />
+        <div class="marquee-wrapper">
+          <div class="marquee-content">
+            <span class="marquee-text">a nsiéuwu uagaaufizdu 0.99% danrisdin } Dpsuiua</span>
+            <span class="marquee-text">a nsiéuwu uagaaufizdu 0.99% danrisdin } Dpsuiua</span>
+            <span class="marquee-text">a nsiéuwu uagaaufizdu 0.99% danrisdin } Dpsuiua</span>
+          </div>
       </div>
     </div>
-  </div>
 
-   <<div class="game-categories">
-    <div class="category-tabs">
-      <button 
-        v-for="tab in tabs" 
-        :key="tab.id"
-        :class="{ active: activeTab === tab.id }"
-        @click="activeTab = tab.id"
-      >
-        <div class="icon-wrapper">
-          <img :src="tab.icon" class="tab-icon" :alt="tab.label" />
-          <div class="icon-decoration"></div>
-        </div>
-        <span>{{ tab.label }}</span>
-      </button>
+    <div class="game-categories">
+      <div class="category-tabs">
+        <button 
+          v-for="tab in tabs" 
+          :key="tab.id"
+          :class="{ active: activeTab === tab.id }"
+          @click="activeTab = tab.id"
+        >
+          <div class="icon-wrapper">
+            <img :src="tab.icon" class="tab-icon" :alt="tab.label" />
+            <div class="icon-decoration"></div>
+          </div>
+          <span>{{ tab.label }}</span>
+        </button>
+      </div>
     </div>
-  </div>
-</div>
 </template>
 
 <style scoped>
-.container-bg{
-    
-}
 .banner-container {
   width: 100%;
   margin-top: 3.75rem;
