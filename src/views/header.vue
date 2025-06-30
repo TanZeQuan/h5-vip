@@ -3,9 +3,14 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const isMenuOpen = ref(false)
 const windowWidth = ref(window.innerWidth)
+const expandedSection = ref(null) // track which section is expanded
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
+}
+
+const toggleSection = (section) => {
+  expandedSection.value = expandedSection.value === section ? null : section
 }
 
 const handleResize = () => {
@@ -24,9 +29,9 @@ onUnmounted(() => {
   <div class="layout-container">
     <!-- Header -->
     <header class="header">
-     <button class="menu-toggle" @click="toggleMenu" aria-label="Toggle menu">
+      <button class="menu-toggle" @click="toggleMenu" aria-label="Toggle menu">
         <img src="@/assets/img/toggle-i.png" alt="Menu" class="menu-icon" />
-    </button>
+      </button>
 
       <div class="logo">
         <img src="@/assets/img/logo-hd.png" alt="THVIP Logo" />
@@ -34,49 +39,92 @@ onUnmounted(() => {
 
       <div class="auth-buttons">
         <button class="btn register">
-            <div class="border-img-wrapper">
-                <img src="@/assets/img/register-br.png" class="btn-border" aria-hidden="true">
-                <span class="btn-content">Register</span>
-            </div>
+          <div class="border-img-wrapper">
+            <img src="@/assets/img/register-br.png" class="btn-border" aria-hidden="true">
+            <span class="btn-content">Register</span>
+          </div>
         </button>
-        
         <button class="btn login">
-            <div class="border-img-wrapper">
-                <img src="@/assets/img/login-br.png" class="btn-border" aria-hidden="true">
-                <span class="btn-content">Login</span>
-            </div>
+          <div class="border-img-wrapper">
+            <img src="@/assets/img/login-br.png" class="btn-border" aria-hidden="true">
+            <span class="btn-content">Login</span>
+          </div>
         </button>
-        </div>
+      </div>
     </header>
 
-    <!-- Sidebar Overlay -->
+    <!-- Overlay -->
     <div class="overlay" v-show="isMenuOpen" @click="toggleMenu"></div>
 
     <!-- Sidebar -->
     <aside class="sidebar-wrapper">
       <nav class="sidebar" :class="{ open: isMenuOpen }">
+        <!-- Top -->
         <div class="menu-group">
-          <div class="menu-item active">Deposit</div>
-          <div class="menu-item">Withdraw</div>
+          <div class="menu-item active">
+            <img src="@/assets/img/deposit.png" alt="Deposit" class="menu-img" />
+            <span>Deposit</span>
+          </div>
+          <div class="menu-item">
+            <img src="@/assets/img/withdraw.png" alt="Withdraw" class="menu-img" />
+            <span>Withdraw</span>
+          </div>
         </div>
 
+        <!-- Mid -->
         <div class="menu-group">
-          <div class="menu-item">Promotion</div>
-          <div class="menu-item">Invite & Earn</div>
-          <div class="menu-item">Reward Center</div>
-          <div class="menu-item">Cash Back</div>
+          <div class="menu-item">
+            <img src="@/assets/img/promotion.png" alt="Promotion" class="menu-img" />
+            <span>Promotion</span>
+          </div>
+          <div class="menu-item">
+            <img src="@/assets/img/invite.png" alt="Invite & Earn" class="menu-img" />
+            <span>Invite & Earn</span>
+          </div>
+          <div class="menu-item">
+            <img src="@/assets/img/reward.png" alt="Reward Center" class="menu-img" />
+            <span>Reward Center</span>
+          </div>
+          <div class="menu-item">
+            <img src="@/assets/img/cashback.png" alt="Cash Back" class="menu-img" />
+            <span>Cash Back</span>
+          </div>
         </div>
-
+        <br />
+        <!-- Expandable -->
         <div class="menu-group">
-          <div class="menu-item">Member</div>
-          <div class="menu-item">Game Center</div>
-          <div class="menu-item">Help Center</div>
+          <div class="menu-item collapsible" @click="toggleSection('member')">
+            <img src="@/assets/img/member.png" alt="Member" class="menu-img" />
+            <span>Member</span>
+            <van-icon :name="expandedSection === 'member' ? 'arrow-up' : 'arrow-down'" class="van-icon" />
+          </div>
+          <div v-show="expandedSection === 'member'" class="submenu">
+            <div class="menu-item">Member Info</div>
+            <div class="menu-item">VIP Status</div>
+          </div>
+          <div class="menu-item collapsible" @click="toggleSection('game')">
+            <img src="@/assets/img/game-center.png" alt="Game Center" class="menu-img" />
+            <span>Game Center</span>
+            <van-icon :name="expandedSection === 'game' ? 'arrow-up' : 'arrow-down'" class="van-icon" />
+          </div>
+          <div v-show="expandedSection === 'game'" class="submenu">
+            <div class="menu-item">Slots</div>
+            <div class="menu-item">Live Casino</div>
+          </div>
         </div>
-
-        <div class="sidebar-footer">
-          <div class="language-selector">
+        <br />
+        <div class="menu-group footer-section">
+          <div class="menu-item secondary">
+            <img src="@/assets/img/help.png" alt="Help Center" class="menu-img" />
+            <span>Help Center</span>
+          </div>
+          <div class="menu-item secondary">
+            <img src="@/assets/img/english.png" alt="Language" class="menu-img" />
             <span>English</span>
-            <van-icon name="arrow-down" size="16" color="#fff" />
+          </div>
+          <div class="menu-item secondary">
+            <img src="@/assets/img/logout.png" alt="Logout" class="menu-img" />
+            <span>Logout</span>
           </div>
         </div>
       </nav>
@@ -86,17 +134,17 @@ onUnmounted(() => {
 
 <style scoped>
 .logo {
-  width: 130px; /* Adjust this value to make logo smaller/larger */
-  height: auto; /* Maintain aspect ratio */
-  margin-right: auto; /* Pushes everything else to the right */
-  margin-left:10px;
+  width: 130px;
+  height: auto;
+  margin-right: auto;
+  margin-left: 10px;
 }
-
 .logo img {
-  width: 100%; /* Make image fill its container */
-  height: auto; /* Maintain aspect ratio */
-  display: block; /* Remove extra space below image */
+  width: 100%;
+  height: auto;
+  display: block;
 }
+/* Toggle Button */
 .menu-toggle {
   background: transparent;
   border: none;
@@ -106,117 +154,23 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
 }
-
 .menu-icon {
-  width: 24px; /* Same size as your original icon */
-  height: 24px;
+  width: 30px;
+  height: 30px;
   display: block;
 }
-/* Sidebar */
-.sidebar-wrapper {
-  position: relative;
-}
 
-.overlay {
-  position: fixed;
-  top: 3.75rem;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 90;
+/* Icon beside text */
+.menu-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .sidebar {
-  background-color: #1a1a1f;
+  background-color: #0d1120;
   color: #fff;
-  width: 15rem;
-  height: calc(100vh - 3.75rem);
-  overflow-y: auto;
-  position: fixed;
-  top: 3.75rem;
-  left: 0;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  z-index: 95;
-}
-
-.sidebar.open {
-  transform: translateX(0);
-}
-
-.sidebar.desktop {
-  transform: translateX(0) !important;
-  z-index: 80;
-}
-
-.menu-group {
-  padding: 1rem 0;
-}
-
-.menu-item {
-  padding: 0.75rem 1.25rem;
-  cursor: pointer;
-  font-size: 15px;
-  transition: background-color 0.2s;
-}
-
-.menu-item:hover,
-.menu-item.active {
-  background-color: #2c2c36;
-  color: #f5e7cc;
-}
-
-.sidebar-footer {
-  padding: 1rem;
-  border-top: 1px solid #333;
-}
-
-.language-selector {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #2c2c36;
-  padding: 0.625rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size:15px;
-}
-
-/* Medium Devices */
-@media screen and (min-width: 768px) {
-  .sidebar {
-    width: 18rem;
-  }
-
-  .menu-item {
-    font-size: 1.3rem;
-    padding: 1rem 1.5rem;
-  }
-
-  .language-selector {
-    font-size: 1.1rem;
-  }
-}
-
-/* Large Devices */
-@media screen and (min-width: 1024px) {
-  .sidebar {
-    width: 22rem;
-  }
-
-  .menu-item {
-    font-size: 1.5rem;
-    padding: 1.25rem 2rem;
-  }
-
-  .language-selector {
-    font-size: 1.25rem;
-  }
-}
-.sidebar {
-  background-color: #1a1a1f;
-  color: #fff;
-  width: 15rem;
+  width: 12rem;
   height: calc(100vh - 3.75rem);
   overflow-y: auto;
   overflow-x: hidden;
@@ -226,5 +180,100 @@ onUnmounted(() => {
   transform: translateX(-100%);
   transition: transform 0.3s ease;
   z-index: 95;
+  padding-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #1a1f30;
+}
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: #1a1f30;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.van-icon {
+  margin-left: auto;
+  font-size: 14px;
+  cursor: pointer;
+  background: linear-gradient(90deg, #fff5e2, #f0cda3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.menu-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
+.menu-group.footer-section {
+    margin-top: -10px;
+  }
+.menu-item {
+  display: flex;
+  align-items: center;
+  background-color: #1a1f30;
+  color: white;
+  padding: 0.35rem 1rem;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 0.75rem;
+}
+.menu-item.active {
+  background: linear-gradient(180deg, #fff5e2, #f0cda3);
+  color: #000;
+}
+.menu-item:hover {
+  background-color: #2c2c36;
+}
+.menu-item.secondary {
+  background-color: transparent;
+  border: 1px solid #636161;
+}
+.submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+@media screen and (min-width: 768px) {
+  .sidebar {
+    width: 16rem;
+  }
+  .menu-item {
+    font-size: 15px;
+    padding: 0.75rem 1.25rem;
+  }
+  .menu-img {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .sidebar {
+    width: 20rem;
+  }
+  .menu-item {
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+  }
+  .menu-img {
+    width: 28px;
+    height: 28px;
+  }
 }
 </style>
