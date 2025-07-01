@@ -51,13 +51,13 @@ function goToRegister() {
 
       <div class="auth-buttons">
       <button class="btn register" @click="goToRegister">
-        <div class="border-img-wrapper">
+        <div class="border-img-wrapper1">
           <img src="@/assets/img/register-br.png" class="btn-border" aria-hidden="true">
           <span class="btn-content">Register</span>
         </div>
       </button>
       <button class="btn login" @click="goToLogin">
-        <div class="border-img-wrapper">
+        <div class="border-img-wrapper2">
           <img src="@/assets/img/login-br.png" class="btn-border" aria-hidden="true">
           <span class="btn-content">Login</span>
         </div>
@@ -180,7 +180,18 @@ function goToRegister() {
   height: 24px;
   object-fit: contain;
 }
-
+.btn{
+  margin-right:-15px;
+}
+.border-img-wrapper1{
+  padding:0px 0px;
+}
+.border-img-wrapper2{
+  padding:0px 8px;
+}
+.btn-content{
+  font-size:13px;
+}
 .sidebar {
   background-color: #0d1120;
   color: #fff;

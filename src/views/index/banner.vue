@@ -59,6 +59,7 @@ const activeTab = ref('popular')
             <span class="marquee-text">a nsiéuwu uagaaufizdu 0.99% danrisdin } Dpsuiua</span>
           </div>
         </div>
+        <img src="@/assets/img/arrow-down.png" alt="bell" class="bell-icon2" />
     </div>
 
     <div class="game-categories">
@@ -139,14 +140,16 @@ const activeTab = ref('popular')
   font-size: 23px;
   padding: 0 15px;
   flex-shrink: 0;
-  height: 25px;
-  margin-right: 15px; /* Increased spacing */
+  height: 18px;
+  margin-right: 8px; /* Increased spacing */
   display: flex;
   align-items: center;
+  margin-left:-8px;
   z-index: 2; /* Ensure icon stays above marquee */
 }
-.bell-icon.shake {
-  animation: shake 2s infinite;
+.bell-icon2 {
+  margin-left:8px;
+  width:18px;
 }
 
 .marquee-wrapper {
