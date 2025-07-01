@@ -25,6 +25,15 @@ const routes = [
     name: 'reward',
     component: () => import('../views/reward/rew.vue') 
   },
+  {
+    path: '/Login',
+    name: 'login',
+    component: () => import('../views/Login/login.vue') 
+  },{
+    path: '/Register',
+    name: 'register',
+    component: () => import('../views/Register/register.vue') 
+  },
 ];
 
 const router = createRouter({

@@ -82,33 +82,33 @@ const footerList = ref([
 }
 @media screen and (min-width: 768px) {
   .share-item .link {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     margin-top:-5rem;
   }
 
   .share-icon {
-    width: 100px !important;
-    height: 100px !important;
+    width: 80px !important;
+    height: 80px !important;
     margin-top: -1rem;
   }
 
   .share-item p {
-    font-size: 1.5rem;
+    font-size: 1.0rem;
     bottom: 1rem;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .share-item .link {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     margin-top:-6rem;
   }
 
   .share-icon {
-    width: 150px !important;
-    height: 150px !important;
+    width: 100px !important;
+    height: 100px !important;
     margin-top: -2rem;
   }
 

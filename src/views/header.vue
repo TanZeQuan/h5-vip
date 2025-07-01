@@ -1,5 +1,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const isMenuOpen = ref(false)
 const windowWidth = ref(window.innerWidth)
@@ -23,10 +26,19 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
 })
+
+// ✅ Route functions
+function goToLogin() {
+  router.push('/login')
+}
+
+function goToRegister() {
+  router.push('/register')
+}
 </script>
 
 <template>
-  <div class="layout-container">
+  <div class="header-container">
     <!-- Header -->
     <header class="header">
       <button class="menu-toggle" @click="toggleMenu" aria-label="Toggle menu">
@@ -38,24 +50,24 @@ onUnmounted(() => {
       </div>
 
       <div class="auth-buttons">
-        <button class="btn register">
-          <div class="border-img-wrapper">
-            <img src="@/assets/img/register-br.png" class="btn-border" aria-hidden="true">
-            <span class="btn-content">Register</span>
-          </div>
-        </button>
-        <button class="btn login">
-          <div class="border-img-wrapper">
-            <img src="@/assets/img/login-br.png" class="btn-border" aria-hidden="true">
-            <span class="btn-content">Login</span>
-          </div>
-        </button>
-      </div>
+      <button class="btn register" @click="goToRegister">
+        <div class="border-img-wrapper">
+          <img src="@/assets/img/register-br.png" class="btn-border" aria-hidden="true">
+          <span class="btn-content">Register</span>
+        </div>
+      </button>
+      <button class="btn login" @click="goToLogin">
+        <div class="border-img-wrapper">
+          <img src="@/assets/img/login-br.png" class="btn-border" aria-hidden="true">
+          <span class="btn-content">Login</span>
+        </div>
+      </button>
+    </div>
     </header>
 
     <!-- Overlay -->
     <div class="overlay" v-show="isMenuOpen" @click="toggleMenu"></div>
-
+ </div>
     <!-- Sidebar -->
     <aside class="sidebar-wrapper">
       <nav class="sidebar" :class="{ open: isMenuOpen }">
@@ -129,10 +141,12 @@ onUnmounted(() => {
         </div>
       </nav>
     </aside>
-  </div>
 </template>
 
 <style scoped>
+.header-container{
+  margin-bottom:3vh;
+}
 .logo {
   width: 130px;
   height: auto;

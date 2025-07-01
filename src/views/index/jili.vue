@@ -2,49 +2,49 @@
 import { ref, computed } from 'vue'
 import { Icon } from 'vant'
 // Hot game images
-import hotGame1 from '@/assets/hot-games/hot-gm1.png'
-import hotGame2 from '@/assets/hot-games/hot-gm2.png'
-import hotGame3 from '@/assets/hot-games/hot-gm3.png'
-import hotGame4 from '@/assets/hot-games/hot-gm4.png'
-import hotGame5 from '@/assets/hot-games/hot-gm5.png'
-import hotGame6 from '@/assets/hot-games/hot-gm6.png'
-import hotGame7 from '@/assets/hot-games/hot-gm7.png'
-import hotGame8 from '@/assets/hot-games/hot-gm8.png'
+import hotGame1 from '@/assets/hot-games/jili1.png'
+import hotGame2 from '@/assets/hot-games/jili2.png'
+import hotGame3 from '@/assets/hot-games/jili3.png'
+import hotGame4 from '@/assets/hot-games/jili4.png'
+import hotGame5 from '@/assets/hot-games/jili5.png'
+import hotGame6 from '@/assets/hot-games/jili6.png'
+import hotGame7 from '@/assets/hot-games/jili7.png'
+import hotGame8 from '@/assets/hot-games/jili8.png'
+import hotGame9 from '@/assets/hot-games/jili9.png'
+import hotGame10 from '@/assets/hot-games/jili10.png'
+import hotGame11 from '@/assets/hot-games/jili11.png'
+import hotGame12 from '@/assets/hot-games/jili12.png'
 
 // Sample game data - expanded to multiple pages
 const allGames = [
   // Page 1
   [
-    { id: 1, title: 'Songkran S...', img: hotGame1, badge: 'PG' },
-    { id: 2, title: 'Mahjong Wa...', img: hotGame2, badge: 'PG' },
-    { id: 3, title: 'Thai Hi Lo', img: hotGame3, badge: 'SEXY' },
+    { id: 1, title: 'Songkran S...', img: hotGame1, badge: 'JILI' },
+    { id: 2, title: 'Mahjong Wa...', img: hotGame2, badge: 'JILI' },
+    { id: 3, title: 'Thai Hi Lo', img: hotGame3, badge: 'JILI' },
     { id: 4, title: 'Happy Fishing', img: hotGame4, badge: 'JILI' },
-    { id: 5, title: 'Lucky Neko', img: hotGame5, badge: 'PG' },
-    { id: 6, title: 'Rich Mahjong', img: hotGame6, badge: 'RSG' },
-    { id: 7, title: 'Thai River...', img: hotGame7, badge: 'PG' },
-    { id: 8, title: 'Golden Empire', img: hotGame8, badge: 'JILI' }
+    { id: 5, title: 'Lucky Neko', img: hotGame5, badge: 'JILI' },
+    { id: 6, title: 'Rich Mahjong', img: hotGame6, badge: 'JILI' },
+    // { id: 7, title: 'Thai River...', img: hotGame7, badge: 'PG' },
+    // { id: 8, title: 'Golden Empire', img: hotGame8, badge: 'JILI' }
   ],
   // Page 2
   [
-    { id: 9, title: 'JILL JILL', img: hotGame1, badge: 'PG' },
-    { id: 10, title: 'CLEVER', img: hotGame2, badge: 'JILI' },
-    { id: 11, title: 'COINS&YO', img: hotGame3, badge: 'RSG' },
-    { id: 12, title: 'PIRATE', img: hotGame4, badge: 'PG' },
-    { id: 13, title: 'PERFECT', img: hotGame5, badge: 'SEXY' },
-    { id: 14, title: 'HIT THIS CASHIN', img: hotGame6, badge: 'JILI' },
-    { id: 15, title: 'QUEEN2', img: hotGame7, badge: 'PG' },
-    { id: 16, title: 'MORE', img: hotGame8, badge: 'RSG' }
+    { id: 7, title: 'JILL JILL', img: hotGame7, badge: 'JILI' },
+    { id: 8, title: 'CLEVER', img: hotGame8, badge: 'JILI' },
+    { id: 9, title: 'COINS&YO', img: hotGame9, badge: 'JILI' },
+    { id: 10, title: 'PIRATE', img: hotGame10, badge: 'JILI' },
+    { id: 11, title: 'PERFECT', img: hotGame11, badge: 'JILI' },
+    { id: 12, title: 'HIT THIS CASHIN', img: hotGame12, badge: 'JILI' },
   ],
   // Page 3
   [
-    { id: 17, title: 'COLDEN', img: hotGame1, badge: 'PG' },
-    { id: 18, title: 'JOKER', img: hotGame2, badge: 'JILI' },
-    { id: 19, title: 'TREASURE', img: hotGame3, badge: 'SEXY' },
-    { id: 20, title: 'COINS', img: hotGame4, badge: 'PG' },
-    { id: 21, title: 'HIT THIS CASHIN', img: hotGame5, badge: 'RSG' },
-    { id: 22, title: 'Money Pot D...', img: hotGame6, badge: 'JILI' },
-    { id: 23, title: 'Golden Trea...', img: hotGame7, badge: 'PG' },
-    { id: 24, title: 'MORE', img: hotGame8, badge: 'SEXY' }
+    { id: 13, title: 'COLDEN', img: hotGame1, badge: 'PG' },
+    { id: 14, title: 'JOKER', img: hotGame2, badge: 'JILI' },
+    { id: 15, title: 'TREASURE', img: hotGame3, badge: 'SEXY' },
+    { id: 16, title: 'COINS', img: hotGame4, badge: 'PG' },
+    { id: 17, title: 'HIT THIS CASHIN', img: hotGame5, badge: 'RSG' },
+    { id: 18, title: 'Money Pot D...', img: hotGame6, badge: 'JILI' },
   ]
 ]
 
@@ -103,11 +103,6 @@ const prevPage = () => {
           <img v-if="game.img" :src="game.img" class="my-game-image" :alt="game.title" />
           <div class="my-game-name">{{ game.title }}</div>
         </div>
-
-        <div class="my-game-item my-more-item">
-          <div class="my-more-icon">⬛⬛<br />⬛⬛</div>
-          <div class="my-game-name">MORE</div>
-        </div>
       </div>
     </div>
   </div>
@@ -117,6 +112,7 @@ const prevPage = () => {
 <style scoped>
 .my-games-container {
   margin: 30px 6px 6px 6px; /* top, right, bottom, left */
+  margin-bottom:30px;
 }
 
 /* Main games section */
@@ -180,7 +176,7 @@ const prevPage = () => {
 
 /* Make the icon gold */
 .my-page-btn .van-icon {
-  color: #ffd700 !important; /* Gold color */
+  color: #ffee8d !important; /* Gold color */
   font-size: 14px;
 }
 
