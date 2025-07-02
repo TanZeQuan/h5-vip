@@ -1,24 +1,20 @@
 <script setup>
 import { ref } from 'vue'
 // Hot game images
-import hotGame1 from '@/assets/hot-games/hot-gm1.png'
-import hotGame2 from '@/assets/hot-games/hot-gm2.png'
-import hotGame3 from '@/assets/hot-games/hot-gm3.png'
-import hotGame4 from '@/assets/hot-games/hot-gm4.png'
-import hotGame5 from '@/assets/hot-games/hot-gm5.png'
-import hotGame6 from '@/assets/hot-games/hot-gm6.png'
-import hotGame7 from '@/assets/hot-games/hot-gm7.png'
-import hotGame8 from '@/assets/hot-games/hot-gm8.png'
+import hotGame1 from '@/assets/hot-games/block-slot1.png'
+import hotGame2 from '@/assets/hot-games/block-slot2.png'
+import hotGame3 from '@/assets/hot-games/block-slot3.png'
+import hotGame4 from '@/assets/hot-games/block-slot4.png'
+import hotGame5 from '@/assets/hot-games/block-slot5.png'
+import hotGame6 from '@/assets/hot-games/block-slot6.png'
 
 const games = [
-  { id: 1, title: 'Songkran S...', img: hotGame1, badge: 'PG' },
-  { id: 2, title: 'Mahjong Wa...', img: hotGame2, badge: 'PG' },
-  { id: 3, title: 'Thai Hi Lo', img: hotGame3, badge: 'SEXY' },
-  { id: 4, title: 'Happy Fishing', img: hotGame4, badge: 'JILI' },
-  { id: 5, title: 'Lucky Neko', img: hotGame5, badge: 'PG' },
-  { id: 6, title: 'Rich Mahjong', img: hotGame6, badge: 'RSG' },
-  { id: 7, title: 'Thai River...', img: hotGame7, badge: 'PG' },
-  { id: 8, title: 'Golden Empire', img: hotGame8, badge: 'JILI' }
+  { id: 1, title: 'Hotline', img: hotGame1, badge: 'Crash Games' },
+  { id: 2, title: 'Keno', img: hotGame2, badge: 'Crash Games' },
+  { id: 3, title: 'Mines', img: hotGame3, badge: 'Crash Games' },
+  { id: 4, title: 'Mini Roulette', img: hotGame4, badge: 'Crash Games' },
+  { id: 5, title: 'Hilo', img: hotGame5, badge: 'Crash Games' },
+  { id: 6, title: 'Plinko', img: hotGame6, badge: 'Crash Games' },
 ]
 </script>
 
@@ -36,11 +32,6 @@ const games = [
           <div class="game-badge" v-if="game.badge" style="cursor: pointer;">{{ game.badge }}</div>
           <img v-if="game.img" :src="game.img" class="game-img" :alt="game.title" style="cursor: pointer;" />
           <div class="game-title" style="cursor: pointer;">{{ game.title }}</div>
-        </div>
-
-        <div class="game-card more-card" style="cursor: pointer;">
-          <div class="more-icon" style="cursor: pointer;">⬛⬛<br />⬛⬛</div>
-          <div class="game-title" style="cursor: pointer;">MORE</div>
         </div>
       </div>
     </div>
@@ -128,7 +119,7 @@ const games = [
   z-index: 1;
   background: linear-gradient(90deg, rgba(255, 245, 226, 0.99), hsla(33, 72%, 79%, 0.99));
   color: #1d212d;
-  font-size: 12px;
+  font-size: 13px;
   font-weight:bold;
   padding: 3px 10px;
   border-radius: 3px;
@@ -138,13 +129,14 @@ const games = [
 .game-title {
   margin-top: 8px;
   padding: 0 4px;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: bold;
    background: linear-gradient(90deg, rgba(255, 245, 226, 0.99), hsla(33, 72%, 79%, 0.99));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  text-align: left;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -163,12 +155,5 @@ const games = [
 
 .games-grid{
   padding-top:10px;
-}
-
-/* ➕ Icon Inside "More" Card */
-.more-icon {
-  font-size: 15px;
-  color:#fff;
-  line-height: 1;
 }
 </style>

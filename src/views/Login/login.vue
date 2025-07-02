@@ -1,3 +1,13 @@
+<script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goHome = () => {
+  router.push('/') // or your actual home route name
+}
+</script>
+
 <template>
   <div class="login-page">
     <!-- Back Arrow -->
@@ -8,20 +18,21 @@
       <img src="@/assets/login-img/login-logo.png" alt="THVIP Logo" class="logo-img" />
     </div>
 
-    <!-- Login Title -->
-    <h2 class="login-title">Login</h2>
+    <!-- Title -->
+    <h2 class="form-title">Login</h2>
 
     <!-- Username -->
     <div class="input-group">
-      <!-- <img src="@/assets/img/user-icon.svg" alt="User" class="input-icon" /> -->
+      <van-icon name="user-o" class="input-icon" />
       <input type="text" placeholder="Username" />
     </div>
 
     <!-- Password -->
     <div class="input-group">
-      <!-- <img src="@/assets/img/lock-icon.svg" alt="Password" class="input-icon" /> -->
+      <van-icon name="lock" class="input-icon" />
       <input type="password" placeholder="Password" />
     </div>
+
 
     <!-- Remember + Forgot -->
     <div class="options">
@@ -48,34 +59,24 @@
     </div>
 
     <!-- Google Button -->
-    <button class="google-button">
-      <!-- <img src="@/assets/img/google-icon.svg" alt="Google" /> -->
-      <span>Google</span>
-    </button>
+    <div class="google-button-wrapper">
+      <button class="google-button">
+        <img src="@/assets/login-img/google.png" alt="Google" class="google-icon" />
+        <span>Google</span>
+      </button>
+    </div>
   </div>
 </template>
-
-<script setup>
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-
-const goHome = () => {
-  router.push('/') // or your actual home route name
-}
-</script>
 
 <style scoped>
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  
-  font-family: Arial, sans-serif;
 }
 
 .login-page {
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start; 
@@ -111,10 +112,14 @@ html, body {
 
 .login-title {
   text-align: center;
-  font-size: 28px;
+  font-size: 2rem;
   font-weight: bold;
-  font-family: Georgia, serif;
   margin-bottom: 20px;
+  color: #d6e2f4;
+  font-family: Georgia, serif;
+  margin-top:-5px;
+  letter-spacing: -1.0px;
+  line-height: 1.1;
 }
 
 .input-group {
@@ -162,15 +167,28 @@ html, body {
 
 .login-button {
   width: 100%;
-  background: linear-gradient(to right, #f7d9b9, #e9c392);
+  background: linear-gradient(90deg, #fff5e2, #f0cda3);
   color: white;
   font-weight: bold;
   border: none;
   border-radius: 30px;
   padding: 12px;
-  font-size: 16px;
+  font-size: 20px;
+  font-family: Georgia, serif;
   margin-bottom: 20px;
   cursor: pointer;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: Georgia, serif;
+  margin-bottom: 20px;
+  color: #d6e2f4;
+  margin-top:-5px;
+  letter-spacing: -1.0px;
+  line-height: 1.1;
 }
 
 .register {
@@ -200,23 +218,33 @@ html, body {
   background: #444;
   margin: 0 10px;
 }
+.google-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top:-10px;
+}
 
 .google-button {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: white;
-  color: #333;
+  gap: 8px;
+  background-color: #db4437;
+  color: white;
+  border: 2px solid white;
   border-radius: 30px;
-  padding: 10px;
+  padding: 10px 20px;
   font-weight: bold;
-  font-size: 14px;
-  border: none;
+  font-size: 16px;
   cursor: pointer;
-  gap: 10px;
+  transition: background-color 0.3s ease;
 }
 
-.google-button img {
+.google-button:hover {
+  background-color: #c33d2f;
+}
+
+.google-icon {
   width: 20px;
   height: 20px;
 }

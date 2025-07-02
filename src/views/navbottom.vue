@@ -1,6 +1,18 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
+
+const handleProtectedRoute = (path) => {
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'
+
+  if (!isLoggedIn) {
+    router.push({ path: '/login', query: { redirect: path } })
+  } else {
+    router.push(path)
+  }
+}
 // 静态导入图片路径
 import homeIcon from '@/assets/img/home-i.svg'
 import promotionIcon from '@/assets/img/promo-i.svg'
@@ -22,21 +34,46 @@ const footerList = ref([
     <div class="footer-seat">
       <div class="footer-list">
         <ul>
-          <li v-for="(item, index) in footerList" :key="index" 
-              :class="['footer-item', { 'share-item': item.title === 'Share' }]">
-            <router-link :to="item.path" class="link">
-              <img :src="item.icon" :alt="item.title" class="icon" 
-                  :class="{ 'share-icon': item.title === 'Share' }" />
-              <p>{{ item.title }}</p>
-              <div v-if="item.title === 'Share'" class="promo-badge"></div>
-            </router-link>
-          </li>
+          <li
+          v-for="(item, index) in footerList"
+          :key="index"
+          :class="['footer-item', { 'share-item': item.title === 'Share' }]"
+        >
+          <div
+            v-if="item.title === 'Rewards'"
+            class="link"
+            @click="handleProtectedRoute(item.path)"
+          >
+            <img
+              :src="item.icon"
+              :alt="item.title"
+              class="icon"
+              :class="{ 'share-icon': item.title === 'Share' }"
+            />
+            <p>{{ item.title }}</p>
+          </div>
+
+          <!-- Normal link for others -->
+          <router-link
+            v-else
+            :to="item.path"
+            class="link"
+          >
+            <img
+              :src="item.icon"
+              :alt="item.title"
+              class="icon"
+              :class="{ 'share-icon': item.title === 'Share' }"
+            />
+            <p>{{ item.title }}</p>
+            <div v-if="item.title === 'Share'" class="promo-badge"></div>
+          </router-link>
+        </li>
         </ul>
       </div>
     </div>
   </div>
 </template>
-
 
 <style scoped>
 /* Special Share button styles */
@@ -79,43 +116,6 @@ const footerList = ref([
   position: absolute;
   bottom: 12px;
   width: 100%;
-}
-@media screen and (min-width: 768px) {
-  .share-item .link {
-    width: 120px;
-    height: 120px;
-    margin-top:-5rem;
-  }
-
-  .share-icon {
-    width: 80px !important;
-    height: 80px !important;
-    margin-top: -1rem;
-  }
-
-  .share-item p {
-    font-size: 1.0rem;
-    bottom: 1rem;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .share-item .link {
-    width: 150px;
-    height: 150px;
-    margin-top:-6rem;
-  }
-
-  .share-icon {
-    width: 100px !important;
-    height: 100px !important;
-    margin-top: -2rem;
-  }
-
-  .share-item p {
-    font-size: 2.2rem;
-    bottom: 1rem;
-  }
 }
 
 </style>

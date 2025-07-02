@@ -167,7 +167,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 3.75rem;
+  height: 1rem;
   background-image: url('@/assets/img/footer.png');
   background-size: cover;
   background-position: center;
@@ -287,73 +287,6 @@
   font-size: 1rem;
 }
 
-
-/* === Medium Devices (Tablets, >=768px) === */
-@media screen and (min-width: 768px) {
-  .icon {
-    width: 4em;
-    height: 4rem;
-  }
-
-  .btn {
-    width: 9rem;
-    height: 9rem;
-  }
-
-  .btn-content {
-    font-size: 1.25rem;
-  }
-
-  .menu-item {
-    font-size: 1.3rem;
-  }
-
-  .footer {
-    height: 6rem;
-  }
-
-  .footer-seat {
-    height: 8rem;
-  }
-
-  .footer-list p {
-    font-size: 1.2rem;
-  }
-}
-
-
-/* === Large Devices (Desktops, >=1024px) === */
-@media screen and (min-width: 1024px) {
-  .icon {
-    width: 7.5rem;
-    height: 7.5rem;
-  }
-
-  .btn {
-    width: 10rem;
-    height: 10rem;
-  }
-
-  .btn-content {
-    font-size: 1.5rem;
-  }
-
-  .menu-item {
-    font-size: 1.5rem;
-  }
-
-  .footer {
-    height: 6rem;
-  }
-
-  .footer-seat {
-    height: 15rem;
-  }
-
-  .footer-list p {
-    font-size: 2.4rem;
-  }
-}
 
 /* === header Small Devices (Default Mobile) === */
 .header {

@@ -219,7 +219,7 @@ const prevPage = () => {
   z-index: 1;
   background: linear-gradient(90deg, rgba(255, 245, 226, 0.99), hsla(33, 72%, 79%, 0.99));
   color: #1d212d;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
   padding: 3px 10px;
   border-radius: 3px;
@@ -229,12 +229,13 @@ const prevPage = () => {
 .my-game-name {
   margin-top: 8px;
   padding: 0 4px;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: bold;
   background: linear-gradient(90deg, rgba(255, 245, 226, 0.99), hsla(33, 72%, 79%, 0.99));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-align: left;
   color: transparent;
   white-space: nowrap;
   overflow: hidden;

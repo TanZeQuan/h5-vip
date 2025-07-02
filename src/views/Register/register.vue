@@ -1,3 +1,12 @@
+<script setup>
+import { Icon } from 'vant'
+import 'vant/es/icon/style'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const goHome = () => router.push('/')
+</script>
+
 <template>
   <div class="register-page">
     <!-- Back Arrow -->
@@ -5,10 +14,7 @@
 
     <!-- Logo -->
     <div class="logo">
-      <!-- Uncomment and replace with your actual logo -->
-      <!-- <img src="@/assets/img/logo.png" alt="THVIP Logo" class="logo-img" /> -->
-      <h1><span class="logo-yellow">TH</span>VIP</h1>
-      <p class="domain">thvip.vip</p>
+      <img src="@/assets/login-img/login-logo.png" alt="THVIP Logo" class="logo-img" />
     </div>
 
     <!-- Title -->
@@ -19,7 +25,7 @@
       <div class="form-group">
         <span class="required">*</span>
         <div class="input-wrapper">
-          <!-- <img src="@/assets/img/user-icon.svg" class="input-icon" /> -->
+          <van-icon name="user-o" class="input-icon" />
           <input type="text" placeholder="Username" />
         </div>
       </div>
@@ -27,14 +33,15 @@
       <div class="form-group">
         <span class="required">*</span>
         <div class="input-wrapper">
-          <!-- <img src="@/assets/img/lock-icon.svg" class="input-icon" /> -->
+          <van-icon name="lock" class="input-icon" />
           <input type="password" placeholder="Password" />
         </div>
       </div>
 
       <div class="form-group">
+        <span class="required">*</span>
         <div class="input-wrapper">
-          <!-- <img src="@/assets/img/lock-icon.svg" class="input-icon" /> -->
+          <van-icon name="lock" class="input-icon" />
           <input type="password" placeholder="Confirm password" />
         </div>
       </div>
@@ -42,7 +49,7 @@
       <div class="form-group">
         <span class="required">*</span>
         <div class="input-wrapper">
-          <!-- <img src="@/assets/img/phone-icon.svg" class="input-icon" /> -->
+          <van-icon name="phone-o" class="input-icon" />
           <input type="text" placeholder="Mobile number" />
         </div>
       </div>
@@ -50,6 +57,7 @@
       <div class="form-group captcha-group">
         <span class="required">*</span>
         <div class="input-wrapper captcha-wrapper">
+          <van-icon name="shield-o" class="input-icon" />
           <input type="text" placeholder="Enter a captcha" />
           <div class="captcha-box">44212</div>
         </div>
@@ -72,35 +80,31 @@
     <!-- Google Button -->
     <div class="google-button-wrapper">
       <button class="google-button">
+        <img src="@/assets/login-img/google.png" alt="Google" class="google-icon" />
         <span>Google</span>
       </button>
     </div>
+
   </div>
 </template>
 
-<script setup>
-import { Icon } from 'vant'
-import 'vant/es/icon/style'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-const goHome = () => router.push('/')
-</script>
-
 <style scoped>
 html, body {
-  height: 100%;
   margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 .register-page {
   min-height: 100vh;
-  color: white;
-  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  padding: 40px 30px 20px;      
+  max-width: 500px;
   margin: 0 auto;
-  padding: 40px 20px;
+  color: white;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
 }
 
 .back-arrow {
@@ -124,17 +128,21 @@ html, body {
 }
 
 .logo-img {
-  max-width: 160px;
+  max-width: 300px;
   width: 100%;
   height: auto;
 }
 
 .form-title {
   text-align: center;
-  font-size: 26px;
+  font-size: 2rem;
   font-weight: bold;
   font-family: Georgia, serif;
   margin-bottom: 20px;
+  color: #d6e2f4;
+  margin-top:-5px;
+  letter-spacing: -1.0px;
+  line-height: 1.1;
 }
 
 .form-group {
@@ -182,7 +190,7 @@ html, body {
   border-radius: 5px;
   font-weight: bold;
   font-size: 16px;
-  margin-left: 10px;
+  margin-left:-20px;
 }
 
 .button-group {
@@ -190,17 +198,19 @@ html, body {
   justify-content: space-between;
   margin-top: 20px;
   gap: 10px;
+  margin-left:20px;
 }
 
 .btn-register {
   flex: 1;
-  background: linear-gradient(to right, #f7d9b9, #e9c392);
+  background: linear-gradient(90deg, #fff5e2, #f0cda3);
   color: white;
   font-weight: bold;
   border: none;
   border-radius: 30px;
+  font-family: Georgia, serif;
   padding: 12px;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
 }
 
@@ -235,16 +245,32 @@ html, body {
 .google-button-wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin-top:-10px;
 }
 
 .google-button {
-  background: white;
-  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #db4437;
+  color: white;
+  border: 2px solid white;
   border-radius: 30px;
-  padding: 10px 30px;
+  padding: 10px 20px;
   font-weight: bold;
-  font-size: 14px;
-  border: none;
+  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
+
+.google-button:hover {
+  background-color: #c33d2f;
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+}
+
 </style>

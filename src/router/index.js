@@ -23,7 +23,8 @@ const routes = [
   {
     path: '/reward',
     name: 'reward',
-    component: () => import('../views/reward/rew.vue') 
+    component: () => import('../views/reward/rew.vue'),
+    // meta: { requiresAuth: true }
   },
   {
     path: '/Login',
@@ -39,7 +40,18 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  // linkActiveClass:'selected' //navbottomlink 跳转颜色固定
-});
+  // linkActiveClass: 'selected'
+})
+
+// ✅ Global navigation guard
+router.beforeEach((to, from, next) => {
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'
+
+  if (to.meta.requiresAuth && !isLoggedIn) {
+    next({ path: '/login', query: { redirect: to.fullPath } })
+  } else {
+    next()
+  }
+})
 
 export default router;

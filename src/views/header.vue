@@ -81,10 +81,6 @@ function goToRegister() {
             <img src="@/assets/img/withdraw.png" alt="Withdraw" class="menu-img" />
             <span>Withdraw</span>
           </div>
-        </div>
-
-        <!-- Mid -->
-        <div class="menu-group">
           <div class="menu-item">
             <img src="@/assets/img/promotion.png" alt="Promotion" class="menu-img" />
             <span>Promotion</span>
@@ -102,7 +98,7 @@ function goToRegister() {
             <span>Cash Back</span>
           </div>
         </div>
-        <br />
+      
         <!-- Expandable -->
         <div class="menu-group">
           <div class="menu-item collapsible" @click="toggleSection('member')">
@@ -195,7 +191,7 @@ function goToRegister() {
 .sidebar {
   background-color: #0d1120;
   color: #fff;
-  width: 12rem;
+  width: 15rem;
   height: calc(100vh - 3.75rem);
   overflow-y: auto;
   overflow-x: hidden;
@@ -209,18 +205,6 @@ function goToRegister() {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  scrollbar-width: thin;
-  scrollbar-color: #888 #1a1f30;
-}
-.sidebar::-webkit-scrollbar {
-  width: 6px;
-}
-.sidebar::-webkit-scrollbar-track {
-  background: #1a1f30;
-}
-.sidebar::-webkit-scrollbar-thumb {
-  background-color: #888;
-  border-radius: 4px;
 }
 .sidebar.open {
   transform: translateX(0);
@@ -240,6 +224,7 @@ function goToRegister() {
 .menu-group {
   display: flex;
   flex-direction: column;
+  margin:5px;
   gap: 0.5rem;
   padding: 0 1rem;
 }
@@ -277,10 +262,11 @@ function goToRegister() {
 @media screen and (min-width: 768px) {
   .sidebar {
     width: 16rem;
+    padding-top:2rem;
   }
   .menu-item {
     font-size: 15px;
-    padding: 0.75rem 1.25rem;
+    padding: 0.55rem 1.25rem;
   }
   .menu-img {
     width: 26px;

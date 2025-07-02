@@ -6,7 +6,12 @@ import jiliLogo from '@/assets/subpage/slot-sp1.png'
 import cq9Logo from '@/assets/subpage/slot-sp2.png'
 import swgLogo from '@/assets/subpage/slot-sp3.png'
 import kaLogo from '@/assets/subpage/slot-sp4.png'
-import slotImage from '@/assets/subpage/slot1.png'
+import liveImage1 from '@/assets/subpage/live-slot1.png'
+import liveImage2 from '@/assets/subpage/live-slot2.png'
+import liveImage3 from '@/assets/subpage/live-slot3.png'
+import liveImage4 from '@/assets/subpage/live-slot4.png'
+import liveImage5 from '@/assets/subpage/live-slot5.png'
+import liveImage6 from '@/assets/subpage/live-slot6.png'
 
 const providers = [
   { key: 'PG', name: 'PG', logo: pgLogo },
@@ -28,41 +33,41 @@ const pageState = ref({
 })
 
 const games = ref([
-  { id: 1, title: 'Fortune King...', provider: 'PG', image: slotImage },
-  { id: 2, title: 'Dinosaur Tyc...', provider: 'PG', image: slotImage },
-  { id: 3, title: 'Happy Fishing', provider: 'PG', image: slotImage },
-  { id: 4, title: 'Ocean King ...', provider: 'PG', image: slotImage },
-  { id: 5, title: 'All-Star Fish...', provider: 'PG', image: slotImage },
-  { id: 6, title: 'Boom Legend', provider: 'PG', image: slotImage },
+  { id: 1, title: 'Fortune King...', provider: 'PG', image: liveImage1, badge: 'PG' },
+  { id: 2, title: 'Dinosaur Tyc...', provider: 'PG', image: liveImage2, badge: 'PG' },
+  { id: 3, title: 'Happy Fishing', provider: 'PG', image: liveImage3, badge: 'PG' },
+  { id: 4, title: 'Ocean King ...', provider: 'PG', image: liveImage4, badge: 'PG' },
+  { id: 5, title: 'All-Star Fish...', provider: 'PG', image: liveImage5, badge: 'PG' },
+  { id: 6, title: 'Boom Legend', provider: 'PG', image: liveImage6, badge: 'PG' },
   
 
-  { id: 1, title: 'FC Game 1', provider: 'JILI', image: slotImage },
-    { id: 2, title: 'FC Game 2', provider: 'JILI', image: slotImage },
-    { id: 3, title: 'FC Game 3', provider: 'JILI', image: slotImage },
-    { id: 4, title: 'FC Game 4', provider: 'JILI', image: slotImage },
-    { id: 5, title: 'FC Game 5', provider: 'JILI', image: slotImage },
-    { id: 6, title: 'FC Game 6', provider: 'JILI', image: slotImage },
-    { id: 7, title: 'FC Game 7', provider: 'JILI', image: slotImage },
-    { id: 8, title: 'FC Game 8', provider: 'JILI', image: slotImage },
-    { id: 9, title: 'FC Game 9', provider: 'JILI', image: slotImage },
-    { id: 10, title: 'FC Game 10', provider: 'JILI', image: slotImage },
-    { id: 11, title: 'FC Game 11', provider: 'JILI', image: slotImage },
+  { id: 1, title: 'FC Game 1', provider: 'JILI', image: liveImage1, badge: 'PG' },
+    { id: 2, title: 'FC Game 2', provider: 'JILI', image: liveImage1, badge: 'PG' },
+    { id: 3, title: 'FC Game 3', provider: 'JILI', image: liveImage1, badge: 'PG' },
+    { id: 4, title: 'FC Game 4', provider: 'JILI', image: liveImage1, badge: 'PG' },
+    { id: 5, title: 'FC Game 5', provider: 'JILI', image: liveImage1, badge: 'PG' },
+    { id: 6, title: 'FC Game 6', provider: 'JILI', image: liveImage1, badge: 'PG' },
+    { id: 7, title: 'FC Game 7', provider: 'JILI', image: liveImage1, badge: 'PG' },
+    { id: 8, title: 'FC Game 8', provider: 'JILI', image: liveImage1, badge: 'PG' },
+    { id: 9, title: 'FC Game 9', provider: 'JILI', image: liveImage1, badge: 'PG' },
+    { id: 10, title: 'FC Game 10', provider: 'JILI', image: liveImage1, badge: 'PG' },
+    { id: 11, title: 'FC Game 11', provider: 'JILI', image: liveImage1, badge: 'PG' },
 
 
-  { id: 1, title: 'CQ9 Game 1', provider: 'FC', image: slotImage },
-  { id: 2, title: 'CQ9 Game 2', provider: 'FC', image: slotImage },
-  { id: 3, title: 'CQ9 Game 3', provider: 'FC', image: slotImage },
-  { id: 4, title: 'CQ9 Game 4', provider: 'FC', image: slotImage },
+  { id: 1, title: 'CQ9 Game 1', provider: 'FC', image: liveImage1, badge: 'PG' },
+  { id: 2, title: 'CQ9 Game 2', provider: 'FC', image: liveImage1, badge: 'PG' },
+  { id: 3, title: 'CQ9 Game 3', provider: 'FC', image: liveImage1, badge: 'PG' },
+  { id: 4, title: 'CQ9 Game 4', provider: 'FC', image: liveImage1, badge: 'PG' },
 
-  { id: 1, title: 'SWG Game 1', provider: 'AMBS', image: slotImage },
-  { id: 2, title: 'SWG Game 2', provider: 'AMBS', image: slotImage },
-  { id: 3, title: 'SWG Game 3', provider: 'AMBS', image: slotImage },
-  { id: 4, title: 'SWG Game 4', provider: 'AMBS', image: slotImage },
+  { id: 1, title: 'SWG Game 1', provider: 'AMBS', image: liveImage1, badge: 'PG' },
+  { id: 2, title: 'SWG Game 2', provider: 'AMBS', image: liveImage1, badge: 'PG' },
+  { id: 3, title: 'SWG Game 3', provider: 'AMBS', image: liveImage1, badge: 'PG' },
+  { id: 4, title: 'SWG Game 4', provider: 'AMBS', image: liveImage1, badge: 'PG' },
   
-  { id: 1, title: 'KA Game 1', provider: 'BP', image: slotImage },
-  { id: 2, title: 'KA Game 2', provider: 'BP', image: slotImage },
-  { id: 3, title: 'KA Game 3', provider: 'BP', image: slotImage },
-  { id: 4, title: 'KA Game 4', provider: 'BP', image: slotImage }
+  { id: 1, title: 'KA Game 1', provider: 'BP', image: liveImage1, badge: 'PG' },
+  { id: 2, title: 'KA Game 2', provider: 'BP', image: liveImage1, badge: 'PG' },
+  { id: 3, title: 'KA Game 3', provider: 'BP', image: liveImage1, badge: 'PG' },
+  { id: 4, title: 'KA Game 4', provider: 'BP', image: liveImage1, badge: 'PG' }
 ])
 
 function changeProvider(provider) {
@@ -132,10 +137,11 @@ function prevPage() {
       </div>
 
         <div class="my-games-grid">
-        <div class="my-game-item" v-for="game in paginatedGames" :key="game.id">
+          <div class="my-game-item" v-for="game in paginatedGames" :key="game.id">
+            <div v-if="game.badge" class="my-game-tag">{{ game.badge }}</div>
             <img :src="game.image" class="my-game-image" :alt="game.title" />
             <div class="my-game-name">{{ game.title }}</div>
-        </div>
+          </div>
         </div>
     </div>
   </div>
@@ -317,7 +323,7 @@ function prevPage() {
   z-index: 1;
   background: linear-gradient(90deg, rgba(255, 245, 226, 0.99), hsla(33, 72%, 79%, 0.99));
   color: #1d212d;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
   padding: 3px 10px;
   border-radius: 3px;
@@ -327,7 +333,8 @@ function prevPage() {
 .my-game-name {
   margin-top: 8px;
   padding: 0 4px;
-  font-size: 15px;
+  font-size: 18px;
+  text-align: left;
   font-weight: bold;
   background: linear-gradient(90deg, rgba(255, 245, 226, 0.99), hsla(33, 72%, 79%, 0.99));
   -webkit-background-clip: text;
