@@ -1,11 +1,67 @@
 <script setup>
-import { Icon } from 'vant'
-import 'vant/es/icon/style'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { showToast } from 'vant'
+import axios from 'axios'
 
 const router = useRouter()
 const goHome = () => router.push('/')
+
+const username = ref('')
+const password = ref('')
+const confirmPassword = ref('')
+const phone = ref('')
+const captcha = ref('')
+
+const captchaCode = '44212'
+
+const handleRegister = async () => {
+  if (!username.value || !password.value || !confirmPassword.value) {
+    return showToast('用户名和密码不能为空')
+  }
+  if (username.value.length < 3 || username.value.length > 20) {
+    return showToast('用户名长度必须在3-20个字符之间')
+  }
+  if (!/^[a-zA-Z0-9_]+$/.test(username.value)) {
+    return showToast('用户名只能包含字母、数字和下划线')
+  }
+  if (password.value.length < 6) {
+    return showToast('密码长度至少6位')
+  }
+  if (password.value !== confirmPassword.value) {
+    return showToast('两次密码输入不一致')
+  }
+  if (captcha.value !== captchaCode) {
+    return showToast('验证码错误')
+  }
+
+  try {
+    const params = new URLSearchParams()
+    params.append('username', username.value)
+    params.append('password', password.value)
+    if (phone.value) params.append('phone', phone.value)
+
+    const res = await axios.post('http://192.168.0.122/silver/user/user_register.php', params, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+
+    if (res.data.success) {
+      showToast('注册成功')
+      setTimeout(() => {
+        router.push('/login') // Replace with actual path
+      }, 1000)
+    } else {
+      showToast(res.data.message)
+    }
+  } catch (err) {
+    showToast('网络错误或服务器异常')
+    console.error(err)
+  }
+}
 </script>
+
 
 <template>
   <div class="register-page">
@@ -21,54 +77,54 @@ const goHome = () => router.push('/')
     <h2 class="form-title">Register</h2>
 
     <!-- Form -->
-    <form class="form">
-      <div class="form-group">
-        <span class="required">*</span>
-        <div class="input-wrapper">
-          <van-icon name="user-o" class="input-icon" />
-          <input type="text" placeholder="Username" />
-        </div>
-      </div>
+<form class="form" @submit.prevent="handleRegister">
+  <div class="form-group">
+    <span class="required">*</span>
+    <div class="input-wrapper">
+      <van-icon name="user-o" class="input-icon" />
+      <input type="text" placeholder="Username" v-model="username" required />
+    </div>
+  </div>
 
-      <div class="form-group">
-        <span class="required">*</span>
-        <div class="input-wrapper">
-          <van-icon name="lock" class="input-icon" />
-          <input type="password" placeholder="Password" />
-        </div>
-      </div>
+  <div class="form-group">
+    <span class="required">*</span>
+    <div class="input-wrapper">
+      <van-icon name="lock" class="input-icon" />
+      <input type="password" placeholder="Password" v-model="password" required />
+    </div>
+  </div>
 
-      <div class="form-group">
-        <span class="required">*</span>
-        <div class="input-wrapper">
-          <van-icon name="lock" class="input-icon" />
-          <input type="password" placeholder="Confirm password" />
-        </div>
-      </div>
+  <div class="form-group">
+    <span class="required">*</span>
+    <div class="input-wrapper">
+      <van-icon name="lock" class="input-icon" />
+      <input type="password" placeholder="Confirm password" v-model="confirmPassword" required />
+    </div>
+  </div>
 
-      <div class="form-group">
-        <span class="required">*</span>
-        <div class="input-wrapper">
-          <van-icon name="phone-o" class="input-icon" />
-          <input type="text" placeholder="Mobile number" />
-        </div>
-      </div>
+  <div class="form-group">
+    <span class="required">*</span>
+    <div class="input-wrapper">
+      <van-icon name="phone-o" class="input-icon" />
+      <input type="text" placeholder="Mobile number" v-model="phone" />
+    </div>
+  </div>
 
-      <div class="form-group captcha-group">
-        <span class="required">*</span>
-        <div class="input-wrapper captcha-wrapper">
-          <van-icon name="shield-o" class="input-icon" />
-          <input type="text" placeholder="Enter a captcha" />
-          <div class="captcha-box">44212</div>
-        </div>
-      </div>
+  <div class="form-group captcha-group">
+    <span class="required">*</span>
+    <div class="input-wrapper captcha-wrapper">
+      <van-icon name="shield-o" class="input-icon" />
+      <input type="text" placeholder="Enter a captcha" v-model="captcha" required />
+      <div class="captcha-box">44212</div>
+    </div>
+  </div>
 
-      <!-- Buttons -->
-      <div class="button-group">
-        <button type="submit" class="btn-register">Register</button>
-        <button type="reset" class="btn-reset">Reset</button>
-      </div>
-    </form>
+  <!-- Buttons -->
+  <div class="button-group">
+    <button type="submit" class="btn-register">Register</button>
+    <button type="reset" class="btn-reset">Reset</button>
+  </div>
+</form>
 
     <!-- Divider -->
     <div class="divider">
