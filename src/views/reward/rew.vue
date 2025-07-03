@@ -219,8 +219,9 @@ const getCardClass = (action) => {
 
 .reward-center {
   max-width: 500px;
+  min-height: 100vh;
+  background-color: #f5f5f5;
   margin: 0 auto;
-  background: linear-gradient(135deg, #ff6b47 0%, #ff8f6b 50%, #ffb347 100%);
   min-height: 100vh;
   position: relative;
   overflow: hidden;

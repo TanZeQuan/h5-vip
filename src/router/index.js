@@ -21,6 +21,11 @@ const routes = [
     component: () => import('../views/promotion/promo.vue') 
   },
   {
+    path: '/share',
+    name: 'share',
+    component: () => import('../views/share/share.vue') 
+  },
+  {
     path: '/reward',
     name: 'reward',
     component: () => import('../views/reward/rew.vue'),

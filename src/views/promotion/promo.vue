@@ -9,7 +9,26 @@ import promo4 from '@/assets/promo-img/promo4.png'
 import promo5 from '@/assets/promo-img/promo5.png'
 import promo6 from '@/assets/promo-img/promo6.png'
 import promo7 from '@/assets/promo-img/promo7.png'
-import promoDetail1 from '@/assets/promo-img/promo-info.png'
+import promo8 from '@/assets/promo-img/promo8.png'
+import promo9 from '@/assets/promo-img/promo9.png'
+import promo10 from '@/assets/promo-img/promo10.png'
+import promo11 from '@/assets/promo-img/promo11.png'
+import promo12 from '@/assets/promo-img/promo12.png'
+import promo13 from '@/assets/promo-img/promo13.png'
+import promo14 from '@/assets/promo-img/promo14.png'
+import promo15 from '@/assets/promo-img/promo15.png'
+import promo16 from '@/assets/promo-img/promo16.png'
+import promo17 from '@/assets/promo-img/promo17.png'
+import promo18 from '@/assets/promo-img/promo18.png'
+import promoDetail from '@/assets/promo-img/promo-info.png'
+import promoDetail1 from '@/assets/promo-img/promo-info1.png'
+import promoDetail2 from '@/assets/promo-img/promo-info2.png'
+import promoDetail3 from '@/assets/promo-img/promo-info3.png'
+import promoDetail4 from '@/assets/promo-img/promo-info4.png'
+import promoDetail5 from '@/assets/promo-img/promo-info5.png'
+import promoDetail6 from '@/assets/promo-img/promo-info6.png'
+import promoDetail7 from '@/assets/promo-img/promo-info7.png'
+import promoDetail8 from '@/assets/promo-img/promo-info8.png'
 
 import { useRouter } from 'vue-router'
 import { Icon as VanIcon } from 'vant'
@@ -26,37 +45,98 @@ const promotions = ref([
     image: promo1,
     title: 'โบนัสฝากครั้งแรก 145%',
     description: '',
-    moreImage: promoDetail1
+    moreImage: promoDetail
   },
   {
     image: promo2,
     title: '4ค่าคอมมิชชั่นสุดพิเศษสำหรับตัวแทน',
-    description: 'ค่าคอมฯ สูงสุด 0.99% และรับรายได้มากขึ้น!'
+    moreImage: promoDetail1
   },
   {
     image: promo3,
     title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
-    description: 'ดาวน์โหลดแอป THVIP และรับโบนัสสูงสุด 6,888฿'
+    moreImage: promoDetail2
   },
    {
     image: promo4,
     title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
-    description: 'ดาวน์โหลดแอป THVIP และรับโบนัสสูงสุด 6,888฿'
+    moreImage: promoDetail3
   },
    {
     image: promo5,
     title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
-    description: 'ดาวน์โหลดแอป THVIP และรับโบนัสสูงสุด 6,888฿'
+    moreImage: promoDetail4
   },
    {
     image: promo6,
     title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
-    description: 'ดาวน์โหลดแอป THVIP และรับโบนัสสูงสุด 6,888฿'
+    moreImage: promoDetail5
   },
   {
     image: promo7,
     title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
-    description: 'ดาวน์โหลดแอป THVIP และรับโบนัสสูงสุด 6,888฿'
+    moreImage: promoDetail6
+  },
+   {
+    image: promo8,
+    title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
+    moreImage: promoDetail7
+  },
+   {
+    image: promo9,
+    title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
+    moreImage: promoDetail8
+  },
+   {
+    image: promo10,
+    title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
+    moreImage: promoDetail1
+  },
+   {
+    image: promo11,
+    title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
+    moreImage: promoDetail1
+  },
+  {
+    image: promo12,
+    title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
+    moreImage: promoDetail1
+  },
+  {
+    image: promo13,
+    title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
+    description: 'ดาวน์โหลดแอป THVIP และรับโบนัสสูงสุด 6,888฿',
+    moreImage: promoDetail1
+  },
+  {
+    image: promo14,
+    title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
+    description: 'ดาวน์โหลดแอป THVIP และรับโบนัสสูงสุด 6,888฿',
+    moreImage: promoDetail1
+  },
+  {
+    image: promo15,
+    title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
+    description: 'ดาวน์โหลดแอป THVIP และรับโบนัสสูงสุด 6,888฿',
+    moreImage: promoDetail1
+  },
+  {
+    image: promo16,
+    title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
+    description: 'ดาวน์โหลดแอป THVIP และรับโบนัสสูงสุด 6,888฿',
+    moreImage: promoDetail1
+  },
+  {
+    image: promo17,
+    title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
+    description: 'ดาวน์โหลดแอป THVIP และรับโบนัสสูงสุด 6,888฿',
+    moreImage: promoDetail1
+  },
+  {
+    image: promo18,
+    title: 'ดาวน์โหลดแอปพิเศษรับโบนัส',
+    description: 'ดาวน์โหลดแอป THVIP และรับโบนัสสูงสุด 6,888฿',
+    moreImage: promoDetail1
   },
 ])
 

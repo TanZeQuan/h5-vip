@@ -214,11 +214,12 @@ const handleMenuClick = (item) => {
 
 .my-account {
   max-width: 500px;
+  min-height: 100vh;
+  background-color: #f5f5f5;
   margin: 0 auto;
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: white;
-  background: linear-gradient(135deg, #4e4745 0%, #181717 50%, #a7a4a2 100%);
 }
 
 .header {

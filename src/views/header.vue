@@ -1,12 +1,10 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-
 const isMenuOpen = ref(false)
-const windowWidth = ref(window.innerWidth)
-const expandedSection = ref(null) // track which section is expanded
+const expandedSection = ref(null)
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -16,25 +14,12 @@ const toggleSection = (section) => {
   expandedSection.value = expandedSection.value === section ? null : section
 }
 
-const handleResize = () => {
-  windowWidth.value = window.innerWidth
-}
-
-onMounted(() => {
-  window.addEventListener('resize', handleResize)
-})
-onUnmounted(() => {
-  window.removeEventListener('resize', handleResize)
-})
-
-// ✅ Route functions
-function goToLogin() {
-  router.push('/login')
-}
-
-function goToRegister() {
-  router.push('/register')
-}
+const goToRegister = () => router.push('/register')
+const goToLogin = () => router.push('/login')
+const goToPromo = () => router.push('/promotion')
+const goToShare = () => router.push('/share')
+const goToReward = () => router.push('/reward')
+const goToCashback = () => router.push('/reward')
 </script>
 
 <template>
@@ -50,28 +35,28 @@ function goToRegister() {
       </div>
 
       <div class="auth-buttons">
-      <button class="btn register" @click="goToRegister">
-        <div class="border-img-wrapper1">
-          <img src="@/assets/img/register-br.png" class="btn-border" aria-hidden="true">
-          <span class="btn-content">Register</span>
-        </div>
-      </button>
-      <button class="btn login" @click="goToLogin">
-        <div class="border-img-wrapper2">
-          <img src="@/assets/img/login-br.png" class="btn-border" aria-hidden="true">
-          <span class="btn-content">Login</span>
-        </div>
-      </button>
-    </div>
+        <button class="btn register" @click="goToRegister">
+          <div class="border-img-wrapper1">
+            <img src="@/assets/img/register-br.png" class="btn-border" aria-hidden="true" />
+            <span class="btn-content">Register</span>
+          </div>
+        </button>
+        <button class="btn login" @click="goToLogin">
+          <div class="border-img-wrapper2">
+            <img src="@/assets/img/login-br.png" class="btn-border" aria-hidden="true" />
+            <span class="btn-content">Login</span>
+          </div>
+        </button>
+      </div>
     </header>
 
     <!-- Overlay -->
     <div class="overlay" v-show="isMenuOpen" @click="toggleMenu"></div>
- </div>
+
     <!-- Sidebar -->
     <aside class="sidebar-wrapper">
       <nav class="sidebar" :class="{ open: isMenuOpen }">
-        <!-- Top -->
+        <!-- Top Menu -->
         <div class="menu-group">
           <div class="menu-item active">
             <img src="@/assets/img/deposit.png" alt="Deposit" class="menu-img" />
@@ -81,25 +66,25 @@ function goToRegister() {
             <img src="@/assets/img/withdraw.png" alt="Withdraw" class="menu-img" />
             <span>Withdraw</span>
           </div>
-          <div class="menu-item">
+          <div class="menu-item" @click="goToPromo">
             <img src="@/assets/img/promotion.png" alt="Promotion" class="menu-img" />
             <span>Promotion</span>
           </div>
-          <div class="menu-item">
+          <div class="menu-item" @click="goToShare">
             <img src="@/assets/img/invite.png" alt="Invite & Earn" class="menu-img" />
             <span>Invite & Earn</span>
           </div>
-          <div class="menu-item">
+          <div class="menu-item" @click="goToReward">
             <img src="@/assets/img/reward.png" alt="Reward Center" class="menu-img" />
             <span>Reward Center</span>
           </div>
-          <div class="menu-item">
+          <div class="menu-item" @click="goToCashback">
             <img src="@/assets/img/cashback.png" alt="Cash Back" class="menu-img" />
             <span>Cash Back</span>
           </div>
         </div>
-      
-        <!-- Expandable -->
+
+        <!-- Member Section -->
         <div class="menu-group">
           <div class="menu-item collapsible" @click="toggleSection('member')">
             <img src="@/assets/img/member.png" alt="Member" class="menu-img" />
@@ -107,19 +92,71 @@ function goToRegister() {
             <van-icon :name="expandedSection === 'member' ? 'arrow-up' : 'arrow-down'" class="van-icon" />
           </div>
           <div v-show="expandedSection === 'member'" class="submenu">
-            <div class="menu-item">Member Info</div>
-            <div class="menu-item">VIP Status</div>
+            <div class="menu-item">
+              <img src="@/assets/img/vip.png" alt="VIP" class="menu-img" />
+              <span>VIP</span>
+            </div>
+            <div class="menu-item">
+              <img src="@/assets/img/bet-record.png" alt="Betting Record" class="menu-img" />
+              <span>Betting Record</span>
+            </div>
+            <div class="menu-item">
+              <img src="@/assets/img/acc-record.png" alt="Account Record" class="menu-img" />
+              <span>Account Record</span>
+            </div>
+            <div class="menu-item">
+              <img src="@/assets/img/security.png" alt="Security Center" class="menu-img" />
+              <span>Security Center</span>
+            </div>
+            <div class="menu-item">
+              <img src="@/assets/img/dep-record.png" alt="Deposit Record" class="menu-img" />
+              <span>Deposit Record</span>
+            </div>
+            <div class="menu-item">
+              <img src="@/assets/img/profit.png" alt="Profit and Loss" class="menu-img" />
+              <span>Profit and Loss</span>
+            </div>
+            <div class="menu-item">
+              <img src="@/assets/img/mail.png" alt="Mail" class="menu-img" />
+              <span>Mail</span>
+            </div>
           </div>
+
+          <!-- Game Section -->
           <div class="menu-item collapsible" @click="toggleSection('game')">
             <img src="@/assets/img/game-center.png" alt="Game Center" class="menu-img" />
             <span>Game Center</span>
             <van-icon :name="expandedSection === 'game' ? 'arrow-up' : 'arrow-down'" class="van-icon" />
           </div>
           <div v-show="expandedSection === 'game'" class="submenu">
-            <div class="menu-item">Slots</div>
-            <div class="menu-item">Live Casino</div>
+            <div class="menu-item">
+              <img src="@/assets/img/tab-fire.png" alt="Hot games" class="menu-img" />
+              <span>Hot games</span>
+            </div>
+            <div class="menu-item">
+              <img src="@/assets/img/tab-slot.svg" alt="Slots" class="menu-img" />
+              <span>Slots</span>
+            </div>
+            <div class="menu-item">
+              <img src="@/assets/img/tab-fish.svg" alt="Fish" class="menu-img" />
+              <span>Fish</span>
+            </div>
+            <div class="menu-item">
+              <img src="@/assets/subpage/live-i.svg" alt="Live" class="menu-img" />
+              <span>Live</span>
+            </div>
+            <div class="menu-item">
+              <img src="@/assets/subpage/poker-i.svg" alt="Poker" class="menu-img" />
+              <span>Poker</span>
+            </div>
+            <div class="menu-item">
+              <img src="@/assets/subpage/ball-i.svg" alt="Sports" class="menu-img" />
+              <span>Sports</span>
+            </div>
           </div>
         </div>
+
+        <!-- sidebar footer Section -->
         <br />
         <div class="menu-group footer-section">
           <div class="menu-item secondary">
@@ -137,6 +174,7 @@ function goToRegister() {
         </div>
       </nav>
     </aside>
+  </div>
 </template>
 
 <style scoped>
@@ -191,10 +229,10 @@ function goToRegister() {
 .sidebar {
   background-color: #0d1120;
   color: #fff;
-  width: 15rem;
-  height: calc(100vh - 3.75rem);
+  width: 17rem;
   overflow-y: auto;
   overflow-x: hidden;
+  height: calc(100vh - 8.98rem); /* taller sidebar */
   position: fixed;
   top: 3.75rem;
   left: 0;
@@ -224,7 +262,7 @@ function goToRegister() {
 .menu-group {
   display: flex;
   flex-direction: column;
-  margin:5px;
+  margin:15px;
   gap: 0.5rem;
   padding: 0 1rem;
 }
@@ -234,13 +272,13 @@ function goToRegister() {
 .menu-item {
   display: flex;
   align-items: center;
-  background-color: #1a1f30;
+  background: linear-gradient(180deg, #21283b, #2a3249 52.6%, #21283b);
   color: white;
-  padding: 0.35rem 1rem;
+  padding: 0.40rem 1rem;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 .menu-item.active {
   background: linear-gradient(180deg, #fff5e2, #f0cda3);
