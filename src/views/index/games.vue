@@ -1,5 +1,12 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+function handleMoreClick() {
+  router.push('/more-games') // Replace with your actual route path
+}
 // Hot game images
 import hotGame1 from '@/assets/hot-games/hot-gm1.png'
 import hotGame2 from '@/assets/hot-games/hot-gm2.png'
@@ -38,9 +45,9 @@ const games = [
           <div class="game-title" style="cursor: pointer;">{{ game.title }}</div>
         </div>
 
-        <div class="game-card more-card" style="cursor: pointer;">
-          <van-icon name="apps-o" class="more-icon" @click="handleMoreClick" />
-          <div class="game-title" style="cursor: pointer;">MORE</div>
+        <div class="game-card more-card" style="cursor: pointer;" @click="handleMoreClick">
+          <van-icon name="apps-o" class="more-icon" />
+          <div class="game-title">MORE</div>
         </div>
       </div>
     </div>

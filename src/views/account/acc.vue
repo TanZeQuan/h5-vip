@@ -1,8 +1,17 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+
+// ✅ Redirect if not logged in
+onMounted(() => {
+  const user = localStorage.getItem('user')
+  if (!user) {
+    router.push('/login')
+  }
+})
+
 const goBack = () => {
   router.push('/') // Navigate to home page
 }
@@ -94,19 +103,19 @@ const menuItems = ref([
     iconClass: 'suggestion-icon',
     hasNotification: false
   },
-   {
+  {
     title: 'Suggestion',
     icon: '💬',
     iconClass: 'suggestion-icon',
     hasNotification: false
   },
-   {
+  {
     title: 'Suggestion',
     icon: '💬',
     iconClass: 'suggestion-icon',
     hasNotification: false
   },
-   {
+  {
     title: 'Suggestion',
     icon: '💬',
     iconClass: 'suggestion-icon',
@@ -115,7 +124,6 @@ const menuItems = ref([
 ])
 
 // Methods
-
 const handleSignIn = () => {
   console.log('Sign in clicked')
 }
@@ -132,6 +140,7 @@ const handleMenuClick = (item) => {
   console.log(`${item.title} clicked`)
 }
 </script>
+
 
 <template>
   <div class="my-account">

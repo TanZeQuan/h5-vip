@@ -1,17 +1,21 @@
 <script setup>
-import { reactive, computed } from 'vue'
+import { reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-// Props (if needed)
-// const props = defineProps({
-//   userId: String
-// })
 
-// Emits (if needed)
+// ✅ Redirect to login if not authenticated
+onMounted(() => {
+  const user = localStorage.getItem('user')
+  if (!user) {
+    router.push('/login')
+  }
+})
+
+// Emits
 const emit = defineEmits(['back', 'action-clicked', 'sign-in'])
 
-// Reactive data
+// User reactive state
 const user = reactive({
   username: 'kelvin21',
   nickname: 'kelvin21',
@@ -26,6 +30,7 @@ const user = reactive({
   }
 })
 
+// Action cards
 const actions = reactive([
   {
     id: 'bonus',
@@ -58,7 +63,7 @@ const actions = reactive([
   }
 ])
 
-// Computed properties
+// Computed avatar and notifications
 const avatarImage = computed(() => {
   return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Crect width='60' height='60' fill='%23ff8f6b'/%3E%3Ccircle cx='30' cy='25' r='12' fill='%23fff'/%3E%3Cpath d='M10 50c0-11 9-20 20-20s20 9 20 20' fill='%23fff'/%3E%3C/svg%3E"
 })
@@ -69,15 +74,14 @@ const totalNotifications = computed(() => {
   }, 0)
 })
 
-// Methods
+// Navigation
 const goBack = () => {
-  router.push('/') // Navigate to home page
+  router.push('/')
 }
 
+// Handle action clicks
 const handleActionClick = (action) => {
   console.log(`Clicked on ${action.title}`)
-  
-  // Handle specific actions
   switch(action.id) {
     case 'bonus':
       handleBonus(action)
@@ -92,54 +96,35 @@ const handleActionClick = (action) => {
       handleTicket(action)
       break
   }
-  
   emit('action-clicked', action)
 }
 
 const handleSignIn = () => {
   console.log('Sign in clicked')
   emit('sign-in')
-  // Add sign-in logic here
 }
 
 const handleBonus = (action) => {
   console.log('Bonus clicked')
-  // Clear notification after claiming bonus
   action.hasNotification = false
   action.notificationCount = 0
-  
-  // Example: Add bonus to user balance
   user.balance.bitcoin += 0.01
 }
 
-const handleInvite = (action) => {
+const handleInvite = () => {
   console.log('Invite friends clicked')
-  // Add invite logic here
 }
 
-const handleTicket = (action) => {
+const handleTicket = () => {
   console.log('TEMU Ticket clicked')
-  // Add ticket logic here
 }
 
 const getCardClass = (action) => {
-  const baseClass = 'action-card'
-  const colorClass = `${action.color}-card`
-  return `${baseClass} ${colorClass}`
+  return `action-card ${action.color}-card`
 }
-
-// Lifecycle hooks (if needed)
-// onMounted(() => {
-//   console.log('Component mounted')
-// })
-
-// Expose methods to parent component (if needed)
-// defineExpose({
-//   refreshUserData: () => {
-//     // Refresh user data logic
-//   }
-// })
 </script>
+
+
 
 <template>
   <div class="reward-center">

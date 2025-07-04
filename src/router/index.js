@@ -35,11 +35,17 @@ const routes = [
     path: '/Login',
     name: 'login',
     component: () => import('../views/Login/login.vue') 
-  },{
+  },
+  {
     path: '/Register',
     name: 'register',
     component: () => import('../views/Register/register.vue') 
   },
+  {
+  path: '/more-games',
+  name: 'MoreGames',
+  component: () => import('@/views/index/more-games.vue') // Adjust the path accordingly
+  }
 ];
 
 const router = createRouter({

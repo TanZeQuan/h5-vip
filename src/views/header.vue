@@ -1,10 +1,20 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const isMenuOpen = ref(false)
 const expandedSection = ref(null)
+const user = ref(null)
+const isPopoutOpen = ref(false)
+
+// Load user from localStorage
+const loadUser = () => {
+  const storedUser = localStorage.getItem('user')
+  user.value = storedUser ? JSON.parse(storedUser) : null
+}
+
+onMounted(loadUser)
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -14,6 +24,18 @@ const toggleSection = (section) => {
   expandedSection.value = expandedSection.value === section ? null : section
 }
 
+const goTo = (path) => {
+  router.push(path)
+}
+
+const logout = () => {
+  localStorage.removeItem('user')
+  user.value = null
+  isMenuOpen.value = false
+  router.push('/')
+}
+
+
 const goToRegister = () => router.push('/register')
 const goToLogin = () => router.push('/login')
 const goToPromo = () => router.push('/promotion')
@@ -21,6 +43,7 @@ const goToShare = () => router.push('/share')
 const goToReward = () => router.push('/reward')
 const goToCashback = () => router.push('/reward')
 </script>
+
 
 <template>
   <div class="header-container">
@@ -34,19 +57,30 @@ const goToCashback = () => router.push('/reward')
         <img src="@/assets/img/logo-hd.png" alt="THVIP Logo" />
       </div>
 
-      <div class="auth-buttons">
-        <button class="btn register" @click="goToRegister">
+      <div class="auth-buttons" v-if="!user">
+        <button class="btn register" @click="goTo('/register')">
           <div class="border-img-wrapper1">
-            <img src="@/assets/img/register-br.png" class="btn-border" aria-hidden="true" />
+            <img src="@/assets/img/register-br.png" class="btn-border" />
             <span class="btn-content">Register</span>
           </div>
         </button>
-        <button class="btn login" @click="goToLogin">
+        <button class="btn login" @click="goTo('/login')">
           <div class="border-img-wrapper2">
-            <img src="@/assets/img/login-br.png" class="btn-border" aria-hidden="true" />
+            <img src="@/assets/img/login-br.png" class="btn-border" />
             <span class="btn-content">Login</span>
           </div>
         </button>
+      </div>
+
+      <div class="user-info right" v-if="user">
+        👤 {{ user.username }}
+        <div class="profile-popout">
+          <p><van-icon name="manager-o" /> Role: {{ user.role }}</p>
+          <p><van-icon name="gold-coin-o" /> Gold: {{ user.game_data?.gold || 0 }}</p>
+          <p><van-icon name="diamond" /> Diamond: {{ user.game_data?.diamond || 0 }}</p>
+          <p><van-icon name="points" /> Point: {{ user.game_data?.point || 0 }}</p>
+          <p><van-icon name="vip-card" /> VIP: {{ user.game_data?.vip_level || 0 }}</p>
+        </div>
       </div>
     </header>
 
@@ -167,7 +201,7 @@ const goToCashback = () => router.push('/reward')
             <img src="@/assets/img/english.png" alt="Language" class="menu-img" />
             <span>English</span>
           </div>
-          <div class="menu-item secondary">
+          <div class="menu-item secondary" v-if="user" @click="logout">
             <img src="@/assets/img/logout.png" alt="Logout" class="menu-img" />
             <span>Logout</span>
           </div>
@@ -325,4 +359,47 @@ const goToCashback = () => router.push('/reward')
     height: 28px;
   }
 }
+
+/* profile icon */
+
+.user-info {
+  position: relative;
+  cursor: pointer;
+  font-weight: 600;
+  color: #fff;
+}
+
+.profile-popout {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 12px;
+  background: rgba(50, 50, 70, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 220px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  display: none;
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.user-info:hover .profile-popout {
+  display: block;
+}
+
+.profile-popout p {
+  margin: 0 0 10px;
+  font-size: 14px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-popout p:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
 </style>

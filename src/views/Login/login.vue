@@ -1,64 +1,122 @@
 <script setup>
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
+const username = ref('')
+const password = ref('')
+const errorMessage = ref('')
+const successMessage = ref('')
+const isLoading = ref(false)
+const rememberMe = ref(false)
+
+// ✅ Load saved username if "Remember Me" was checked previously
+const savedUsername = localStorage.getItem('rememberedUsername')
+if (savedUsername) {
+  username.value = savedUsername
+  rememberMe.value = true
+}
+
 const goHome = () => {
-  router.push('/') // or your actual home route name
+  router.push('/')
+}
+
+const handleLogin = async () => {
+  errorMessage.value = ''
+  successMessage.value = ''
+
+  if (!username.value || !password.value) {
+    errorMessage.value = '用户名和密码不能为空'
+    return
+  }
+
+  isLoading.value = true
+
+  try {
+    const formData = new FormData()
+    formData.append('username', username.value)
+    formData.append('password', password.value)
+
+    const response = await fetch('http://192.168.0.122/silver/user/user_Login.php', {
+      method: 'POST',
+      body: formData
+    })
+
+    const result = await response.json()
+
+    if (result.success) {
+      successMessage.value = result.message
+
+      // ✅ Save user data
+      localStorage.setItem('user', JSON.stringify(result.data))
+
+      // ✅ Save username only if Remember Me is checked
+      if (rememberMe.value) {
+        localStorage.setItem('rememberedUsername', username.value)
+      } else {
+        localStorage.removeItem('rememberedUsername')
+      }
+
+      // ✅ Redirect to homepage
+      router.push('/')
+    } else {
+      errorMessage.value = result.message
+    }
+  } catch (error) {
+    errorMessage.value = '登录失败，请检查网络连接'
+  } finally {
+    isLoading.value = false
+  }
 }
 </script>
 
+
 <template>
   <div class="login-page">
-    <!-- Back Arrow -->
     <van-icon name="arrow-left" class="back-arrow" @click="goHome" />
 
-    <!-- Logo -->
     <div class="logo">
       <img src="@/assets/login-img/login-logo.png" alt="THVIP Logo" class="logo-img" />
     </div>
 
-    <!-- Title -->
     <h2 class="form-title">Login</h2>
 
-    <!-- Username -->
     <div class="input-group">
       <van-icon name="user-o" class="input-icon" />
-      <input type="text" placeholder="Username" />
+      <input v-model="username" type="text" placeholder="Username" required/>
     </div>
 
-    <!-- Password -->
     <div class="input-group">
       <van-icon name="lock" class="input-icon" />
-      <input type="password" placeholder="Password" />
+      <input v-model="password" type="password" placeholder="Password" required/>
     </div>
 
+    <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+    <div v-if="successMessage" class="success-message">{{ successMessage }}</div>
 
-    <!-- Remember + Forgot -->
     <div class="options">
       <label class="remember">
-        <input type="checkbox" />
+        <input type="checkbox" v-model="rememberMe" />
         <span>Remember</span>
       </label>
       <a href="#" class="forgot">Forgot password?</a>
     </div>
 
-    <!-- Login Button -->
-    <button class="login-button">Login</button>
+    <button class="login-button" @click="handleLogin" :disabled="isLoading">
+      {{ isLoading ? '登录中...' : 'Login' }}
+    </button>
 
-    <!-- Register -->
     <div class="register">
       No account yet? <span class="register-link">Register</span>
     </div>
 
-    <!-- Divider -->
     <div class="divider">
       <span></span>
       <p>Or log in with</p>
       <span></span>
     </div>
 
-    <!-- Google Button -->
     <div class="google-button-wrapper">
       <button class="google-button">
         <img src="@/assets/login-img/google.png" alt="Google" class="google-icon" />
@@ -67,6 +125,8 @@ const goHome = () => {
     </div>
   </div>
 </template>
+
+
 
 <style scoped>
 html, body {
@@ -247,5 +307,17 @@ html, body {
 .google-icon {
   width: 20px;
   height: 20px;
+}
+.error-message {
+  color: #ff4d4f;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.success-message {
+  color: #4caf50;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 </style>

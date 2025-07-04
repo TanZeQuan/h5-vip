@@ -13,6 +13,7 @@ import favoriteIcon from '@/assets/img/tab-star.svg'
 import jillIcon from '@/assets/img/tab-jili.png'
 import sigisIcon from '@/assets/img/tab-slot.svg'
 import fishIcon from '@/assets/img/tab-fish.svg'
+import tabBadge from '@/assets/img/badge-i.png'
 
 const bannerList = ref([
   { id: 1, imgUrl: img1 },
@@ -62,18 +63,26 @@ const activeTab = ref('popular')
         <img src="@/assets/img/arrow-down.png" alt="bell" class="bell-icon2" />
     </div>
 
-    <div class="game-categories">
+    <!-- Sticky Tabs -->
+    <div class="tab-sticky">
       <div class="category-tabs">
         <button 
-          v-for="tab in tabs" 
-          :key="tab.id"
-          @click="activeTab = tab.id"
+        v-for="tab in tabs" 
+        :key="tab.id"
+        @click="activeTab = tab.id"
+        :class="{ active: activeTab === tab.id }"
         >
-          <div class="icon-wrapper">
+        <div class="icon-wrapper">
+            <!-- Always visible badge -->
+            <span 
+                class="tab-badge-bg"
+                :class="{ active: activeTab === tab.id }"
+                :style="{ backgroundImage: `url(${tabBadge})` }"
+            />
+            <!-- Icon -->
             <img :src="tab.icon" class="tab-icon" :alt="tab.label" />
-            <div class="icon-decoration"></div>
-          </div>
-          <span>{{ tab.label }}</span>
+        </div>
+        <span>{{ tab.label }}</span>
         </button>
       </div>
     </div>
@@ -232,5 +241,34 @@ const activeTab = ref('popular')
   margin-bottom: 2px;
   transition: all 0.3s ease;
   margin-top: -1rem;
+}
+/* Tabs (Sticky) */
+
+.icon-wrapper {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tab-badge-bg {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  z-index: -1;
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  transform: translate(-50%, -70%);
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+/* When the tab is active, glow the badge */
+.tab-badge-bg.active {
+  opacity: 1;
+  filter: brightness(1.6) drop-shadow(0 0 6px #fff8cc);
 }
 </style>

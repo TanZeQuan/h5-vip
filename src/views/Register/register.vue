@@ -106,7 +106,7 @@ const handleRegister = async () => {
     <span class="required">*</span>
     <div class="input-wrapper">
       <van-icon name="phone-o" class="input-icon" />
-      <input type="text" placeholder="Mobile number" v-model="phone" />
+      <input type="text" placeholder="Mobile number" v-model="phone" required/>
     </div>
   </div>
 

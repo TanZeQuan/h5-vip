@@ -1,9 +1,20 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import ShareReward from '@/views/share/share-reward.vue'
+import ShareIncome from '@/views/share/share-income.vue'
+import ShareRecord from '@/views/share/share-record.vue'
 
 const router = useRouter()
 const activeTab = ref('Overview')
+
+// ✅ Check login status
+onMounted(() => {
+  const user = localStorage.getItem('user')
+  if (!user) {
+    router.push('/login') // redirect to login if not logged in
+  }
+})
 
 const copyToClipboard = () => {
   navigator.clipboard.writeText(referralLink.value)
@@ -12,9 +23,11 @@ const copyToClipboard = () => {
 const setTab = (tab) => {
   activeTab.value = tab
 }
+
 const goBack = () => {
   router.push('/') // Navigate to home page
 }
+
 // Leaderboard data
 const users = [
   { name: 'k***********g', amount: '139.00' },
@@ -27,7 +40,11 @@ const users = [
 
 const loopedUsers = computed(() => [...users, ...users])
 const scrollSpeed = 20
+
+// ✅ Example referral link (update this based on actual logic if needed)
+// const referralLink = ref('http://vip999.113thvip.com/?referralCode=pix8455')
 </script>
+
 
 <template>
   <div class="container">
@@ -226,6 +243,16 @@ const scrollSpeed = 20
         <div class="container-banner2">
             <img src="@/assets/share/overview-banner2.png" alt="Achievement Icon" class="overview-img" />
         </div>
+    </div>
+       <!-- Share subpage Section -->
+    <div class="main-content" v-if="activeTab === 'Rewards'">
+      <ShareReward/>
+    </div>
+    <div class="main-content" v-if="activeTab === 'Incomes'">
+      <ShareIncome />
+    </div>
+    <div class="main-content" v-if="activeTab === 'Records'">
+  <ShareRecord />
     </div>
   </div>
 </template>
