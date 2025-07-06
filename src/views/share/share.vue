@@ -9,12 +9,12 @@ const router = useRouter()
 const activeTab = ref('Overview')
 
 // ✅ Check login status
-onMounted(() => {
-  const user = localStorage.getItem('user')
-  if (!user) {
-    router.push('/login') // redirect to login if not logged in
-  }
-})
+// onMounted(() => {
+//   const user = localStorage.getItem('user')
+//   if (!user) {
+//     router.push('/login') // redirect to login if not logged in
+//   }
+// })
 
 const copyToClipboard = () => {
   navigator.clipboard.writeText(referralLink.value)
