@@ -13,7 +13,8 @@ const routes = [
   {
     path: '/account',
     name: 'account',
-    component: () => import('../views/account/acc.vue') 
+    component: () => import('../views/account/acc.vue') ,
+    meta: { hideNavBottom: true }
   },
   {
     path: '/promotion',
@@ -23,13 +24,14 @@ const routes = [
   {
     path: '/share',
     name: 'share',
-    component: () => import('../views/share/share.vue') 
+    component: () => import('../views/share/share.vue') ,
+    meta: { hideNavBottom: true }
   },
   {
     path: '/reward',
     name: 'reward',
     component: () => import('../views/reward/rew.vue'),
-    // meta: { requiresAuth: true }
+    meta: { hideNavBottom: true }
   },
   {
     path: '/Login',
@@ -45,7 +47,19 @@ const routes = [
   path: '/more-games',
   name: 'MoreGames',
   component: () => import('@/views/index/more-games.vue') // Adjust the path accordingly
-  }
+  },
+  {
+    path: '/deposit',
+    name: 'deposit',
+    component: () => import('../views/deposit/dep.vue'),
+    meta: { hideNavBottom: true }
+  },
+  {
+    path: '/withdraw',
+    name: 'withdraw',
+    component: () => import('../views/withdraw/withdraw.vue'),
+    meta: { hideNavBottom: true }
+  },
 ];
 
 const router = createRouter({

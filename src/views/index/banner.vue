@@ -19,7 +19,7 @@ const bannerList = ref([
   { id: 1, imgUrl: img1 },
   { id: 2, imgUrl: img2 },
   { id: 3, imgUrl: img3 },
-  { id: 4, imgUrl: img4 }
+  { id: 4, imgUrl: img4 },
 ])
 
 const tabs = ref([

@@ -1,14 +1,18 @@
 <script setup>
-import Navbottom from './views/navbottom.vue'
+import { useRoute } from 'vue-router'
+import NavBottom from './views/navbottom.vue'
+
+const route = useRoute()
 </script>
 
 <template>
-    <transition name="slide-up" mode="out-in">
+  <transition name="slide-up" mode="out-in">
+    <div>
       <router-view />
-    </transition>
-  <Navbottom />
+      <NavBottom v-if="!route.meta.hideNavBottom" />
+    </div>
+  </transition>
 </template>
-
 
 <style scoped>
 .slide-up-enter-active,

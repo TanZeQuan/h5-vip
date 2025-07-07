@@ -6,6 +6,17 @@ import ShareIncome from '@/views/share/share-income.vue'
 import ShareRecord from '@/views/share/share-record.vue'
 
 const router = useRouter()
+
+// ✅ Redirect if not logged in
+onMounted(() => {
+  const user = localStorage.getItem('user')
+  if (!user) {
+    router.push('/login')
+  }
+})
+const goBack = () => {
+  router.push('/') // Navigate to home page
+}
 const activeTab = ref('Overview')
 
 // ✅ Check login status
@@ -22,10 +33,6 @@ const copyToClipboard = () => {
 
 const setTab = (tab) => {
   activeTab.value = tab
-}
-
-const goBack = () => {
-  router.push('/') // Navigate to home page
 }
 
 // Leaderboard data
@@ -50,7 +57,7 @@ const scrollSpeed = 20
   <div class="container">
     <!-- Header -->
     <div class="header">
-      <button class="back-button" @click="goBack">‹</button>
+      <button class="back-button"@click="goBack">‹</button>
       <h1 class="header-title">Invite Friends</h1>
     </div>
 
@@ -290,7 +297,7 @@ const scrollSpeed = 20
 }
 
 .header-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   margin: 0;
 }
@@ -307,13 +314,14 @@ const scrollSpeed = 20
 
 .nav-tab {
   flex: 1;
-  padding: 12px;
+  padding: 10px;
   text-align: center;
   border: none;
   background: transparent;
+  font-size: 17px;
   cursor: pointer;
-  font-weight: 500;
-  color: #6b7280;
+  font-weight: 600;
+  color: #030303;
 }
 
 .active-tab {

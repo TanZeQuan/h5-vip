@@ -1,10 +1,10 @@
 <script setup>
-import { reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+
 
 const router = useRouter()
 
-// ✅ Redirect to login if not authenticated
 onMounted(() => {
   const user = localStorage.getItem('user')
   if (!user) {
@@ -12,77 +12,31 @@ onMounted(() => {
   }
 })
 
-// Emits
 const emit = defineEmits(['back', 'action-clicked', 'sign-in'])
 
-// User reactive state
 const user = reactive({
   username: 'kelvin21',
   nickname: 'kelvin21',
-  balance: {
-    bitcoin: 0.00,
-    coins: 0.00
-  },
+  balance: { bitcoin: 0.0, coins: 0.0 },
   vipLevel: 0,
-  benefits: {
-    current: 0,
-    total: 2
-  }
+  benefits: { current: 0, total: 2 }
 })
 
-// Action cards
 const actions = reactive([
-  {
-    id: 'bonus',
-    title: 'Bonus',
-    icon: '🎁',
-    color: 'bonus',
-    hasNotification: true,
-    notificationCount: 1
-  },
-  {
-    id: 'signin',
-    title: 'Sign In',
-    icon: '📅',
-    color: 'signin',
-    hasNotification: false
-  },
-  {
-    id: 'invite',
-    title: 'Invite Friends',
-    icon: '👥',
-    color: 'invite',
-    hasNotification: false
-  },
-  {
-    id: 'ticket',
-    title: 'TEMU Ticket',
-    icon: '🎫',
-    color: 'ticket',
-    hasNotification: false
-  }
+  { id: 'bonus', title: 'Bonus', icon: '🎁', color: 'bonus', hasNotification: true, notificationCount: 1,},
+  { id: 'signin', title: 'Sign In', icon: '📅', color: 'signin', hasNotification: false },
+  { id: 'invite', title: 'Invite Friends', icon: '👥', color: 'invite', hasNotification: false },
+  { id: 'ticket', title: 'TEMU Ticket', icon: '🎫', color: 'ticket', hasNotification: false }
 ])
 
-// Computed avatar and notifications
-const avatarImage = computed(() => {
-  return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Crect width='60' height='60' fill='%23ff8f6b'/%3E%3Ccircle cx='30' cy='25' r='12' fill='%23fff'/%3E%3Cpath d='M10 50c0-11 9-20 20-20s20 9 20 20' fill='%23fff'/%3E%3C/svg%3E"
-})
+const avatarImage = computed(() =>
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Crect width='60' height='60' fill='%23ff8f6b'/%3E%3Ccircle cx='30' cy='25' r='12' fill='%23fff'/%3E%3Cpath d='M10 50c0-11 9-20 20-20s20 9 20 20' fill='%23fff'/%3E%3C/svg%3E"
+)
 
-const totalNotifications = computed(() => {
-  return actions.reduce((total, action) => {
-    return total + (action.hasNotification ? action.notificationCount : 0)
-  }, 0)
-})
+const goBack = () => router.push('/')
 
-// Navigation
-const goBack = () => {
-  router.push('/')
-}
-
-// Handle action clicks
 const handleActionClick = (action) => {
-  console.log(`Clicked on ${action.title}`)
-  switch(action.id) {
+  switch (action.id) {
     case 'bonus':
       handleBonus(action)
       break
@@ -90,41 +44,26 @@ const handleActionClick = (action) => {
       handleSignIn()
       break
     case 'invite':
-      handleInvite(action)
+      handleInvite()
       break
     case 'ticket':
-      handleTicket(action)
+      handleTicket()
       break
   }
   emit('action-clicked', action)
 }
 
-const handleSignIn = () => {
-  console.log('Sign in clicked')
-  emit('sign-in')
-}
-
+const handleSignIn = () => emit('sign-in')
 const handleBonus = (action) => {
-  console.log('Bonus clicked')
   action.hasNotification = false
   action.notificationCount = 0
   user.balance.bitcoin += 0.01
 }
-
-const handleInvite = () => {
-  console.log('Invite friends clicked')
-}
-
-const handleTicket = () => {
-  console.log('TEMU Ticket clicked')
-}
-
-const getCardClass = (action) => {
-  return `action-card ${action.color}-card`
-}
+const handleInvite = () => {}
+const handleTicket = () => {}
+const getCardClass = (action) => `action-card ${action.color}-card`
+const refreshBalance = () => console.log('Refreshing balance...')
 </script>
-
-
 
 <template>
   <div class="reward-center">
@@ -133,21 +72,19 @@ const getCardClass = (action) => {
       <div class="shape shape2"></div>
       <div class="shape shape3"></div>
     </div>
-    
-    <div class="header">
-      <button class="back-btn" @click="goBack">‹</button>
-      <h1 class="header-title">Reward Center</h1>
-    </div>
-    
+
     <div class="main-content">
+      <div class="header">
+        <button class="back-btn" @click="goBack">‹</button>
+        <h1 class="header-title">Reward Center</h1>
+      </div>
+
       <div class="user-card">
-        <div class="sign-in-badge" @click="handleSignIn">
-          Sign In 
-        </div>
-        
+        <div class="user-card-overlay">
+        <div class="sign-in-badge" @click="handleSignIn">Sign In</div>
         <div class="user-info">
           <div class="avatar">
-            <img :src="avatarImage" alt="Avatar">
+            <img :src="avatarImage" alt="Avatar" />
           </div>
           <div class="user-details">
             <h3>{{ user.username }} 📱</h3>
@@ -155,11 +92,11 @@ const getCardClass = (action) => {
             <div class="balance">
               <span class="coin-icon">₿</span>
               <span>{{ user.balance.bitcoin.toFixed(2) }}</span>
-               <button class="refresh-btn" @click="refreshBalance">⟲</button>
+              <button class="refresh-btn" @click="refreshBalance">⟲</button>
             </div>
           </div>
         </div>
-        
+
         <div class="vip-section">
           <div class="vip-status">
             <span class="crown-icon">👑</span>
@@ -167,23 +104,21 @@ const getCardClass = (action) => {
           </div>
           <div class="benefits">
             Benefits ⚙️
-            <span style="margin-left: 10px;">{{ user.benefits.current }} / {{ user.benefits.total }}</span>
+            <span>{{ user.benefits.current }} / {{ user.benefits.total }}</span>
           </div>
         </div>
       </div>
-      
+      </div>
+
       <div class="action-grid">
-        <a 
-          v-for="action in actions" 
+        <a
+          v-for="action in actions"
           :key="action.title"
-          href="#" 
+          href="#"
           :class="getCardClass(action)"
           @click.prevent="handleActionClick(action)"
         >
-          <div 
-            v-if="action.hasNotification" 
-            class="notification-badge"
-          >
+          <div v-if="action.hasNotification" class="notification-badge">
             {{ action.notificationCount }}
           </div>
           <div class="card-icon">{{ action.icon }}</div>
@@ -205,13 +140,18 @@ const getCardClass = (action) => {
 .reward-center {
   max-width: 500px;
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: white;
   margin: 0 auto;
-  min-height: 100vh;
   position: relative;
   overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* ✅ Background image is set here (so it includes header + main content) */
+  background-image: url('@/assets/rewards/reward-bg.png');
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: top center;
 }
+
 
 .background-shapes {
   position: absolute;
@@ -255,10 +195,12 @@ const getCardClass = (action) => {
 
 .header {
   position: relative;
-  z-index: 10;
+  z-index: 0; /* ✅ Keep header above background */
+  background-color: transparent;
   display: flex;
   align-items: center;
-  padding: 15px 20px;
+  margin-top:-6rem;
+  padding: 5px 20px;
   color: white;
 }
 
@@ -269,12 +211,7 @@ const getCardClass = (action) => {
   font-size: 50px;
   cursor: pointer;
   margin-right: 15px;
-  margin-top:-10px;
-  transition: opacity 0.2s;
-}
-
-.back-btn:hover {
-  opacity: 0.8;
+  margin-top: -10px;
 }
 
 .header-title {
@@ -289,16 +226,29 @@ const getCardClass = (action) => {
   position: relative;
   z-index: 10;
   padding: 20px;
-  margin-top:1.5rem;
+  margin-top:80px;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: top center;
+  position: relative;
+  padding-top: 100px; /* ✅ Push down to not overlap banner */
 }
 
 .user-card {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 20px;
   padding: 20px;
-  margin-bottom: 30px;
+  margin-top:3rem;
   position: relative;
-  backdrop-filter: blur(10px);
+  background-image: url('@/assets/rewards/rw-badge.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.user-card-overlay {
+  background: rgba(255, 255, 255, 0.9); /* or rgba(0, 0, 0, 0.3) for darker */
+  border-radius: 20px;
+  padding: 40px;
 }
 
 .sign-in-badge {
@@ -311,15 +261,7 @@ const getCardClass = (action) => {
   border-radius: 20px;
   font-size: 14px;
   font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 5px;
   cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.sign-in-badge:hover {
-  transform: scale(1.05);
 }
 
 .sign-in-badge::before {
@@ -329,11 +271,12 @@ const getCardClass = (action) => {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 10px;
   font-weight: bold;
+  margin-right: 5px;
 }
 
 .user-info {
@@ -400,25 +343,15 @@ const getCardClass = (action) => {
   border-top: 1px solid #eee;
 }
 
-.vip-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #888;
+.vip-status,
+.benefits {
   font-size: 14px;
+  color: #666;
 }
 
 .crown-icon {
   color: #ffd700;
-  font-size: 16px;
-}
-
-.benefits {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: #666;
-  font-size: 14px;
+  margin-right: 5px;
 }
 
 .refresh-btn {
@@ -426,9 +359,6 @@ const getCardClass = (action) => {
   border-radius: 50%;
   width: 32px;
   height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 16px;
   color: #666;
   cursor: pointer;
@@ -445,32 +375,25 @@ const getCardClass = (action) => {
   padding: 30px 20px;
   text-align: center;
   color: white;
-  text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s;
   position: relative;
   overflow: hidden;
   cursor: pointer;
 }
 
-.action-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
 .bonus-card {
-  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  background-image: url('@/assets/rewards/rewards-bonus.png');
 }
 
 .signin-card {
-  background: linear-gradient(135deg, #3498db, #2980b9);
+  background-image: url('@/assets/rewards/rewards-invite.png');
 }
 
 .invite-card {
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  background-image: url('@/assets/rewards/rewards-sign.png');
 }
 
 .ticket-card {
-  background: linear-gradient(135deg, #ff6b47, #e74c3c);
+  background-image: url('@/assets/rewards/rewards-ticket.png');
 }
 
 .card-icon {
@@ -499,68 +422,20 @@ const getCardClass = (action) => {
   width: 20px;
   height: 20px;
   border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  font-weight: bold;
-  animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-
-.card-decoration {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.bonus-card .card-decoration {
-  bottom: 10px;
-  left: 10px;
-}
-
-.signin-card .card-decoration {
-  bottom: 15px;
-  right: 20px;
-  width: 20px;
-  height: 20px;
-}
-
-.invite-card .card-decoration {
-  top: 20px;
-  left: 15px;
-  width: 25px;
-  height: 25px;
-}
-
-.ticket-card .card-decoration {
-  top: 10px;
-  right: 10px;
-  width: 15px;
-  height: 15px;
-}
-
-/* Responsive design */
 @media (max-width: 480px) {
   .reward-center {
     max-width: 100%;
   }
-  
   .main-content {
     padding: 15px;
   }
-  
-  .action-grid {
-    gap: 12px;
-  }
-  
   .action-card {
     padding: 25px 15px;
   }

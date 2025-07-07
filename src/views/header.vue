@@ -38,6 +38,8 @@ const logout = () => {
 
 const goToRegister = () => router.push('/register')
 const goToLogin = () => router.push('/login')
+const goToDep = () => router.push('/deposit')
+const goToWithdraw = () => router.push('/withdraw')
 const goToPromo = () => router.push('/promotion')
 const goToShare = () => router.push('/share')
 const goToReward = () => router.push('/reward')
@@ -92,11 +94,11 @@ const goToCashback = () => router.push('/reward')
       <nav class="sidebar" :class="{ open: isMenuOpen }">
         <!-- Top Menu -->
         <div class="menu-group">
-          <div class="menu-item active">
+          <div class="menu-item active" @click="goToDep">
             <img src="@/assets/img/deposit.png" alt="Deposit" class="menu-img" />
             <span>Deposit</span>
           </div>
-          <div class="menu-item">
+          <div class="menu-item active" @click="goToWithdraw">
             <img src="@/assets/img/withdraw.png" alt="Withdraw" class="menu-img" />
             <span>Withdraw</span>
           </div>
