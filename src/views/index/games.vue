@@ -145,7 +145,7 @@ const games = [
 .game-title {
   margin-top: 8px;
   padding: 0 4px;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
    background: linear-gradient(90deg, rgba(255, 245, 226, 0.99), hsla(33, 72%, 79%, 0.99));
   -webkit-background-clip: text;

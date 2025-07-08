@@ -188,7 +188,7 @@ function toggleMore(index) {
   align-items: center;
   justify-content: center;
   position: relative;
-  height: 80px;
+  height: 70px;
   font-weight: bold;
   font-size: 22px;
 }

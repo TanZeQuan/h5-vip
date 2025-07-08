@@ -1,8 +1,15 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+
+onMounted(() => {
+  const user = localStorage.getItem('user')
+  if (!user) {
+    router.push('/login')
+  }
+})
 
 const selectedMethod = ref('promptpay')
 const selectedAmount = ref(null)
@@ -180,6 +187,7 @@ const proceed = () => {
   background: none;
   border: none;
   color: white;
+  margin-left:10px;
   width: 1.5rem;
   height: 1.5rem;
   cursor: pointer;

@@ -229,11 +229,16 @@ const handleMenuClick = (item) => {
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: white;
+   /* ✅ Background image is set here (so it includes header + main content) */
+  background-image: url('@/assets/rewards/rw-badge2.png');
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: top center;
 }
 
 .header {
   padding: 15px 20px;
-  background: #2c2c2c;
+  background: transparent;
   position: relative;
   z-index: 10;
   display: flex;
@@ -262,15 +267,20 @@ const handleMenuClick = (item) => {
 .main-content {
   padding: 25px;
 }
-
 .user-card {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(236, 236, 236, 0.767);
+  background-image: 
+    url('@/assets/rewards/rw-badge-top.png'), /* Small badge */
+    url('@/assets/rewards/rw-bg.png');        /* Main background */
+  background-repeat: no-repeat, no-repeat;
+  background-size: 80px auto, 100% auto;
+  background-position: top right 10px, top center;
+
   border-radius: 20px;
   padding: 10px;
-  margin-bottom: 30px;
-  position: relative;
+  margin: 0.6rem 0 30px;
   color: #333;
-  margin-top:0.6rem;
+  position: relative;
 }
 
 .sign-in-badge {
@@ -410,17 +420,26 @@ const handleMenuClick = (item) => {
   background: #f8f8f8;
   border: none;
   border-radius: 20px;
-  margin-left:-5px;
-  padding: 10px 10px;
+  margin-left: -5px;
+  padding: 6px 10px; /* ⬅️ Smaller padding */
+  margin:8px;
   font-size: 14px;
   font-weight: 500;
   color: #333;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 0 #ccc, 0 5px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  top: 0;
 }
 
 .action-btn:hover {
   background: #e8e8e8;
+}
+
+.action-btn:active {
+  top: 2px;
+  box-shadow: 0 2px 0 #bbb, 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 .member-center {
@@ -487,10 +506,6 @@ const handleMenuClick = (item) => {
   color: #ccc;
   line-height: 1.2;
   max-width: 60px;
-}
-
-.icon {
-  filter: sepia(1) hue-rotate(25deg) saturate(2) brightness(1.2);
 }
 
 /* Specific icon colors */

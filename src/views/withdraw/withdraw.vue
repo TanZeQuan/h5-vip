@@ -1,8 +1,16 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+
+onMounted(() => {
+  const user = localStorage.getItem('user')
+  if (!user) {
+    router.push('/login')
+  }
+})
+
 const goBack = () => {
   router.push('/') // Navigate to home page
 }

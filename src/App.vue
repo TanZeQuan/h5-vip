@@ -6,18 +6,21 @@ const route = useRoute()
 </script>
 
 <template>
-  <transition name="slide-up" mode="out-in">
-    <div>
+  <div>
+    <!-- ✅ Only router-view is wrapped in transition -->
+    <transition name="slide-up" mode="out-in">
       <router-view />
-      <NavBottom v-if="!route.meta.hideNavBottom" />
-    </div>
-  </transition>
+    </transition>
+
+    <!-- NavBottom stays outside, static -->
+    <NavBottom v-if="!route.meta.hideNavBottom" />
+  </div>
 </template>
 
 <style scoped>
 .slide-up-enter-active,
 .slide-up-leave-active {
-  transition: all 0.4s ease;
+  transition: transform 0.5s ease, opacity 0.2s ease;
 }
 
 .slide-up-enter-from {

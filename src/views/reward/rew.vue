@@ -1,6 +1,10 @@
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import giftIcon from '@/assets/rewards/rw-gift.png'
+import inviteIcon from '@/assets/rewards/rw-invite.png'
+import signIcon from '@/assets/rewards/rw-sign.png'
+import temuIcon from '@/assets/rewards/rw-temu.png'
 
 
 const router = useRouter()
@@ -23,10 +27,10 @@ const user = reactive({
 })
 
 const actions = reactive([
-  { id: 'bonus', title: 'Bonus', icon: '🎁', color: 'bonus', hasNotification: true, notificationCount: 1,},
-  { id: 'signin', title: 'Sign In', icon: '📅', color: 'signin', hasNotification: false },
-  { id: 'invite', title: 'Invite Friends', icon: '👥', color: 'invite', hasNotification: false },
-  { id: 'ticket', title: 'TEMU Ticket', icon: '🎫', color: 'ticket', hasNotification: false }
+  { id: 'bonus', title: 'Bonus', icon: giftIcon, color: 'bonus', hasNotification: true, notificationCount: 1,},
+  { id: 'signin', title: 'Sign In', icon: inviteIcon, color: 'signin', hasNotification: false },
+  { id: 'invite', title: 'Invite Friends', icon: signIcon, color: 'invite', hasNotification: false },
+  { id: 'ticket', title: 'TEMU Ticket', icon: temuIcon, color: 'ticket', hasNotification: false }
 ])
 
 const avatarImage = computed(() =>
@@ -121,11 +125,14 @@ const refreshBalance = () => console.log('Refreshing balance...')
           <div v-if="action.hasNotification" class="notification-badge">
             {{ action.notificationCount }}
           </div>
-          <div class="card-icon">{{ action.icon }}</div>
+          <div class="card-icon">
+            <img :src="action.icon" :alt="action.title + ' Icon'" />
+          </div>
           <div class="card-title">{{ action.title }}</div>
           <div class="card-decoration"></div>
         </a>
       </div>
+
     </div>
   </div>
 </template>
@@ -140,18 +147,15 @@ const refreshBalance = () => console.log('Refreshing balance...')
 .reward-center {
   max-width: 500px;
   min-height: 100vh;
-  background-color: white;
   margin: 0 auto;
-  position: relative;
-  overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  /* ✅ Background image is set here (so it includes header + main content) */
+  background-color: #fff;
+  color: white;
   background-image: url('@/assets/rewards/reward-bg.png');
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: top center;
 }
-
 
 .background-shapes {
   position: absolute;
@@ -159,49 +163,19 @@ const refreshBalance = () => console.log('Refreshing balance...')
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.3;
+  opacity: 0.2;
   z-index: 1;
 }
 
-.shape {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.shape1 {
-  width: 120px;
-  height: 120px;
-  top: 60px;
-  left: -30px;
-  background: rgba(255, 200, 100, 0.3);
-}
-
-.shape2 {
-  width: 80px;
-  height: 80px;
-  top: 20px;
-  right: 20px;
-  background: rgba(255, 255, 100, 0.2);
-}
-
-.shape3 {
-  width: 60px;
-  height: 60px;
-  bottom: 200px;
-  right: -20px;
-  background: rgba(255, 150, 100, 0.3);
-}
-
+/* Header */
 .header {
+  padding: 15px 20px;
+  background: transparent;
   position: relative;
-  z-index: 0; /* ✅ Keep header above background */
-  background-color: transparent;
+  z-index: 10;
   display: flex;
   align-items: center;
-  margin-top:-6rem;
-  padding: 5px 20px;
-  color: white;
+  margin-top:-10px;
 }
 
 .back-btn {
@@ -222,33 +196,31 @@ const refreshBalance = () => console.log('Refreshing balance...')
   margin-right: 39px;
 }
 
+/* Content */
 .main-content {
+  padding: 25px;
+}
+
+/* User Card */
+.user-card {
+  background: rgba(236, 236, 236, 0.767);
+  border-radius: 20px;
+  padding: 8px;
+  margin-top: 3rem;
   position: relative;
-  z-index: 10;
-  padding: 20px;
-  margin-top:80px;
+  background-image: 
+    url('@/assets/rewards/rw-badge-top.png'), url('@/assets/rewards/rw-bg.png');
+  background-repeat: no-repeat, no-repeat;
+  background-size: 80px auto, 100% auto;
+  background-position: top right 10px, top center;
+}
+
+.user-card-overlay {
+  background-image: url('@/assets/rewards/rw-border.png');
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: top center;
-  position: relative;
-  padding-top: 100px; /* ✅ Push down to not overlap banner */
-}
-
-.user-card {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
   padding: 20px;
-  margin-top:3rem;
-  position: relative;
-  background-image: url('@/assets/rewards/rw-badge.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.user-card-overlay {
-  background: rgba(255, 255, 255, 0.9); /* or rgba(0, 0, 0, 0.3) for darker */
-  border-radius: 20px;
-  padding: 40px;
 }
 
 .sign-in-badge {
@@ -279,6 +251,7 @@ const refreshBalance = () => console.log('Refreshing balance...')
   margin-right: 5px;
 }
 
+/* User Info */
 .user-info {
   display: flex;
   align-items: center;
@@ -335,6 +308,7 @@ const refreshBalance = () => console.log('Refreshing balance...')
   font-size: 12px;
 }
 
+/* VIP Section */
 .vip-section {
   display: flex;
   justify-content: space-between;
@@ -364,10 +338,12 @@ const refreshBalance = () => console.log('Refreshing balance...')
   cursor: pointer;
 }
 
+/* Action Grid */
 .action-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
+  margin-top: 30px;
 }
 
 .action-card {
@@ -378,8 +354,12 @@ const refreshBalance = () => console.log('Refreshing balance...')
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
+/* Background images */
 .bonus-card {
   background-image: url('@/assets/rewards/rewards-bonus.png');
 }
@@ -396,11 +376,12 @@ const refreshBalance = () => console.log('Refreshing balance...')
   background-image: url('@/assets/rewards/rewards-ticket.png');
 }
 
+/* Card Icon */
 .card-icon {
   width: 50px;
   height: 50px;
   margin: 0 auto 15px;
-  background: rgba(255, 255, 255, 0.2);
+  background: #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -408,11 +389,16 @@ const refreshBalance = () => console.log('Refreshing balance...')
   font-size: 24px;
 }
 
+.card-icon img {
+  width: 30px;
+}
+
 .card-title {
   font-size: 16px;
   font-weight: 600;
 }
 
+/* Notification Badge */
 .notification-badge {
   position: absolute;
   top: 15px;
@@ -429,15 +415,19 @@ const refreshBalance = () => console.log('Refreshing balance...')
   justify-content: center;
 }
 
+/* Responsive */
 @media (max-width: 480px) {
   .reward-center {
     max-width: 100%;
   }
+
   .main-content {
     padding: 15px;
   }
+
   .action-card {
     padding: 25px 15px;
   }
 }
+
 </style>

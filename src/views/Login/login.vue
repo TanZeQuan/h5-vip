@@ -100,7 +100,7 @@ const handleLogin = async () => {
         <input type="checkbox" v-model="rememberMe" />
         <span>Remember</span>
       </label>
-      <a href="#" class="forgot">Forgot password?</a>
+      <router-link to="/forget" class="forgot">Forgot password?</router-link>
     </div>
 
     <button class="login-button" @click="handleLogin" :disabled="isLoading">
@@ -108,7 +108,7 @@ const handleLogin = async () => {
     </button>
 
     <div class="register">
-      No account yet? <span class="register-link">Register</span>
+      No account yet? <router-link to ="/register" class="register-link">Register</router-link>
     </div>
 
     <div class="divider">
@@ -233,7 +233,7 @@ html, body {
   border: none;
   border-radius: 30px;
   padding: 12px;
-  font-size: 20px;
+  font-size: 25px;
   font-family: Georgia, serif;
   margin-bottom: 20px;
   cursor: pointer;

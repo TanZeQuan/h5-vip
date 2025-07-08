@@ -34,14 +34,22 @@ const routes = [
     meta: { hideNavBottom: true }
   },
   {
+    path: '/forget',
+    name: 'forget',
+    component: () => import('../views/forget/forget.vue'),
+    meta: { hideNavBottom: true }
+  },
+  {
     path: '/Login',
     name: 'login',
-    component: () => import('../views/Login/login.vue') 
+    component: () => import('../views/Login/login.vue'),
+    meta: { hideNavBottom: true }
   },
   {
     path: '/Register',
     name: 'register',
-    component: () => import('../views/Register/register.vue') 
+    component: () => import('../views/Register/register.vue'),
+    meta: { hideNavBottom: true }
   },
   {
   path: '/more-games',
@@ -59,6 +67,16 @@ const routes = [
     name: 'withdraw',
     component: () => import('../views/withdraw/withdraw.vue'),
     meta: { hideNavBottom: true }
+  },
+  {
+    path: '/jili',
+    name: 'jili',
+    component: () => import('../views/index/jili.vue')
+  },
+  {
+    path: '/fish',
+    name: 'fish',
+    component: () => import('../views//index/fish.vue')
   },
 ];
 

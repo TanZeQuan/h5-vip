@@ -1,5 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import games from "@/views/index/games.vue"
+import jili from "@/views/index/jili.vue"
+import slots from "@/views/index/slot.vue"
+import fish from "@/views/index/fish.vue"
 
 // Banner images
 import img1 from '@/assets/img/slide1.jpg'
@@ -23,70 +27,93 @@ const bannerList = ref([
 ])
 
 const tabs = ref([
-  { id: 'popular', label: 'Popular', icon: popularIcon },
-  { id: 'favorite', label: 'My favorite', icon: favoriteIcon },
-  { id: 'jill', label: 'JILL', icon: jillIcon },
-  { id: 'sigis', label: 'SIGIs', icon: sigisIcon },
-  { id: 'fish', label: 'Fish', icon: fishIcon }
+  { id: 'popular', label: 'Popular', icon: popularIcon, path: '/index/games'},
+  { id: 'favorite', label: 'My favorite', icon: favoriteIcon, path: '/index/games' },
+  { id: 'jill', label: 'JILL', icon: jillIcon, path: '/index/jili' },
+  { id: 'slots', label: 'Slots', icon: sigisIcon, path: '/index/slot' },
+  { id: 'fish', label: 'Fish', icon: fishIcon, path: '/index/fish' }
 ])
 
+
 const activeTab = ref('popular')
+
+function goToCategory(tab) {
+  activeTab.value = tab.id
+
+  // Wait DOM ready in case section is not rendered instantly
+  setTimeout(() => {
+    const section = document.getElementById(tab.id)
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, 100)
+}
 
 </script>
 
 <template>
-    <div class="banner-container">
-      <van-swipe
-        class="promo-swipe"
-        :autoplay="3000"
-        indicator-color="transparent"
-      >
-        <van-swipe-item v-for="item in bannerList" :key="item.id">
-          <img
-            :src="item.imgUrl"
-            class="swipe-image"
-            alt="Promotion Banner"
-          />
-        </van-swipe-item>
-      </van-swipe>
-    </div>
-    
-      <div class="marquee-container">
-        <img src="@/assets/img/ring.png" alt="bell" class="bell-icon shake" />
-        <div class="marquee-wrapper">
-          <div class="marquee-content">
-            <span class="marquee-text">a nsiéuwu uagaaufizdu 0.99% danrisdin } Dpsuiua</span>
-            <span class="marquee-text">a nsiéuwu uagaaufizdu 0.99% danrisdin } Dpsuiua</span>
-            <span class="marquee-text">a nsiéuwu uagaaufizdu 0.99% danrisdin } Dpsuiua</span>
-          </div>
-        </div>
-        <img src="@/assets/img/arrow-down.png" alt="bell" class="bell-icon2" />
-    </div>
+  <div class="banner-container">
+    <van-swipe class="promo-swipe" :autoplay="3000" indicator-color="transparent">
+      <van-swipe-item v-for="item in bannerList" :key="item.id">
+        <img :src="item.imgUrl" class="swipe-image" alt="Promotion Banner" />
+      </van-swipe-item>
+    </van-swipe>
+  </div>
 
-    <!-- Sticky Tabs -->
-    <div class="tab-sticky">
-      <div class="category-tabs">
-        <button 
-        v-for="tab in tabs" 
-        :key="tab.id"
-        @click="activeTab = tab.id"
-        :class="{ active: activeTab === tab.id }"
-        >
-        <div class="icon-wrapper">
-            <!-- Always visible badge -->
-            <span 
-                class="tab-badge-bg"
-                :class="{ active: activeTab === tab.id }"
-                :style="{ backgroundImage: `url(${tabBadge})` }"
-            />
-            <!-- Icon -->
-            <img :src="tab.icon" class="tab-icon" :alt="tab.label" />
-        </div>
-        <span>{{ tab.label }}</span>
-        </button>
+  <div class="marquee-container">
+    <img src="@/assets/img/ring.png" alt="bell" class="bell-icon shake" />
+    <div class="marquee-wrapper">
+      <div class="marquee-content">
+        <span class="marquee-text">Your scrolling text here</span>
+        <span class="marquee-text">More announcements here</span>
+        <span class="marquee-text">Repeat news and info</span>
       </div>
     </div>
+    <img src="@/assets/img/arrow-down.png" alt="bell" class="bell-icon2" />
+  </div>
+
+  <!-- Sticky Tabs -->
+  <div class="tab-sticky">
+    <div class="category-tabs">
+      <button
+        v-for="tab in tabs"
+        :key="tab.id"
+        @click="goToCategory(tab)"
+        :class="{ active: activeTab === tab.id }"
+      >
+        <div class="icon-wrapper">
+          <span
+            class="tab-badge-bg"
+            :class="{ active: activeTab === tab.id }"
+            :style="{ backgroundImage: `url(${tabBadge})` }"
+          />
+          <img :src="tab.icon" class="tab-icon" :alt="tab.label" />
+        </div>
+        <span>{{ tab.label }}</span>
+      </button>
+    </div>
+  </div>
+   <!-- Scroll Target Section: Popular -->
+    <div id="popular">
+      <games />
+    </div>
+
+    <!-- Scroll Target Section: JILL -->
+    <div id="jill">
+      <jili />
+    </div>
+
+    <!-- Scroll Target Section: Slots -->
+    <div id="slots">
+      <slots />
+    </div>
+
+    <!-- Scroll Target Section: Fish -->
+    <div id="fish">
+      <fish />
+    </div>
 </template>
+
 
 <style scoped>
 .banner-container {

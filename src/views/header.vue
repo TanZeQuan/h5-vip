@@ -3,9 +3,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const isMenuOpen = ref(false)
 const expandedSection = ref(null)
-const user = ref(null)
 const isPopoutOpen = ref(false)
 
 // Load user from localStorage
@@ -20,6 +18,36 @@ const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
 }
 
+// Menu state
+const isMenuOpen = ref(false)
+
+// Profile dropdown
+const isProfileOpen = ref(false)
+const toggleProfile = () => {
+  isProfileOpen.value = !isProfileOpen.value
+}
+
+// Mock login state
+const isLoggedIn = ref(localStorage.getItem('isLoggedIn') === 'true')
+
+// Mock user info
+const user = ref({
+  username: 'JohnDoe',
+  id: 123456,
+  vip_level: 3,
+  avatar: '' // fallback default avatar
+})
+
+// Click outside to close
+const profileRef = ref(null)
+const handleClickOutside = (e) => {
+  if (profileRef.value && !profileRef.value.contains(e.target)) {
+    isProfileOpen.value = false
+  }
+}
+// Default avatar
+const defaultAvatar = new URL('@/assets/img/english.png', import.meta.url).href
+
 const toggleSection = (section) => {
   expandedSection.value = expandedSection.value === section ? null : section
 }
@@ -33,6 +61,15 @@ const logout = () => {
   user.value = null
   isMenuOpen.value = false
   router.push('/')
+   // Clear login state
+  localStorage.setItem('isLoggedIn', 'false')
+
+  // Update reactive state
+  isLoggedIn.value = false
+  isProfileOpen.value = false
+
+  // Redirect to login page
+  router.push('/ ')
 }
 
 
@@ -75,15 +112,35 @@ const goToCashback = () => router.push('/reward')
       </div>
 
       <div class="user-info right" v-if="user">
-        👤 {{ user.username }}
-        <div class="profile-popout">
-          <p><van-icon name="manager-o" /> Role: {{ user.role }}</p>
-          <p><van-icon name="gold-coin-o" /> Gold: {{ user.game_data?.gold || 0 }}</p>
-          <p><van-icon name="diamond" /> Diamond: {{ user.game_data?.diamond || 0 }}</p>
-          <p><van-icon name="points" /> Point: {{ user.game_data?.point || 0 }}</p>
-          <p><van-icon name="vip-card" /> VIP: {{ user.game_data?.vip_level || 0 }}</p>
-        </div>
+        <!-- Profile Info -->
+          <div class="avatar-section clickable" @click="toggleProfile">
+            <img :src="user.avatar || defaultAvatar" class="avatar-img" />
+            <div class="vip-badge">VIP{{ user.vip_level }}</div>
+            <div class="user-labels">
+              <div class="username">{{ user.username }}</div>
+              <div class="userid">ID:{{ user.id }}</div>
+            </div>
+          </div>
       </div>
+
+      <!-- Profile Dropdown -->
+        <div class="profile-dropdown" v-if="isProfileOpen">
+          <button class="dropdown-item" @click="goTo('/my-account')">
+            <van-icon name="manager-o" /> My Account
+          </button>
+          <button class="dropdown-item" @click="goTo('/bet-record')">
+            <van-icon name="records" /> Betting Record
+          </button>
+          <button class="dropdown-item" @click="goTo('/mail')">
+            <van-icon name="envelop-o" /> Mail
+          </button>
+          <button class="dropdown-item" @click="goTo('/support')">
+            <van-icon name="service-o" /> Customer Service
+          </button>
+          <button class="dropdown-item logout" @click="logout">
+            <van-icon name="sign-out" /> Logout
+          </button>
+        </div>
     </header>
 
     <!-- Overlay -->
@@ -128,31 +185,27 @@ const goToCashback = () => router.push('/reward')
             <van-icon :name="expandedSection === 'member' ? 'arrow-up' : 'arrow-down'" class="van-icon" />
           </div>
           <div v-show="expandedSection === 'member'" class="submenu">
-            <div class="menu-item">
-              <img src="@/assets/img/vip.png" alt="VIP" class="menu-img" />
-              <span>VIP</span>
-            </div>
-            <div class="menu-item">
+            <div class="menu-item-sub">
               <img src="@/assets/img/bet-record.png" alt="Betting Record" class="menu-img" />
               <span>Betting Record</span>
             </div>
-            <div class="menu-item">
+            <div class="menu-item-sub">
               <img src="@/assets/img/acc-record.png" alt="Account Record" class="menu-img" />
               <span>Account Record</span>
             </div>
-            <div class="menu-item">
+            <div class="menu-item-sub">
               <img src="@/assets/img/security.png" alt="Security Center" class="menu-img" />
               <span>Security Center</span>
             </div>
-            <div class="menu-item">
+            <div class="menu-item-sub">
               <img src="@/assets/img/dep-record.png" alt="Deposit Record" class="menu-img" />
               <span>Deposit Record</span>
             </div>
-            <div class="menu-item">
+            <div class="menu-item-sub">
               <img src="@/assets/img/profit.png" alt="Profit and Loss" class="menu-img" />
               <span>Profit and Loss</span>
             </div>
-            <div class="menu-item">
+            <div class="menu-item-sub">
               <img src="@/assets/img/mail.png" alt="Mail" class="menu-img" />
               <span>Mail</span>
             </div>
@@ -165,27 +218,27 @@ const goToCashback = () => router.push('/reward')
             <van-icon :name="expandedSection === 'game' ? 'arrow-up' : 'arrow-down'" class="van-icon" />
           </div>
           <div v-show="expandedSection === 'game'" class="submenu">
-            <div class="menu-item">
+            <div class="menu-item-sub">
               <img src="@/assets/img/tab-fire.png" alt="Hot games" class="menu-img" />
               <span>Hot games</span>
             </div>
-            <div class="menu-item">
+            <div class="menu-item-sub">
               <img src="@/assets/img/tab-slot.svg" alt="Slots" class="menu-img" />
               <span>Slots</span>
             </div>
-            <div class="menu-item">
+            <div class="menu-item-sub">
               <img src="@/assets/img/tab-fish.svg" alt="Fish" class="menu-img" />
               <span>Fish</span>
             </div>
-            <div class="menu-item">
+            <div class="menu-item-sub">
               <img src="@/assets/subpage/live-i.svg" alt="Live" class="menu-img" />
               <span>Live</span>
             </div>
-            <div class="menu-item">
+            <div class="menu-item-sub">
               <img src="@/assets/subpage/poker-i.svg" alt="Poker" class="menu-img" />
               <span>Poker</span>
             </div>
-            <div class="menu-item">
+            <div class="menu-item-sub">
               <img src="@/assets/subpage/ball-i.svg" alt="Sports" class="menu-img" />
               <span>Sports</span>
             </div>
@@ -327,6 +380,17 @@ const goToCashback = () => router.push('/reward')
   background-color: transparent;
   border: 1px solid #636161;
 }
+.menu-item-sub {
+  display: flex;
+  align-items: center;
+  color: white;
+  padding: 0.40rem 1rem;
+  font-size: 16px;
+  font-weight: 600;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* 👈 subtle white line */
+}
+
 .submenu {
   display: flex;
   flex-direction: column;
@@ -364,44 +428,116 @@ const goToCashback = () => router.push('/reward')
 
 /* profile icon */
 
-.user-info {
-  position: relative;
+.menu-toggle {
+  background: none;
+  border: none;
   cursor: pointer;
-  font-weight: 600;
-  color: #fff;
 }
 
-.profile-popout {
+.menu-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.logo-img {
+  height: 36px;
+}
+
+.user-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar-section.clickable {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.avatar-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #4f46e5;
+}
+
+.vip-badge {
+  background: #f59e0b;
+  color: #111827;
+  padding: 2px 6px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+.user-labels {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: white;
+}
+
+.username {
+  font-weight: 600;
+}
+
+.userid {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.profile-dropdown {
   position: absolute;
   top: 100%;
   right: 0;
-  margin-top: 12px;
-  background: rgba(50, 50, 70, 0.8);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: 16px;
-  min-width: 220px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  color: #fff;
-  display: none;
-  transition: all 0.3s ease;
+  margin-top: 8px;
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   z-index: 100;
+  min-width: 200px;
+  padding: 8px 0;
 }
 
-.user-info:hover .profile-popout {
-  display: block;
-}
-
-.profile-popout p {
-  margin: 0 0 10px;
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  color: white;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
   font-size: 14px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
 }
 
-.profile-popout p:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
+.dropdown-item:hover {
+  background: #374151;
+}
+
+.dropdown-item.logout {
+  color: #f87171;
+}
+
+.auth-btn {
+  padding: 6px 12px;
+  border: 1px solid #4f46e5;
+  background: transparent;
+  color: white;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.auth-btn.register {
+  background: #4f46e5;
+  color: white;
 }
 
 </style>

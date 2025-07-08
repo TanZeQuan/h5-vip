@@ -266,7 +266,7 @@ html, body {
   border-radius: 30px;
   font-family: Georgia, serif;
   padding: 12px;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
 }
 
@@ -278,7 +278,7 @@ html, body {
   color: #e9c392;
   font-weight: bold;
   padding: 12px;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
 }
 
