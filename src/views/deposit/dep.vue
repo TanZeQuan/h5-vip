@@ -58,55 +58,44 @@ const proceed = () => {
     <div class="header">
       <button class="back-button" @click="goBack">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
       <h1 class="header-title">Deposit</h1>
       <div class="header-actions">
-        <div class="notification-badge">
-          <span class="badge-count">1</span>
-        </div>
-        <button class="menu-button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <circle cx="12" cy="12" r="3"/>
-            <circle cx="12" cy="5" r="3"/>
-            <circle cx="12" cy="19" r="3"/>
-          </svg>
-        </button>
+        <van-icon name="todo-list-o" class="menu-icon large-icon" />
+        <van-icon name="service-o" class="menu-icon large-icon" />
       </div>
     </div>
 
-    <!-- Content -->
-    <div class="content">
-      <!-- Deposit Method -->
-      <div class="section">
-        <h2 class="section-title">
-          <span class="bullet">•</span> Deposit method
-        </h2>
-        <div class="payment-methods">
-          <div v-for="method in [
-              { key: 'bank-qr', label: 'Bank QR Pay', icon: 'M3 5h18v2H3V5zm0 4h18v2H3V9zm0 4h18v2H3v-2zm0 4h18v2H3v-2z' },
-              { key: 'online-banking', label: 'โอนเงิน /ธนาคาร โอเลต', icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' },
-              { key: 'promptpay', label: 'PromptPay', text: 'promptpay' },
-              { key: 'true-wallet', label: 'True Wallet', text: 'T' }
-            ]" :key="method.key"
-            class="payment-method"
-            :class="{ active: selectedMethod === method.key }"
-            @click="selectMethod(method.key)"
-          >
-            <div class="method-icon" :class="method.key + '-icon'">
-              <svg v-if="method.icon" viewBox="0 0 24 24" fill="currentColor">
-                <path :d="method.icon" />
-              </svg>
-              <span v-else>{{ method.text }}</span>
-            </div>
-            <span class="method-text">{{ method.label }}</span>
+    <!-- Deposit Method -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="bullet">•</span> Deposit method
+      </h2>
+      <div class="payment-methods">
+        <div v-for="method in [
+            { key: 'bank-qr', label: 'Bank QR Pay', icon: 'M3 5h18v2H3V5zm0 4h18v2H3V9zm0 4h18v2H3v-2zm0 4h18v2H3v-2z' },
+            { key: 'online-banking', label: 'โอนเงิน /ธนาคาร โอเลต', icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' },
+            { key: 'promptpay', label: 'PromptPay', text: 'promptpay' },
+            { key: 'true-wallet', label: 'True Wallet', text: 'T' }
+          ]" :key="method.key"
+          class="payment-method"
+          :class="{ active: selectedMethod === method.key }"
+          @click="selectMethod(method.key)"
+        >
+          <div class="method-icon" :class="method.key + '-icon'">
+            <svg v-if="method.icon" viewBox="0 0 24 24" fill="currentColor">
+              <path :d="method.icon" />
+            </svg>
+            <span v-else>{{ method.text }}</span>
           </div>
+          <span class="method-text">{{ method.label }}</span>
         </div>
       </div>
 
       <!-- Payment Channel -->
-      <div class="section">
+      <div class="section2">
         <h2 class="section-title">
           <span class="bullet">•</span> Payment channels
         </h2>
@@ -115,10 +104,13 @@ const proceed = () => {
             โอนเงิน /ธนาคาร<br>โอเลต 9
           </button>
         </div>
+        <div class="amount-limits">
+          <span class="limit-text">โปรดชำระเงินตามจำนวนเงินที่ปรากฏในคำสั่งซื้อมิฉะนั้น การเติมเงินจะทำให้เกิดความล่าช้า</span>
+        </div>
       </div>
 
       <!-- Deposit Amount -->
-      <div class="section">
+      <div class="section3">
         <h2 class="section-title">
           <span class="bullet">•</span> Deposit Amounts
         </h2>
@@ -173,11 +165,10 @@ const proceed = () => {
   flex-direction: column;
 }
 
-/* Header */
 .header {
   background: #180836;
   color: white;
-  padding: 3px;
+  padding: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -187,7 +178,6 @@ const proceed = () => {
   background: none;
   border: none;
   color: white;
-  margin-left:10px;
   width: 1.5rem;
   height: 1.5rem;
   cursor: pointer;
@@ -208,46 +198,27 @@ const proceed = () => {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
-.notification-badge {
-  position: relative;
-  background: #ef4444;
-  border-radius: 50%;
-  width: 1.5rem;
-  height: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.badge-count {
-  font-size: 0.75rem;
-  font-weight: bold;
-}
-
-.menu-button {
-  background: none;
-  border: none;
+.menu-icon {
   color: white;
-  width: 1.5rem;
-  height: 1.5rem;
-  cursor: pointer;
-  padding: 0;
 }
 
-/* Content */
-.content {
-  flex: 1;
-  padding: 1rem;
-  margin-top:20px;
+.large-icon {
+  font-size: 32px;
 }
 
 .section {
-  margin-bottom: 1.5rem;
+  padding: 1rem;
+  margin-top:3rem;
 }
-
+.section2 {
+  padding: 1rem;
+}
+.section3 {
+  padding: 1rem;
+}
 .section-title {
   display: flex;
   align-items: center;
@@ -256,21 +227,25 @@ const proceed = () => {
   font-weight: 600;
   color: #333;
   margin-bottom: 1rem;
-  margin-top:3rem;
 }
 
 .bullet {
   color: #f59e0b;
   font-size: 1.5rem;
 }
-
-/* Payment Methods */
+.payment-channel{
+  width:100%;
+  height:100%;
+}
 .payment-methods {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
 }
-
+.channel-button:hover{
+  color:red;
+  border:1px solid red;
+}
 .payment-method {
   background: white;
   border: 2px solid #e5e7eb;
@@ -288,7 +263,10 @@ const proceed = () => {
   border-color: #ef4444;
   background: #fef2f2;
 }
-
+.limit-text{
+  color:red;
+  font-size:13px;
+}
 .method-icon {
   width: 2rem;
   height: 2rem;
@@ -321,28 +299,6 @@ const proceed = () => {
   color: #333;
 }
 
-/* Payment Channel */
-.payment-channel {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.channel-button {
-  background: white;
-  border: 2px solid #ef4444;
-  border-radius: 0.5rem;
-  padding: 0.75rem 1rem;
-  color: #ef4444;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.channel-button:hover {
-  background: #fef2f2;
-}
-
-/* Amount Grid */
 .amount-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -370,7 +326,6 @@ const proceed = () => {
   border-color: #3b82f6;
 }
 
-/* Custom Amount */
 .custom-amount {
   margin-bottom: 1rem;
 }
@@ -407,19 +362,6 @@ const proceed = () => {
   color: #9ca3af;
 }
 
-/* Amount Limits */
-.amount-limits {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.limit-text {
-  font-size: 0.75rem;
-  color: #ef4444;
-}
-
-/* Footer */
 .footer {
   padding: 1rem;
   background: white;
@@ -441,27 +383,5 @@ const proceed = () => {
 
 .next-button:hover {
   background: #db3333;
-}
-
-/* Responsive */
-@media (max-width: 640px) {
-  .payment-methods {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .amount-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  .amount-limits {
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .amount-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 </style>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -10,6 +10,13 @@ const errorMessage = ref('')
 const successMessage = ref('')
 const isLoading = ref(false)
 const rememberMe = ref(false)
+const showPassword = ref(false) // 👈 Add this line
+
+const passwordFieldType = computed(() => showPassword.value ? 'text' : 'password')
+
+const togglePasswordVisibility = () => {
+  showPassword.value = !showPassword.value
+}
 
 // ✅ Load saved username if "Remember Me" was checked previously
 const savedUsername = localStorage.getItem('rememberedUsername')
@@ -89,8 +96,19 @@ const handleLogin = async () => {
 
     <div class="input-group">
       <van-icon name="lock" class="input-icon" />
-      <input v-model="password" type="password" placeholder="Password" required/>
+      <input
+        v-model="password"
+        :type="passwordFieldType"
+        placeholder="Password"
+        required
+      />
+      <van-icon
+        @click="togglePasswordVisibility"
+        :name="showPassword ? 'eye-o' : 'closed-eye'"
+        class="password-toggle"
+      />
     </div>
+
 
     <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
     <div v-if="successMessage" class="success-message">{{ successMessage }}</div>
@@ -151,6 +169,7 @@ html, body {
   font-size: 24px;
   color: white;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .logo {

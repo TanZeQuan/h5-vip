@@ -40,6 +40,18 @@ const routes = [
     meta: { hideNavBottom: true }
   },
   {
+    path: '/my-account',
+    name: 'my-acc',
+    component: () => import('../views/my-account/my-acc.vue'),
+    meta: { hideNavBottom: true }
+  },
+  {
+    path: '/betting-record',
+    name: 'bet',
+    component: () => import('../views/betting-record/bet.vue'),
+    meta: { hideNavBottom: true }
+  },
+  {
     path: '/Login',
     name: 'login',
     component: () => import('../views/Login/login.vue'),

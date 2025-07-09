@@ -5,6 +5,7 @@ import giftIcon from '@/assets/rewards/rw-gift.png'
 import inviteIcon from '@/assets/rewards/rw-invite.png'
 import signIcon from '@/assets/rewards/rw-sign.png'
 import temuIcon from '@/assets/rewards/rw-temu.png'
+import avatar from '@/assets/img/man.png'
 
 
 const router = useRouter()
@@ -18,12 +19,31 @@ onMounted(() => {
 
 const emit = defineEmits(['back', 'action-clicked', 'sign-in'])
 
-const user = reactive({
-  username: 'kelvin21',
-  nickname: 'kelvin21',
-  balance: { bitcoin: 0.0, coins: 0.0 },
+const user = ref({
+  username: '',
+  nickname: '',
+  balance: {
+    bitcoin: 0
+  },
   vipLevel: 0,
-  benefits: { current: 0, total: 2 }
+  benefits: {
+    current: 0,
+    total: 100
+  }
+})
+
+onMounted(() => {
+  const storedUser = localStorage.getItem('user')
+  if (storedUser) {
+    try {
+      const parsed = JSON.parse(storedUser)
+      user.value.username = parsed.username || ''
+      user.value.nickname = parsed.nickname || ''
+      user.value.balance.bitcoin = parsed.balance?.bitcoin || 0
+    } catch (err) {
+      console.error('Failed to parse user:', err)
+    }
+  }
 })
 
 const actions = reactive([
@@ -33,9 +53,7 @@ const actions = reactive([
   { id: 'ticket', title: 'TEMU Ticket', icon: temuIcon, color: 'ticket', hasNotification: false }
 ])
 
-const avatarImage = computed(() =>
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Crect width='60' height='60' fill='%23ff8f6b'/%3E%3Ccircle cx='30' cy='25' r='12' fill='%23fff'/%3E%3Cpath d='M10 50c0-11 9-20 20-20s20 9 20 20' fill='%23fff'/%3E%3C/svg%3E"
-)
+const avatarImage = computed(() => avatar)
 
 const goBack = () => router.push('/')
 
@@ -88,11 +106,11 @@ const refreshBalance = () => console.log('Refreshing balance...')
         <div class="sign-in-badge" @click="handleSignIn">Sign In</div>
         <div class="user-info">
           <div class="avatar">
-            <img :src="avatarImage" alt="Avatar" />
+            <img :src="user.avatar || avatar" alt="Avatar" />
           </div>
           <div class="user-details">
             <h3>{{ user.username }} 📱</h3>
-            <div class="nickname">Nickname: {{ user.nickname }} ✏️</div>
+            <div class="nickname">Nickname: {{ user.username }} ✏️</div>
             <div class="balance">
               <span class="coin-icon">₿</span>
               <span>{{ user.balance.bitcoin.toFixed(2) }}</span>

@@ -53,11 +53,13 @@ function goToCategory(tab) {
 
 <template>
   <div class="banner-container">
-    <van-swipe class="promo-swipe" :autoplay="3000" indicator-color="transparent">
-      <van-swipe-item v-for="item in bannerList" :key="item.id">
-        <img :src="item.imgUrl" class="swipe-image" alt="Promotion Banner" />
-      </van-swipe-item>
-    </van-swipe>
+    <router-link to="/promotion">
+      <van-swipe class="promo-swipe" :autoplay="3000" indicator-color="transparent">
+        <van-swipe-item v-for="item in bannerList" :key="item.id">
+          <img :src="item.imgUrl" class="swipe-image" alt="Promotion Banner" />
+        </van-swipe-item>
+      </van-swipe>
+    </router-link>
   </div>
 
   <div class="marquee-container">
@@ -127,6 +129,7 @@ function goToCategory(tab) {
   width: 100%;
   height: 35vw; /* 例如宽度是 100vw，高度为其 45% */
   max-height: 280px; /* 防止大屏幕过高，可选 */
+  cursor: pointer;
 }
 
 .swipe-image {

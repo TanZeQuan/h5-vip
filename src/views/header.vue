@@ -32,9 +32,9 @@ const isLoggedIn = ref(localStorage.getItem('isLoggedIn') === 'true')
 
 // Mock user info
 const user = ref({
-  username: 'JohnDoe',
-  id: 123456,
-  vip_level: 3,
+  username: '',
+  id: '',
+  vip_level: '',
   avatar: '' // fallback default avatar
 })
 
@@ -46,7 +46,7 @@ const handleClickOutside = (e) => {
   }
 }
 // Default avatar
-const defaultAvatar = new URL('@/assets/img/english.png', import.meta.url).href
+const defaultAvatar = new URL('@/assets/img/man.png', import.meta.url).href
 
 const toggleSection = (section) => {
   expandedSection.value = expandedSection.value === section ? null : section
@@ -69,7 +69,7 @@ const logout = () => {
   isProfileOpen.value = false
 
   // Redirect to login page
-  router.push('/ ')
+  router.push('/')
 }
 
 
@@ -110,37 +110,79 @@ const goToCashback = () => router.push('/reward')
           </div>
         </button>
       </div>
-
+      
       <div class="user-info right" v-if="user">
+        <div class="wallet-am">
+          <span class="wallet-amount">₿ 0</span>
+        </div>
+        <!-- Wallet and Withdraw Buttons -->
+        <div class="wallet-section">
+          <button class="wallet-btn" @click="openWallet">
+            <img src="@/assets/img/wallet.png" class="wallet-icon" />
+            <span class="wallet-amount">{{ user.balance }}</span>
+          </button>
+          
+          <button class="withdraw-btn" @click="openWithdraw">
+            <img src="@/assets/img/money.png" class="withdraw-icon" />
+          </button>
+        </div>
+
         <!-- Profile Info -->
-          <div class="avatar-section clickable" @click="toggleProfile">
-            <img :src="user.avatar || defaultAvatar" class="avatar-img" />
-            <div class="vip-badge">VIP{{ user.vip_level }}</div>
-            <div class="user-labels">
-              <div class="username">{{ user.username }}</div>
-              <div class="userid">ID:{{ user.id }}</div>
-            </div>
-          </div>
+        <div class="avatar-section clickable" @click="toggleProfile">
+          <img :src="user.avatar || defaultAvatar" class="avatar-img" />
+        </div>
       </div>
 
       <!-- Profile Dropdown -->
         <div class="profile-dropdown" v-if="isProfileOpen">
-          <button class="dropdown-item" @click="goTo('/my-account')">
-            <van-icon name="manager-o" /> My Account
-          </button>
-          <button class="dropdown-item" @click="goTo('/bet-record')">
-            <van-icon name="records" /> Betting Record
-          </button>
-          <button class="dropdown-item" @click="goTo('/mail')">
-            <van-icon name="envelop-o" /> Mail
-          </button>
-          <button class="dropdown-item" @click="goTo('/support')">
-            <van-icon name="service-o" /> Customer Service
-          </button>
-          <button class="dropdown-item logout" @click="logout">
-            <van-icon name="sign-out" /> Logout
-          </button>
+        <div class="avatar-section">
+          <img :src="user.avatar || defaultAvatar" class="avatar-img" />
+          <div class="vip-badge">VIP{{ user.vip_level }}</div>
+          <div class="user-info">
+            <div class="username">{{ user.username }}</div>
+            <div class="userid">
+              ID:{{ user.user_id }}
+            </div>
+          </div>
         </div>
+
+        <div class="menu-buttons">
+        <button class="dropdown-item" type="button" @click="goTo('/my-account')">
+          <span class="dropdown-content">
+            <van-icon name="contact" class="dropdown-icon" />
+            <span>My Account</span>
+          </span>
+        </button>
+      <button class="dropdown-item" @click="goTo('/betting-record')">
+        <span class="dropdown-content">
+          <van-icon name="records" class="dropdown-icon" />
+          <span>Betting Record</span>
+        </span>
+      </button>
+      
+      <button class="dropdown-item" @click="goTo('/mail')">
+        <span class="dropdown-content">
+          <van-icon name="envelop-o" class="dropdown-icon" />
+          <span>Mail</span>
+        </span>
+      </button>
+      
+      <button class="dropdown-item" @click="goTo('/support')">
+        <span class="dropdown-content">
+          <van-icon name="service" class="dropdown-icon" />
+          <span>Customer Service</span>
+        </span>
+      </button>
+      
+      <button class="dropdown-item logout" @click="logout">
+        <span class="dropdown-content">
+          <van-icon name="arrow-left" class="dropdown-icon" />
+
+          <span>Logout</span>
+        </span>
+      </button>
+    </div>
+  </div>
     </header>
 
     <!-- Overlay -->
@@ -450,94 +492,205 @@ const goToCashback = () => router.push('/reward')
   gap: 16px;
 }
 
-.avatar-section.clickable {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.avatar-section {
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
   cursor: pointer;
 }
 
 .avatar-img {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
+  margin-top:10px;
+  border: 3px solid #ffc107;
   object-fit: cover;
-  border: 2px solid #4f46e5;
 }
 
 .vip-badge {
-  background: #f59e0b;
-  color: #111827;
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffc107;
+  color: black;
+  font-weight: bold;
+  font-size: 10px;
   padding: 2px 6px;
-  font-size: 12px;
-  border-radius: 6px;
-}
-
-.user-labels {
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-  color: white;
-}
-
-.username {
-  font-weight: 600;
-}
-
-.userid {
-  font-size: 12px;
-  opacity: 0.8;
+  border-radius: 10px;
+  z-index: 1;
 }
 
 .profile-dropdown {
   position: absolute;
   top: 100%;
   right: 0;
-  margin-top: 8px;
+  margin-top: 5px;
+  margin:10px;
   background: #1f2937;
   border: 1px solid #374151;
   border-radius: 10px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   z-index: 100;
   min-width: 200px;
-  padding: 8px 0;
+  padding: 20px 16px;
 }
 
 .dropdown-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 16px;
-  color: white;
-  background: none;
+  background-color: #2c3d5c;
   border: none;
+  padding: 10px 16px; /* Reduced from 30px to 16px for left alignment */
+  border-radius: 8px;
   width: 100%;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
   text-align: left;
-  font-size: 14px;
-  cursor: pointer;
+  justify-content: flex-start; /* ensures content stays left-aligned */
 }
 
+.dropdown-content {
+  gap: 10px;
+  flex: 1;
+}
+.dropdown-icon{
+  margin-right:20px;
+}
 .dropdown-item:hover {
-  background: #374151;
+  background-color: #3a4f6f;
 }
 
-.dropdown-item.logout {
-  color: #f87171;
+.logout {
+  background-color: #3a2b45;
 }
 
-.auth-btn {
-  padding: 6px 12px;
-  border: 1px solid #4f46e5;
-  background: transparent;
+.logout:hover {
+  background-color: #5a3e65;
+}
+
+.user-info {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.username {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.userid {
+  font-size: 13px;
+  color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wallet-section {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.wallet-btn {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to right, #f8491df8, #ffa57ec9);
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
   color: white;
-  border-radius: 6px;
-  font-size: 14px;
+  font-weight: bold;
+  margin-right: 10px;
+  margin-top:-10px;
+  position: relative;
+  overflow: hidden;
+  width:35px;
+  height:auto;
+  animation: heartbeat 1.4s infinite ease-in-out;
+  transform-origin: center;
   cursor: pointer;
 }
 
-.auth-btn.register {
-  background: #4f46e5;
+.wallet-am{
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  margin-top:-10px;
+  position: relative;
+  overflow: hidden;
+  width:40px;
+  height:auto;
+  cursor:pointer;
+}
+.wallet-icon {
+  width:20px;
+  height:20px;
+}
+
+/* Wallet amount */
+.wallet-amount {
+  font-size: 15px;
+  color: rgba(230, 240, 255, 0.89);
+}
+
+.withdraw-btn {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to right, #0741ff, #e9f5ffc5);
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
   color: white;
+  font-weight: bold;
+  margin-right: 10px;
+  margin-top:-10px;
+  position: relative;
+  overflow: hidden;
+  width:35px;
+  height:auto;
+  margin-right:-8px;
+  cursor: pointer;
+}
+
+.withdraw-icon {
+  margin-right: 6px;
+  width:20px;
+  height:20px;
+}
+/* Animation keyframes */
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.2);
+  }
+  70% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Add these to your existing styles */
+.user-info.right {
+  display: flex;
+  align-items: center;
 }
 
 </style>

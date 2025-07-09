@@ -92,17 +92,30 @@ const footerList = ref([
   position: relative;
   transform-origin: center;
 }
-@keyframes breath {
-  0%, 100% {
+/* Animation keyframes */
+@keyframes heartbeat {
+  0% {
     transform: scale(1);
   }
-  50% {
-    transform: scale(1.05);
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.2);
+  }
+  70% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
 .share-item .link {
-  animation: breath 0.5s infinite ease-in-out; /* Changed from 3s to 1.5s */
+  animation: heartbeat 1.4s infinite ease-in-out;
 }
 
 .share-icon {

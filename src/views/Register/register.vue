@@ -167,6 +167,7 @@ html, body {
   font-size: 24px;
   color: white;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .logo {

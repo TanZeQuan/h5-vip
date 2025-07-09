@@ -17,10 +17,24 @@ const goBack = () => {
 }
 
 // Reactive data
-const user = reactive({
-  username: 'kelvin21',
-  nickname: 'kelvin21',
-  balance: '0.00'
+const user = ref({
+  username: '',
+  nickname: '',
+  balance: ''
+})
+
+onMounted(() => {
+  const storedUser = localStorage.getItem('user')
+  if (storedUser) {
+    try {
+      const parsed = JSON.parse(storedUser)
+      user.value.username = parsed.username || ''
+      user.value.nickname = parsed.nickname || ''
+      user.value.balance.bitcoin = parsed.balance?.bitcoin || 0
+    } catch (err) {
+      console.error('Failed to parse user:', err)
+    }
+  }
 })
 
 const quickActions = ref([
@@ -104,20 +118,20 @@ const menuItems = ref([
     hasNotification: false
   },
   {
-    title: 'Suggestion',
-    icon: '💬',
+    title: 'Download APP',
+    icon: '📲',
     iconClass: 'suggestion-icon',
     hasNotification: false
   },
   {
-    title: 'Suggestion',
-    icon: '💬',
+    title: 'Customer Service',
+    icon: '📞',
     iconClass: 'suggestion-icon',
     hasNotification: false
   },
   {
-    title: 'Suggestion',
-    icon: '💬',
+    title: 'Help Center',
+    icon: '❓',
     iconClass: 'suggestion-icon',
     hasNotification: false
   }
@@ -158,7 +172,7 @@ const handleMenuClick = (item) => {
         
         <div class="user-info">
           <div class="avatar">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23ff8f6b'/%3E%3Cstop offset='100%25' stop-color='%23ffb347'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='80' height='80' fill='url(%23grad)' rx='40'/%3E%3Ccircle cx='40' cy='30' r='15' fill='%23643A23'/%3E%3Cpath d='M15 65c0-14 11-25 25-25s25 11 25 25' fill='%23643A23'/%3E%3C/svg%3E" alt="Avatar">
+            <img src="@/assets/img/man.png" alt="Avatar">
           </div>
           
           <div class="user-details">
@@ -168,7 +182,7 @@ const handleMenuClick = (item) => {
             </div>
             
             <h3>{{ user.username }} 📱</h3>
-            <div class="nickname">Nickname: {{ user.nickname }} ✏️</div>
+            <div class="nickname">Nickname: {{ user.username }} ✏️</div>
             
             <div class="balance-section">
               <div class="balance">
@@ -203,7 +217,6 @@ const handleMenuClick = (item) => {
             @click="handleMenuClick(item)"
           >
             <div class="menu-icon" :class="item.iconClass">
-              <div v-if="item.hasNotification" class="notification-dot">{{ item.notificationCount }}</div>
               <span class="icon">{{ item.icon }}</span>
             </div>
             <div class="menu-title">{{ item.title }}</div>
@@ -450,7 +463,7 @@ const handleMenuClick = (item) => {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 20px;
-  color: #ccc;
+  color: #252525;
 }
 
 .menu-grid {
@@ -468,44 +481,27 @@ const handleMenuClick = (item) => {
   transition: transform 0.2s;
 }
 
-.menu-item:hover {
-  transform: translateY(-2px);
-}
-
 .menu-icon {
   width: 50px;
   height: 50px;
-  background: #d1a24f;;
+  background: #d1a24f;
   border-radius: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
   position: relative;
-}
-
-.notification-dot {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background: #e74c3c;
-  color: white;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  font-weight: bold;
+  margin-left:-10px;
 }
 
 .menu-title {
-  font-size: 12px;
+  font-size: 13px;
   text-align: center;
-  color: #ccc;
+  font-weight: 600;
+  color: #696969;
   line-height: 1.2;
-  max-width: 60px;
+  max-width: 80px;
+  margin-left:-10px;
 }
 
 /* Specific icon colors */

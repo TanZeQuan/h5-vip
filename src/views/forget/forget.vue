@@ -1,44 +1,92 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-const username = ref('')
 const email = ref('')
+const code = ref('')
+const newPassword = ref('')
 const errorMessage = ref('')
 const successMessage = ref('')
 const isLoading = ref(false)
+const showPassword = ref(false)
+const isSendingCode = ref(false)
+
+const passwordFieldType = computed(() => showPassword.value ? 'text' : 'password')
+
+const togglePasswordVisibility = () => {
+  showPassword.value = !showPassword.value
+}
 
 const goHome = () => {
   router.push('/')
 }
 
-const handleReset = async () => {
+const sendCode = async () => {
   errorMessage.value = ''
   successMessage.value = ''
 
-  if (!username.value || !email.value) {
-    errorMessage.value = 'Username and email are required.'
+  if (!email.value) {
+    errorMessage.value = 'Please enter your email first.'
+    return
+  }
+
+  isSendingCode.value = true
+
+  try {
+    const bodyData = `email=${encodeURIComponent(email.value)}`
+    const response = await fetch('http://192.168.0.122/silver/reset/request_reset.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: bodyData
+    })
+
+    const result = await response.json()
+    if (result.success) {
+      successMessage.value = result.message || 'Verification code sent.'
+    } else {
+      errorMessage.value = result.message || 'Failed to send code.'
+    }
+  } catch (error) {
+    errorMessage.value = 'Network error. Please try again.'
+  } finally {
+    isSendingCode.value = false
+  }
+}
+
+const handleResetPassword = async () => {
+  errorMessage.value = ''
+  successMessage.value = ''
+
+  if (!email.value || !code.value || !newPassword.value) {
+    errorMessage.value = 'All fields are required.'
+    return
+  }
+
+  if (newPassword.value.length < 6) {
+    errorMessage.value = 'Password must be at least 6 characters.'
     return
   }
 
   isLoading.value = true
 
   try {
-    const formData = new FormData()
-    formData.append('username', username.value)
-    formData.append('email', email.value)
+    const bodyData = `email=${encodeURIComponent(email.value)}&code=${encodeURIComponent(code.value)}&new_password=${encodeURIComponent(newPassword.value)}`
 
-    const response = await fetch('http://192.168.0.122/silver/user/forgot_password.php', {
+    const response = await fetch('http://192.168.0.122/silver/reset/reset_password.php', {
       method: 'POST',
-      body: formData,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: bodyData
     })
 
     const result = await response.json()
 
     if (result.success) {
-      successMessage.value = result.message || 'Reset instructions sent to your email.'
+      successMessage.value = result.message || 'Password reset successful.'
+      setTimeout(() => {
+        router.push('/login')
+      }, 1500)
     } else {
       errorMessage.value = result.message || 'Reset failed.'
     }
@@ -62,20 +110,38 @@ const handleReset = async () => {
     <span class="form-title2">Please retrieve your password in the following ways</span>
 
     <div class="input-group">
-      <van-icon name="user-o" class="input-icon" />
-      <input v-model="username" type="text" placeholder="Username" required />
+      <van-icon name="envelop-o" class="input-icon" />
+      <input v-model="email" type="email" placeholder="Email" required />
+    </div>
+
+    <button class="send-code-button" @click="sendCode" :disabled="isSendingCode">
+      {{ isSendingCode ? 'Sending...' : 'Send Code' }}
+    </button>
+
+    <div class="input-group">
+      <van-icon name="certificate" class="input-icon" />
+      <input v-model="code" type="text" placeholder="Verification Code" />
     </div>
 
     <div class="input-group">
-      <van-icon name="envelop-o" class="input-icon" />
-      <input v-model="email" type="email" placeholder="Email" required />
+      <van-icon name="lock" class="input-icon" />
+      <input 
+        v-model="newPassword" 
+        :type="passwordFieldType" 
+        placeholder="New Password (min 6 chars)" 
+      />
+      <van-icon 
+        @click="togglePasswordVisibility" 
+        :name="showPassword ? 'eye-o' : 'closed-eye'" 
+        class="password-toggle" 
+      />
     </div>
 
     <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
     <div v-if="successMessage" class="success-message">{{ successMessage }}</div>
 
-    <button class="login-button" @click="handleReset" :disabled="isLoading">
-      {{ isLoading ? 'Sending...' : 'Reset' }}
+    <button class="login-button" @click="handleResetPassword" :disabled="isLoading">
+      {{ isLoading ? 'Resetting...' : 'Reset' }}
     </button>
   </div>
 </template>
@@ -96,6 +162,7 @@ const handleReset = async () => {
   font-size: 24px;
   color: white;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .logo {
@@ -150,6 +217,34 @@ const handleReset = async () => {
 .input-icon {
   width: 20px;
   height: 20px;
+}
+
+.password-toggle {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.send-code-button {
+  width: 100%;
+  background: #ffffff20;
+  color: white;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 8px;
+  font-size: 16px;
+  font-family: Georgia, serif;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.send-code-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.send-code-button:hover{
+  background:#596275;
 }
 
 .login-button {
