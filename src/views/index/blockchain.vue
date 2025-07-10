@@ -119,9 +119,9 @@ const games = [
   z-index: 1;
   background: linear-gradient(90deg, rgba(255, 245, 226, 0.99), hsla(33, 72%, 79%, 0.99));
   color: #1d212d;
-  font-size: 13px;
-  font-weight:bold;
-  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px 5px;
   border-radius: 3px;
 }
 

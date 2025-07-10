@@ -33,11 +33,11 @@ const pageState = ref({
 })
 
 const games = ref([
-  { id: 1, title: 'Fortune King...', provider: 'PG', image: fishImage1, badge: 'PG' },
-  { id: 2, title: 'Dinosaur Tyc...', provider: 'PG', image: fishImage2, badge: 'PG' },
+  { id: 1, title: 'Fortune King Jackpot', provider: 'PG', image: fishImage1, badge: 'PG' },
+  { id: 2, title: 'Dinosaur Tycoon II', provider: 'PG', image: fishImage2, badge: 'PG' },
   { id: 3, title: 'Happy Fishing', provider: 'PG', image: fishImage3, badge: 'PG' },
-  { id: 4, title: 'Ocean King ...', provider: 'PG', image: fishImage4, badge: 'PG' },
-  { id: 5, title: 'All-Star Fish...', provider: 'PG', image: fishImage5, badge: 'PG' },
+  { id: 4, title: 'Ocean King Jackpot', provider: 'PG', image: fishImage4, badge: 'PG' },
+  { id: 5, title: 'All-Star Fishing', provider: 'PG', image: fishImage5, badge: 'PG' },
   { id: 6, title: 'Boom Legend', provider: 'PG', image: fishImage6, badge: 'PG' },
   
 

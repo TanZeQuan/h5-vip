@@ -1,39 +1,39 @@
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-// ✅ Redirect if not logged in
-onMounted(() => {
-  const user = localStorage.getItem('user')
-  if (!user) {
-    router.push('/login')
+const user = ref({
+  username: '',
+  nickname: '',
+  balance: {
+    bitcoin: 0
   }
 })
+
+const goToNicknamePage = () => {
+  router.push('/nickname') // Navigate to nickname page
+}
 
 const goBack = () => {
   router.push('/') // Navigate to home page
 }
 
-// Reactive data
-const user = ref({
-  username: '',
-  nickname: '',
-  balance: ''
-})
-
 onMounted(() => {
   const storedUser = localStorage.getItem('user')
-  if (storedUser) {
-    try {
-      const parsed = JSON.parse(storedUser)
-      user.value.username = parsed.username || ''
-      user.value.nickname = parsed.nickname || ''
-      user.value.balance.bitcoin = parsed.balance?.bitcoin || 0
-    } catch (err) {
-      console.error('Failed to parse user:', err)
-    }
+  if (!storedUser) {
+    router.push('/login')
+    return
+  }
+
+  try {
+    const parsed = JSON.parse(storedUser)
+    user.value.username = parsed.username || ''
+    user.value.nickname = parsed.nickname || ''
+    user.value.balance.bitcoin = parsed.balance?.bitcoin || 0
+  } catch (err) {
+    console.error('Failed to parse user:', err)
   }
 })
 
@@ -44,100 +44,23 @@ const quickActions = ref([
 ])
 
 const menuItems = ref([
-  {
-    title: 'Reward Center',
-    icon: '🏆',
-    iconClass: 'trophy-icon',
-    hasNotification: true,
-    notificationCount: 1
-  },
-  {
-    title: 'Betting Record',
-    icon: '⚡',
-    iconClass: 'betting-icon',
-    hasNotification: false
-  },
-  {
-    title: 'Profit And Loss',
-    icon: '💰',
-    iconClass: 'profit-icon',
-    hasNotification: false
-  },
-  {
-    title: 'Deposit Record',
-    icon: '💳',
-    iconClass: 'deposit-icon',
-    hasNotification: false
-  },
-  {
-    title: 'Withdrawal Record',
-    icon: '📋',
-    iconClass: 'withdrawal-icon',
-    hasNotification: false
-  },
-  {
-    title: 'Account Record',
-    icon: '🔍',
-    iconClass: 'account-icon',
-    hasNotification: false
-  },
-  {
-    title: 'My Account',
-    icon: '👤',
-    iconClass: 'myaccount-icon',
-    hasNotification: false
-  },
-  {
-    title: 'Security Center',
-    icon: '🔒',
-    iconClass: 'security-icon',
-    hasNotification: false
-  },
-  {
-    title: 'Invite Friends',
-    icon: '👥',
-    iconClass: 'invite-icon',
-    hasNotification: false
-  },
-  {
-    title: 'Manual Rebate',
-    icon: '💵',
-    iconClass: 'rebate-icon',
-    hasNotification: false
-  },
-  {
-    title: 'Internal Message',
-    icon: '📧',
-    iconClass: 'message-icon',
-    hasNotification: false
-  },
-  {
-    title: 'Suggestion',
-    icon: '💬',
-    iconClass: 'suggestion-icon',
-    hasNotification: false
-  },
-  {
-    title: 'Download APP',
-    icon: '📲',
-    iconClass: 'suggestion-icon',
-    hasNotification: false
-  },
-  {
-    title: 'Customer Service',
-    icon: '📞',
-    iconClass: 'suggestion-icon',
-    hasNotification: false
-  },
-  {
-    title: 'Help Center',
-    icon: '❓',
-    iconClass: 'suggestion-icon',
-    hasNotification: false
-  }
+  { title: 'Reward Center', icon: '🏆', iconClass: 'trophy-icon', hasNotification: true, notificationCount: 1 },
+  { title: 'Betting Record', icon: '⚡', iconClass: 'betting-icon', hasNotification: false },
+  { title: 'Profit And Loss', icon: '💰', iconClass: 'profit-icon', hasNotification: false },
+  { title: 'Deposit Record', icon: '💳', iconClass: 'deposit-icon', hasNotification: false },
+  { title: 'Withdrawal Record', icon: '📋', iconClass: 'withdrawal-icon', hasNotification: false },
+  { title: 'Account Record', icon: '🔍', iconClass: 'account-icon', hasNotification: false },
+  { title: 'My Account', icon: '👤', iconClass: 'myaccount-icon', hasNotification: false },
+  { title: 'Security Center', icon: '🔒', iconClass: 'security-icon', hasNotification: false },
+  { title: 'Invite Friends', icon: '👥', iconClass: 'invite-icon', hasNotification: false },
+  { title: 'Manual Rebate', icon: '💵', iconClass: 'rebate-icon', hasNotification: false },
+  { title: 'Internal Message', icon: '📧', iconClass: 'message-icon', hasNotification: false },
+  { title: 'Suggestion', icon: '💬', iconClass: 'suggestion-icon', hasNotification: false },
+  { title: 'Download APP', icon: '📲', iconClass: 'suggestion-icon', hasNotification: false },
+  { title: 'Customer Service', icon: '📞', iconClass: 'suggestion-icon', hasNotification: false },
+  { title: 'Help Center', icon: '❓', iconClass: 'suggestion-icon', hasNotification: false }
 ])
 
-// Methods
 const handleSignIn = () => {
   console.log('Sign in clicked')
 }
@@ -155,48 +78,49 @@ const handleMenuClick = (item) => {
 }
 </script>
 
-
 <template>
   <div class="my-account">
     <div class="header">
       <button class="back-btn" @click="goBack">‹</button>
       <h1 class="header-title">My Account</h1>
     </div>
-    
+
     <div class="main-content">
       <div class="user-card">
         <div class="sign-in-badge" @click="handleSignIn">
           <span class="check-icon">✓</span>
-          Sign In 
+          Sign In
         </div>
-        
+
         <div class="user-info">
           <div class="avatar">
             <img src="@/assets/img/man.png" alt="Avatar">
           </div>
-          
+
           <div class="user-details">
             <div class="vip-badge">
               <span class="vip-icon">👤</span>
               <span>VIP0</span>
             </div>
-            
+
             <h3>{{ user.username }} 📱</h3>
-            <div class="nickname">Nickname: {{ user.username }} ✏️</div>
-            
+            <div class="nickname" @click="goToNicknamePage">
+              Nickname: {{ user.nickname }} ✏️
+            </div>
+
             <div class="balance-section">
               <div class="balance">
                 <span class="coin-icon">₿</span>
-                <span class="balance-amount">{{ user.balance }}</span>
+                <span class="balance-amount">{{ user.balance.bitcoin }}</span>
               </div>
               <button class="refresh-btn" @click="refreshBalance">⟲</button>
             </div>
           </div>
         </div>
-        
+
         <div class="action-buttons">
-          <button 
-            v-for="action in quickActions" 
+          <button
+            v-for="action in quickActions"
             :key="action.name"
             class="action-btn"
             @click="handleQuickAction(action)"
@@ -205,13 +129,13 @@ const handleMenuClick = (item) => {
           </button>
         </div>
       </div>
-      
+
       <div class="member-center">
         <h2 class="section-title">Member Center</h2>
-        
+
         <div class="menu-grid">
-          <div 
-            v-for="item in menuItems" 
+          <div
+            v-for="item in menuItems"
             :key="item.title"
             class="menu-item"
             @click="handleMenuClick(item)"
@@ -333,11 +257,17 @@ const handleMenuClick = (item) => {
 }
 
 .avatar {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #555454, #e7ddd0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .avatar img {
@@ -377,6 +307,7 @@ const handleMenuClick = (item) => {
   font-size: 14px;
   color: #666;
   margin-bottom: 12px;
+  cursor: pointer;
 }
 
 .balance-section {

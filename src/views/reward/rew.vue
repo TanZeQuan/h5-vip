@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, onActivated } from 'vue'
 import { useRouter } from 'vue-router'
 import giftIcon from '@/assets/rewards/rw-gift.png'
 import inviteIcon from '@/assets/rewards/rw-invite.png'
@@ -7,16 +7,7 @@ import signIcon from '@/assets/rewards/rw-sign.png'
 import temuIcon from '@/assets/rewards/rw-temu.png'
 import avatar from '@/assets/img/man.png'
 
-
 const router = useRouter()
-
-onMounted(() => {
-  const user = localStorage.getItem('user')
-  if (!user) {
-    router.push('/login')
-  }
-})
-
 const emit = defineEmits(['back', 'action-clicked', 'sign-in'])
 
 const user = ref({
@@ -32,57 +23,62 @@ const user = ref({
   }
 })
 
-onMounted(() => {
+const goToNicknamePage = () => {
+  router.push('/nickname')
+}
+
+const loadUser = () => {
   const storedUser = localStorage.getItem('user')
-  if (storedUser) {
-    try {
-      const parsed = JSON.parse(storedUser)
-      user.value.username = parsed.username || ''
-      user.value.nickname = parsed.nickname || ''
-      user.value.balance.bitcoin = parsed.balance?.bitcoin || 0
-    } catch (err) {
-      console.error('Failed to parse user:', err)
-    }
+  if (!storedUser) {
+    router.push('/login')
+    return
   }
-})
+
+  try {
+    const parsed = JSON.parse(storedUser)
+    user.value.username = parsed.username || ''
+    user.value.nickname = parsed.nickname || ''
+    user.value.balance.bitcoin = parsed.balance?.bitcoin || 0
+    user.value.vipLevel = parsed.vipLevel || 0
+    user.value.benefits = parsed.benefits || { current: 0, total: 100 }
+  } catch (err) {
+    console.error('Failed to parse user:', err)
+  }
+}
+
+onMounted(loadUser)
+onActivated(loadUser) // Optional if you're using <keep-alive>
 
 const actions = reactive([
-  { id: 'bonus', title: 'Bonus', icon: giftIcon, color: 'bonus', hasNotification: true, notificationCount: 1,},
+  { id: 'bonus', title: 'Bonus', icon: giftIcon, color: 'bonus', hasNotification: true, notificationCount: 1 },
   { id: 'signin', title: 'Sign In', icon: inviteIcon, color: 'signin', hasNotification: false },
   { id: 'invite', title: 'Invite Friends', icon: signIcon, color: 'invite', hasNotification: false },
   { id: 'ticket', title: 'TEMU Ticket', icon: temuIcon, color: 'ticket', hasNotification: false }
 ])
 
 const avatarImage = computed(() => avatar)
-
 const goBack = () => router.push('/')
+const handleSignIn = () => emit('sign-in')
+
+const handleBonus = (action) => {
+  action.hasNotification = false
+  action.notificationCount = 0
+  user.value.balance.bitcoin += 0.01
+}
+
+const handleInvite = () => {}
+const handleTicket = () => {}
 
 const handleActionClick = (action) => {
   switch (action.id) {
-    case 'bonus':
-      handleBonus(action)
-      break
-    case 'signin':
-      handleSignIn()
-      break
-    case 'invite':
-      handleInvite()
-      break
-    case 'ticket':
-      handleTicket()
-      break
+    case 'bonus': handleBonus(action); break
+    case 'signin': handleSignIn(); break
+    case 'invite': handleInvite(); break
+    case 'ticket': handleTicket(); break
   }
   emit('action-clicked', action)
 }
 
-const handleSignIn = () => emit('sign-in')
-const handleBonus = (action) => {
-  action.hasNotification = false
-  action.notificationCount = 0
-  user.balance.bitcoin += 0.01
-}
-const handleInvite = () => {}
-const handleTicket = () => {}
 const getCardClass = (action) => `action-card ${action.color}-card`
 const refreshBalance = () => console.log('Refreshing balance...')
 </script>
@@ -103,33 +99,35 @@ const refreshBalance = () => console.log('Refreshing balance...')
 
       <div class="user-card">
         <div class="user-card-overlay">
-        <div class="sign-in-badge" @click="handleSignIn">Sign In</div>
-        <div class="user-info">
-          <div class="avatar">
-            <img :src="user.avatar || avatar" alt="Avatar" />
+          <div class="sign-in-badge" @click="handleSignIn">Sign In</div>
+          <div class="user-info">
+            <div class="avatar">
+              <img :src="avatarImage" alt="Avatar" />
+            </div>
+            <div class="user-details">
+              <h3>{{ user.username }} 📱</h3>
+              <div class="nickname" @click="goToNicknamePage">
+                Nickname: {{ user.nickname }} ✏️
+              </div>
+              <div class="balance">
+                <span class="coin-icon">₿</span>
+                <span>{{ user.balance.bitcoin.toFixed(2) }}</span>
+                <button class="refresh-btn" @click="refreshBalance">⟲</button>
+              </div>
+            </div>
           </div>
-          <div class="user-details">
-            <h3>{{ user.username }} 📱</h3>
-            <div class="nickname">Nickname: {{ user.username }} ✏️</div>
-            <div class="balance">
-              <span class="coin-icon">₿</span>
-              <span>{{ user.balance.bitcoin.toFixed(2) }}</span>
-              <button class="refresh-btn" @click="refreshBalance">⟲</button>
+
+          <div class="vip-section">
+            <div class="vip-status">
+              <span class="crown-icon">👑</span>
+              <span>VIP{{ user.vipLevel }}</span>
+            </div>
+            <div class="benefits">
+              Benefits ⚙️
+              <span>{{ user.benefits.current }} / {{ user.benefits.total }}</span>
             </div>
           </div>
         </div>
-
-        <div class="vip-section">
-          <div class="vip-status">
-            <span class="crown-icon">👑</span>
-            <span>VIP{{ user.vipLevel }}</span>
-          </div>
-          <div class="benefits">
-            Benefits ⚙️
-            <span>{{ user.benefits.current }} / {{ user.benefits.total }}</span>
-          </div>
-        </div>
-      </div>
       </div>
 
       <div class="action-grid">
@@ -140,9 +138,6 @@ const refreshBalance = () => console.log('Refreshing balance...')
           :class="getCardClass(action)"
           @click.prevent="handleActionClick(action)"
         >
-          <div v-if="action.hasNotification" class="notification-badge">
-            {{ action.notificationCount }}
-          </div>
           <div class="card-icon">
             <img :src="action.icon" :alt="action.title + ' Icon'" />
           </div>
@@ -150,7 +145,6 @@ const refreshBalance = () => console.log('Refreshing balance...')
           <div class="card-decoration"></div>
         </a>
       </div>
-
     </div>
   </div>
 </template>
@@ -223,14 +217,13 @@ const refreshBalance = () => console.log('Refreshing balance...')
 .user-card {
   background: rgba(236, 236, 236, 0.767);
   border-radius: 20px;
-  padding: 8px;
+  padding: 10px;
   margin-top: 3rem;
   position: relative;
-  background-image: 
-    url('@/assets/rewards/rw-badge-top.png'), url('@/assets/rewards/rw-bg.png');
-  background-repeat: no-repeat, no-repeat;
-  background-size: 80px auto, 100% auto;
-  background-position: top right 10px, top center;
+  background-image: url('@/assets/rewards/rw-badge.png');
+  background-repeat: no-repeat;
+  background-size: 40% auto;
+  background-position: top right 30px;
 }
 
 .user-card-overlay {
@@ -243,6 +236,7 @@ const refreshBalance = () => console.log('Refreshing balance...')
 
 .sign-in-badge {
   position: absolute;
+  z-index: 1; /* 👈 add this */
   top: -8px;
   right: 15px;
   background: #e74c3c;
@@ -253,6 +247,7 @@ const refreshBalance = () => console.log('Refreshing balance...')
   font-weight: 600;
   cursor: pointer;
 }
+
 
 .sign-in-badge::before {
   content: '✓';
@@ -278,8 +273,8 @@ const refreshBalance = () => console.log('Refreshing balance...')
 }
 
 .avatar {
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background: linear-gradient(45deg, #ff6b47, #ffb347);
   display: flex;
@@ -302,10 +297,15 @@ const refreshBalance = () => console.log('Refreshing balance...')
 }
 
 .nickname {
+  position: relative;
+  z-index: 2;
+  padding: 4px;
   font-size: 14px;
   color: #666;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  cursor: pointer
 }
+
 
 .balance {
   display: flex;
@@ -414,23 +414,6 @@ const refreshBalance = () => console.log('Refreshing balance...')
 .card-title {
   font-size: 16px;
   font-weight: 600;
-}
-
-/* Notification Badge */
-.notification-badge {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: #e74c3c;
-  color: white;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  font-size: 12px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* Responsive */

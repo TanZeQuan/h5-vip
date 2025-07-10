@@ -19,12 +19,12 @@ import hotGame12 from '@/assets/hot-games/jili12.png'
 const allGames = [
   // Page 1
   [
-    { id: 1, title: 'Songkran S...', img: hotGame1, badge: 'JILI' },
-    { id: 2, title: 'Mahjong Wa...', img: hotGame2, badge: 'JILI' },
-    { id: 3, title: 'Thai Hi Lo', img: hotGame3, badge: 'JILI' },
-    { id: 4, title: 'Happy Fishing', img: hotGame4, badge: 'JILI' },
-    { id: 5, title: 'Lucky Neko', img: hotGame5, badge: 'JILI' },
-    { id: 6, title: 'Rich Mahjong', img: hotGame6, badge: 'JILI' },
+    { id: 1, title: 'Golden Empire 2', img: hotGame1, badge: 'JILI' },
+    { id: 2, title: 'Mines Grand', img: hotGame2, badge: 'JILI' },
+    { id: 3, title: 'Clover Coins 3x3', img: hotGame3, badge: 'JILI' },
+    { id: 4, title: 'Bikini Lady', img: hotGame4, badge: 'JILI' },
+    { id: 5, title: '3 Witch Lamp', img: hotGame5, badge: 'JILI' },
+    { id: 6, title: 'Money Pot Deluxe', img: hotGame6, badge: 'JILI' },
     // { id: 7, title: 'Thai River...', img: hotGame7, badge: 'PG' },
     // { id: 8, title: 'Golden Empire', img: hotGame8, badge: 'JILI' }
   ],

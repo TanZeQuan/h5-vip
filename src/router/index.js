@@ -46,6 +46,24 @@ const routes = [
     meta: { hideNavBottom: true }
   },
   {
+    path: '/nickname',
+    name: 'nickname',
+    component: () => import('../views/account/nickname.vue'),
+    meta: { hideNavBottom: true }
+  },
+  {
+    path: '/acc-record',
+    name: 'acc-record',
+    component: () => import('../views/account/acc-record.vue'),
+    meta: { hideNavBottom: true }
+  },
+  {
+    path: '/security-center',
+    name: 'sec',
+    component: () => import('../views/security-center/sec.vue'),
+    meta: { hideNavBottom: true }
+  },
+  {
     path: '/betting-record',
     name: 'bet',
     component: () => import('../views/betting-record/bet.vue'),
@@ -72,6 +90,24 @@ const routes = [
     path: '/deposit',
     name: 'deposit',
     component: () => import('../views/deposit/dep.vue'),
+    meta: { hideNavBottom: true }
+  },
+  {
+    path: '/deposit-record',
+    name: 'dep-record',
+    component: () => import('../views/deposit/dep-record.vue'),
+    meta: { hideNavBottom: true }
+  },
+  {
+    path: '/profit',
+    name: 'profit',
+    component: () => import('../views/profit/profit.vue'),
+    meta: { hideNavBottom: true }
+  },
+  {
+    path: '/mail',
+    name: 'mail',
+    component: () => import('../views/mail-record/mail.vue'),
     meta: { hideNavBottom: true }
   },
   {

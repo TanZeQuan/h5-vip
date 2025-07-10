@@ -6,6 +6,26 @@ const router = useRouter()
 const expandedSection = ref(null)
 const isPopoutOpen = ref(false)
 
+const goToAccountRecord = () => {
+  router.push('/acc-record')
+}
+const goToBettingRecord = () => {
+  router.push('/betting-record')
+}
+const goToSecurityRecord = () => {
+  router.push('/security-center')
+}
+const goToDepositRecord = () => {
+  router.push('/deposit-record')
+}
+const goToProfitRecord = () => {
+  router.push('/profit')
+}
+const goToMailRecord = () => {
+  router.push('/mail')
+}
+
+const nickname = ref('')
 // Load user from localStorage
 const loadUser = () => {
   const storedUser = localStorage.getItem('user')
@@ -139,7 +159,7 @@ const goToCashback = () => router.push('/reward')
           <img :src="user.avatar || defaultAvatar" class="avatar-img" />
           <div class="vip-badge">VIP{{ user.vip_level }}</div>
           <div class="user-info">
-            <div class="username">{{ user.username }}</div>
+            <div class="username">{{ user.nickname }}</div>
             <div class="userid">
               ID:{{ user.user_id }}
             </div>
@@ -227,27 +247,27 @@ const goToCashback = () => router.push('/reward')
             <van-icon :name="expandedSection === 'member' ? 'arrow-up' : 'arrow-down'" class="van-icon" />
           </div>
           <div v-show="expandedSection === 'member'" class="submenu">
-            <div class="menu-item-sub">
+            <div class="menu-item-sub" @click="goToBettingRecord">
               <img src="@/assets/img/bet-record.png" alt="Betting Record" class="menu-img" />
               <span>Betting Record</span>
             </div>
-            <div class="menu-item-sub">
+           <div class="menu-item-sub" @click="goToAccountRecord">
               <img src="@/assets/img/acc-record.png" alt="Account Record" class="menu-img" />
               <span>Account Record</span>
             </div>
-            <div class="menu-item-sub">
+            <div class="menu-item-sub" @click="goToSecurityRecord">
               <img src="@/assets/img/security.png" alt="Security Center" class="menu-img" />
               <span>Security Center</span>
             </div>
-            <div class="menu-item-sub">
+            <div class="menu-item-sub" @click="goToDepositRecord">
               <img src="@/assets/img/dep-record.png" alt="Deposit Record" class="menu-img" />
               <span>Deposit Record</span>
             </div>
-            <div class="menu-item-sub">
+            <div class="menu-item-sub" @click="goToProfitRecord">
               <img src="@/assets/img/profit.png" alt="Profit and Loss" class="menu-img" />
               <span>Profit and Loss</span>
             </div>
-            <div class="menu-item-sub">
+            <div class="menu-item-sub" @click="goToMailRecord">
               <img src="@/assets/img/mail.png" alt="Mail" class="menu-img" />
               <span>Mail</span>
             </div>
@@ -344,6 +364,7 @@ const goToCashback = () => router.push('/reward')
   width: 24px;
   height: 24px;
   object-fit: contain;
+  cursor: pointer;
 }
 .btn{
   margin-right:-15px;
@@ -396,6 +417,7 @@ const goToCashback = () => router.push('/reward')
   margin:15px;
   gap: 0.5rem;
   padding: 0 1rem;
+  cursor: pointer;
 }
 .menu-group.footer-section {
     margin-top: -10px;

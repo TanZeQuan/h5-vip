@@ -33,12 +33,12 @@ const pageState = ref({
 })
 
 const games = ref([
-  { id: 1, title: 'Fortune King...', provider: 'PG', image: slotImage1, badge: 'PG' },
-  { id: 2, title: 'Dinosaur Tyc...', provider: 'PG', image: slotImage2, badge: 'PG' },
-  { id: 3, title: 'Happy Fishing', provider: 'PG', image: slotImage3, badge: 'PG' },
-  { id: 4, title: 'Ocean King ...', provider: 'PG', image: slotImage4, badge: 'PG' },
-  { id: 5, title: 'All-Star Fish...', provider: 'PG', image: slotImage5, badge: 'PG' },
-  { id: 6, title: 'Boom Legend', provider: 'PG', image: slotImage6, badge: 'PG' },
+  { id: 1, title: 'Diner Frenzy Spins', provider: 'PG', image: slotImage1, badge: 'PG' },
+  { id: 2, title: 'Dead Man Riches', provider: 'PG', image: slotImage2, badge: 'PG' },
+  { id: 3, title: 'Doomsday Rampage', provider: 'PG', image: slotImage3, badge: 'PG' },
+  { id: 4, title: 'Jack the Giant Hunter', provider: 'PG', image: slotImage4, badge: 'PG' },
+  { id: 5, title: 'Knockout Riches', provider: 'PG', image: slotImage5, badge: 'PG' },
+  { id: 6, title: 'Graffiti Rush', provider: 'PG', image: slotImage6, badge: 'PG' },
   
 
   { id: 1, title: 'FC Game 1', provider: 'JILI', image: slotImage1, badge: 'PG' },

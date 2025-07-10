@@ -1,42 +1,114 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
+const userId = ref(null)
 const username = ref('')
-const nickname = ref('')
-const birthday = ref('')
-const email = ref('')
-const fullName = ref('')
-const phone = ref('1239876543')
+
+const form = reactive({
+  nickname: '',
+  birthday: '',
+  email: '',
+  fullName: '',
+  phone: ''
+})
 
 const maskedPhone = computed(() => {
-  return phone.value.slice(0, 5) + '****'
+  return form.phone ? form.phone.slice(0, 5) + '****' : ''
 })
 
 const goBack = () => {
   router.back()
 }
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
   console.log('Form submitted', {
     username: username.value,
-    nickname: nickname.value,
-    birthday: birthday.value,
-    email: email.value,
-    fullName: fullName.value,
+    ...form
   })
+
+  try {
+    // Step 1: 更新昵称/邮箱
+    const nicknameEmailParams = new URLSearchParams()
+    nicknameEmailParams.append('user_id', userId.value)
+    nicknameEmailParams.append('nickname', form.nickname)
+    if (form.email) {
+      nicknameEmailParams.append('email', form.email)
+    }
+
+    const nicknameEmailRes = await fetch('http://192.168.0.122/silver/user/user_update_nickname.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: nicknameEmailParams.toString()
+    })
+
+    const nicknameEmailResult = await nicknameEmailRes.json()
+
+    if (!nicknameEmailResult.success) {
+      alert('昵称/邮箱更新失败：' + nicknameEmailResult.message)
+      return
+    }
+
+    // Step 2: 更新生日、全名、手机号（如果你想启用，可以取消注释下面代码）
+    /*
+    const profileForm = new FormData()
+    profileForm.append('user_id', userId.value)
+    profileForm.append('birthday', form.birthday)
+    profileForm.append('fullName', form.fullName)
+    profileForm.append('phone', form.phone)
+
+    const profileRes = await fetch('http://192.168.0.122/silver/user/update_profile.php', {
+      method: 'POST',
+      body: profileForm
+    })
+
+    const profileResult = await profileRes.json()
+
+    if (!profileResult.success) {
+      alert('其他信息更新失败：' + profileResult.message)
+      return
+    }
+    */
+
+    // 本地更新
+    const localUser = JSON.parse(localStorage.getItem('user')) || {}
+    localStorage.setItem('user', JSON.stringify({
+      ...localUser,
+      nickname: form.nickname,
+      email: form.email,
+      // birthday: form.birthday,
+      // full_name: form.fullName,
+      // phone: form.phone
+    }))
+
+    alert('更新成功')
+    router.push('/')
+  } catch (error) {
+    console.error(error)
+    alert('网络错误，无法提交')
+  }
 }
 
-// Load username from localStorage
 onMounted(() => {
   const user = JSON.parse(localStorage.getItem('user'))
-  if (user && user.username) {
+  if (user) {
+    userId.value = user.user_id
     username.value = user.username
+    form.nickname = user.nickname || ''
+    form.birthday = user.birthday || ''
+    form.email = user.email || ''
+    form.fullName = user.full_name || ''
+    form.phone = user.phone || ''
+  } else {
+    router.push('/login')
   }
 })
 </script>
+
 
 <template>
   <div class="container">
@@ -54,28 +126,28 @@ onMounted(() => {
       <div class="form-group">
         <div class="input-container">
           <span class="input-icon">👤</span>
-          <input v-model="nickname" class="input-field" placeholder="Please enter your nickname" />
+          <input v-model="form.nickname" class="input-field" />
         </div>
       </div>
 
       <div class="form-group">
         <div class="input-container">
           <span class="input-icon">📅</span>
-          <input v-model="birthday" type="date" class="input-field" />
+          <input v-model="form.birthday" type="date" class="input-field" />
         </div>
       </div>
 
       <div class="form-group">
         <div class="input-container">
           <span class="input-icon">✉️</span>
-          <input v-model="email" class="input-field" placeholder="Please enter your email" />
+          <input v-model="form.email" class="input-field" placeholder="Please enter your email" />
         </div>
       </div>
 
       <div class="form-group">
         <div class="input-container">
           <span class="input-icon">📄</span>
-          <input v-model="fullName" class="input-field" placeholder="Please enter your Full Name" />
+          <input v-model="form.nickname" class="input-field" placeholder="Please enter your Full Name" />
         </div>
       </div>
 
@@ -87,7 +159,14 @@ onMounted(() => {
 
       <div class="phone-container">
         <span class="phone-icon">📱</span>
-        <span class="phone-number">{{ maskedPhone }}</span>
+        <div class="phone-number">
+          <input
+            v-model="form.phone"
+            type="text"
+            class="phone-input"
+            :placeholder="maskedPhone || 'Enter your phone number'"
+          />
+        </div>
       </div>
 
       <div class="privacy-section">
@@ -218,12 +297,18 @@ onMounted(() => {
   color: #999;
   font-size: 16px;
 }
-
+.phone-input{
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  color: #333;
+  flex: 1;
+}
 .phone-number {
   color: #333;
   font-size: 14px;
 }
-
 .privacy-section {
   margin-bottom: 25px;
 }
