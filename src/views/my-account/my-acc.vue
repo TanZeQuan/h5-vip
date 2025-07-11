@@ -9,7 +9,7 @@ const username = ref('')
 
 const form = reactive({
   nickname: '',
-  birthday: '',
+  date: '',
   email: '',
   fullName: '',
   phone: ''
@@ -30,68 +30,46 @@ const handleSubmit = async () => {
   })
 
   try {
-    // Step 1: 更新昵称/邮箱
-    const nicknameEmailParams = new URLSearchParams()
-    nicknameEmailParams.append('user_id', userId.value)
-    nicknameEmailParams.append('nickname', form.nickname)
-    if (form.email) {
-      nicknameEmailParams.append('email', form.email)
-    }
+    const params = new URLSearchParams()
+    params.append('user_id', userId.value)
+    params.append('nickname', form.nickname)
+    if (form.email) params.append('email', form.email)
+    if (form.phone) params.append('phone', form.phone)
+    if (form.birthday) params.append('date', form.birthday)
 
-    const nicknameEmailRes = await fetch('http://192.168.0.122/silver/user/user_update_nickname.php', {
+    const res = await fetch('http://192.168.0.122/silver/user/user_update_nickname.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: nicknameEmailParams.toString()
+      body: params.toString()
     })
 
-    const nicknameEmailResult = await nicknameEmailRes.json()
+    const result = await res.json()
 
-    if (!nicknameEmailResult.success) {
-      alert('昵称/邮箱更新失败：' + nicknameEmailResult.message)
+    if (!result.success) {
+      alert('修改失败：' + result.message)
       return
     }
 
-    // Step 2: 更新生日、全名、手机号（如果你想启用，可以取消注释下面代码）
-    /*
-    const profileForm = new FormData()
-    profileForm.append('user_id', userId.value)
-    profileForm.append('birthday', form.birthday)
-    profileForm.append('fullName', form.fullName)
-    profileForm.append('phone', form.phone)
-
-    const profileRes = await fetch('http://192.168.0.122/silver/user/update_profile.php', {
-      method: 'POST',
-      body: profileForm
-    })
-
-    const profileResult = await profileRes.json()
-
-    if (!profileResult.success) {
-      alert('其他信息更新失败：' + profileResult.message)
-      return
-    }
-    */
-
-    // 本地更新
+    // 更新本地缓存
     const localUser = JSON.parse(localStorage.getItem('user')) || {}
     localStorage.setItem('user', JSON.stringify({
       ...localUser,
       nickname: form.nickname,
       email: form.email,
-      // birthday: form.birthday,
-      // full_name: form.fullName,
-      // phone: form.phone
+      phone: form.phone,
+      date: form.birthday // 注意：key 与 API 一致
     }))
 
-    alert('更新成功')
+    alert('资料修改成功')
     router.push('/')
-  } catch (error) {
-    console.error(error)
+  } catch (err) {
+    console.error(err)
     alert('网络错误，无法提交')
   }
 }
+
 
 onMounted(() => {
   const user = JSON.parse(localStorage.getItem('user'))
@@ -99,7 +77,7 @@ onMounted(() => {
     userId.value = user.user_id
     username.value = user.username
     form.nickname = user.nickname || ''
-    form.birthday = user.birthday || ''
+    form.date = user.date || ''
     form.email = user.email || ''
     form.fullName = user.full_name || ''
     form.phone = user.phone || ''

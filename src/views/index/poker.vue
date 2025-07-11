@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-import pgLogo from '@/assets/subpage/slot-sp.png'
+import KPLogo from '@/assets/subpage/slot-sp.png'
 import jiliLogo from '@/assets/subpage/slot-sp1.png'
 import cq9Logo from '@/assets/subpage/slot-sp2.png'
 import swgLogo from '@/assets/subpage/slot-sp3.png'
@@ -15,18 +15,18 @@ import PokerImage5 from '@/assets/poker/poker-lot5.png'
 import PokerImage6 from '@/assets/poker/poker-lot6.png'
 
 const providers = [
-  { key: 'PG', name: 'PG', logo: pgLogo },
+  { key: 'KP', name: 'KP', logo: KPLogo },
   { key: 'JILI', name: 'JILI', logo: jiliLogo },
   { key: 'FC', name: 'CQ9', logo: cq9Logo },
   { key: 'AMBS', name: 'SWG', logo: swgLogo },
   { key: 'BP', name: 'KA', logo: kaLogo }
 ]
 
-const selectedProvider = ref('PG')
+const selectedProvider = ref('KP')
 const gamesPerPage = 6
 
 const pageState = ref({
-  PG: 1,
+  KP: 1,
   JILI: 1,
   CQ9: 1,
   SWG: 1,
@@ -34,41 +34,41 @@ const pageState = ref({
 })
 
 const games = ref([
-  { id: 1, title: 'Fortune King...', provider: 'PG', image: PokerImage1, badge: 'PG' },
-  { id: 2, title: 'Dinosaur Tyc...', provider: 'PG', image: PokerImage2, badge: 'PG' },
-  { id: 3, title: 'Happy Fishing', provider: 'PG', image: PokerImage3, badge: 'PG' },
-  { id: 4, title: 'Ocean King ...', provider: 'PG', image: PokerImage4, badge: 'PG' },
-  { id: 5, title: 'All-Star Fish...', provider: 'PG', image: PokerImage5, badge: 'PG' },
-  { id: 6, title: 'Boom Legend', provider: 'PG', image: PokerImage6, badge: 'PG' },
+  { id: 1, title: 'Fortune King...', provider: 'KP', image: PokerImage1, badge: 'KP' },
+  { id: 2, title: 'Dinosaur Tyc...', provider: 'KP', image: PokerImage2, badge: 'KP' },
+  { id: 3, title: 'Happy Fishing', provider: 'KP', image: PokerImage3, badge: 'KP' },
+  { id: 4, title: 'Ocean King ...', provider: 'KP', image: PokerImage4, badge: 'KP' },
+  { id: 5, title: 'All-Star Fish...', provider: 'KP', image: PokerImage5, badge: 'KP' },
+  { id: 6, title: 'Boom Legend', provider: 'KP', image: PokerImage6, badge: 'KP' },
   
 
-  { id: 1, title: 'FC Game 1', provider: 'JILI', image: PokerImage1, badge: 'PG' },
-    { id: 2, title: 'FC Game 2', provider: 'JILI', image: PokerImage3, badge: 'PG' },
-    { id: 3, title: 'FC Game 3', provider: 'JILI', image: PokerImage2, badge: 'PG' },
-    { id: 4, title: 'FC Game 4', provider: 'JILI', image: PokerImage6, badge: 'PG' },
-    { id: 5, title: 'FC Game 5', provider: 'JILI', image: PokerImage3, badge: 'PG' },
-    { id: 6, title: 'FC Game 6', provider: 'JILI', image: PokerImage5, badge: 'PG' },
-    { id: 7, title: 'FC Game 7', provider: 'JILI', image: PokerImage4, badge: 'PG' },
-    { id: 8, title: 'FC Game 8', provider: 'JILI', image: PokerImage2, badge: 'PG' },
-    { id: 9, title: 'FC Game 9', provider: 'JILI', image: PokerImage1, badge: 'PG' },
-    { id: 10, title: 'FC Game 10', provider: 'JILI', image: PokerImage3, badge: 'PG' },
-    { id: 11, title: 'FC Game 11', provider: 'JILI', image: PokerImage5, badge: 'PG' },
+  { id: 1, title: 'FC Game 1', provider: 'JILI', image: PokerImage1, badge: 'KP' },
+    { id: 2, title: 'FC Game 2', provider: 'JILI', image: PokerImage3, badge: 'KP' },
+    { id: 3, title: 'FC Game 3', provider: 'JILI', image: PokerImage2, badge: 'KP' },
+    { id: 4, title: 'FC Game 4', provider: 'JILI', image: PokerImage6, badge: 'KP' },
+    { id: 5, title: 'FC Game 5', provider: 'JILI', image: PokerImage3, badge: 'KP' },
+    { id: 6, title: 'FC Game 6', provider: 'JILI', image: PokerImage5, badge: 'KP' },
+    { id: 7, title: 'FC Game 7', provider: 'JILI', image: PokerImage4, badge: 'KP' },
+    { id: 8, title: 'FC Game 8', provider: 'JILI', image: PokerImage2, badge: 'KP' },
+    { id: 9, title: 'FC Game 9', provider: 'JILI', image: PokerImage1, badge: 'KP' },
+    { id: 10, title: 'FC Game 10', provider: 'JILI', image: PokerImage3, badge: 'KP' },
+    { id: 11, title: 'FC Game 11', provider: 'JILI', image: PokerImage5, badge: 'KP' },
 
 
-  { id: 1, title: 'CQ9 Game 1', provider: 'FC', image: PokerImage3, badge: 'PG' },
-  { id: 2, title: 'CQ9 Game 2', provider: 'FC', image: PokerImage4, badge: 'PG' },
-  { id: 3, title: 'CQ9 Game 3', provider: 'FC', image: PokerImage1, badge: 'PG' },
-  { id: 4, title: 'CQ9 Game 4', provider: 'FC', image: PokerImage5, badge: 'PG' },
+  { id: 1, title: 'CQ9 Game 1', provider: 'FC', image: PokerImage3, badge: 'KP' },
+  { id: 2, title: 'CQ9 Game 2', provider: 'FC', image: PokerImage4, badge: 'KP' },
+  { id: 3, title: 'CQ9 Game 3', provider: 'FC', image: PokerImage1, badge: 'KP' },
+  { id: 4, title: 'CQ9 Game 4', provider: 'FC', image: PokerImage5, badge: 'KP' },
 
-  { id: 1, title: 'SWG Game 1', provider: 'AMBS', image: PokerImage2, badge: 'PG' },
-  { id: 2, title: 'SWG Game 2', provider: 'AMBS', image: PokerImage2, badge: 'PG' },
-  { id: 3, title: 'SWG Game 3', provider: 'AMBS', image: PokerImage3, badge: 'PG' },
-  { id: 4, title: 'SWG Game 4', provider: 'AMBS', image: PokerImage4, badge: 'PG' },
+  { id: 1, title: 'SWG Game 1', provider: 'AMBS', image: PokerImage2, badge: 'KP' },
+  { id: 2, title: 'SWG Game 2', provider: 'AMBS', image: PokerImage2, badge: 'KP' },
+  { id: 3, title: 'SWG Game 3', provider: 'AMBS', image: PokerImage3, badge: 'KP' },
+  { id: 4, title: 'SWG Game 4', provider: 'AMBS', image: PokerImage4, badge: 'KP' },
   
-  { id: 1, title: 'KA Game 1', provider: 'BP', image: PokerImage2, badge: 'PG' },
-  { id: 2, title: 'KA Game 2', provider: 'BP', image: PokerImage4, badge: 'PG' },
-  { id: 3, title: 'KA Game 3', provider: 'BP', image: PokerImage5, badge: 'PG' },
-  { id: 4, title: 'KA Game 4', provider: 'BP', image: PokerImage1, badge: 'PG' }
+  { id: 1, title: 'KA Game 1', provider: 'BP', image: PokerImage2, badge: 'KP' },
+  { id: 2, title: 'KA Game 2', provider: 'BP', image: PokerImage4, badge: 'KP' },
+  { id: 3, title: 'KA Game 3', provider: 'BP', image: PokerImage5, badge: 'KP' },
+  { id: 4, title: 'KA Game 4', provider: 'BP', image: PokerImage1, badge: 'KP' }
 ])
 
 function changeProvider(provider) {

@@ -6,6 +6,21 @@ const router = useRouter()
 const expandedSection = ref(null)
 const isPopoutOpen = ref(false)
 
+const gold = ref(0)
+
+onMounted(() => {
+  const userStr = localStorage.getItem('user')
+  if (userStr) {
+    try {
+      const user = JSON.parse(userStr)
+      gold.value = user.game_data?.gold || 0
+    } catch (e) {
+      console.error('解析用户数据失败:', e)
+    }
+  }
+})
+
+
 const goToAccountRecord = () => {
   router.push('/acc-record')
 }
@@ -23,6 +38,57 @@ const goToProfitRecord = () => {
 }
 const goToMailRecord = () => {
   router.push('/mail')
+}
+
+const openWallet = () => {
+  router.push('/deposit')
+}
+const openWithdraw = () => {
+  router.push('/withdraw')
+}
+
+/* game-categories link */
+const goToGamePopular= () => {
+  router.push({
+    path: '/more-games',
+    query: { tab: 'popular' },
+    hash: '#popular-section'
+  })
+}
+const goToGameJili= () => {
+  router.push({
+    path: '/more-games',
+    query: { tab: 'jili' },
+    hash: '#jili-section'
+  })
+}
+const goToGameSlot = () => {
+  router.push({
+    path: '/more-games',
+    query: { tab: 'slot' },
+    hash: '#slot-section'
+  })
+}
+const goToGameFish= () => {
+  router.push({
+    path: '/more-games',
+    query: { tab: 'fish' },
+    hash: '#fish-section'
+  })
+}
+const goToGameLive = () => {
+  router.push({
+    path: '/more-games',
+    query: { tab: 'live' },
+    hash: '#live-section'
+  })
+}
+const goToGamePoker = () => {
+  router.push({
+    path: '/more-games',
+    query: { tab: 'poker' },
+    hash: '#poker-section'
+  })
 }
 
 const nickname = ref('')
@@ -131,9 +197,9 @@ const goToCashback = () => router.push('/reward')
         </button>
       </div>
       
-      <div class="user-info right" v-if="user">
-        <div class="wallet-am">
-          <span class="wallet-amount">₿ 0</span>
+        <div class="user-info right" v-if="user">
+          <div class="wallet-am">
+          <span class="wallet-amount">₿ {{ gold }}</span>
         </div>
         <!-- Wallet and Withdraw Buttons -->
         <div class="wallet-section">
@@ -280,29 +346,29 @@ const goToCashback = () => router.push('/reward')
             <van-icon :name="expandedSection === 'game' ? 'arrow-up' : 'arrow-down'" class="van-icon" />
           </div>
           <div v-show="expandedSection === 'game'" class="submenu">
-            <div class="menu-item-sub">
+            <div class="menu-item-sub" @click="goToGamePopular">
               <img src="@/assets/img/tab-fire.png" alt="Hot games" class="menu-img" />
               <span>Hot games</span>
             </div>
-            <div class="menu-item-sub">
+            <div class="menu-item-sub" @click="goToGameJili">
+              <img src="@/assets/hot-games/jili-i.png" alt="Jili" class="menu-img" />
+              <span>Jili</span>
+            </div>
+            <div class="menu-item-sub" @click="goToGameSlot">
               <img src="@/assets/img/tab-slot.svg" alt="Slots" class="menu-img" />
               <span>Slots</span>
             </div>
-            <div class="menu-item-sub">
+            <div class="menu-item-sub" @click="goToGameFish">
               <img src="@/assets/img/tab-fish.svg" alt="Fish" class="menu-img" />
               <span>Fish</span>
             </div>
-            <div class="menu-item-sub">
+            <div class="menu-item-sub" @click="goToGameLive">
               <img src="@/assets/subpage/live-i.svg" alt="Live" class="menu-img" />
               <span>Live</span>
             </div>
-            <div class="menu-item-sub">
+            <div class="menu-item-sub" @click="goToGamePoker">
               <img src="@/assets/subpage/poker-i.svg" alt="Poker" class="menu-img" />
               <span>Poker</span>
-            </div>
-            <div class="menu-item-sub">
-              <img src="@/assets/subpage/ball-i.svg" alt="Sports" class="menu-img" />
-              <span>Sports</span>
             </div>
           </div>
         </div>
@@ -381,7 +447,7 @@ const goToCashback = () => router.push('/reward')
 .sidebar {
   background-color: #0d1120;
   color: #fff;
-  width: 17rem;
+  width: 15rem;
   overflow-y: auto;
   overflow-x: hidden;
   height: calc(100vh - 8.98rem); /* taller sidebar */
@@ -414,7 +480,7 @@ const goToCashback = () => router.push('/reward')
 .menu-group {
   display: flex;
   flex-direction: column;
-  margin:15px;
+  margin:12px;
   gap: 0.5rem;
   padding: 0 1rem;
   cursor: pointer;
@@ -429,7 +495,7 @@ const goToCashback = () => router.push('/reward')
   color: white;
   padding: 0.40rem 1rem;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   gap: 1rem;
 }
@@ -449,7 +515,7 @@ const goToCashback = () => router.push('/reward')
   align-items: center;
   color: white;
   padding: 0.40rem 1rem;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   gap: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* 👈 subtle white line */
@@ -661,6 +727,7 @@ const goToCashback = () => router.push('/reward')
 .wallet-amount {
   font-size: 15px;
   color: rgba(230, 240, 255, 0.89);
+  margin-right:20px;
 }
 
 .withdraw-btn {

@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-import pgLogo from '@/assets/subpage/slot-sp.png'
+import SEXYLogo from '@/assets/subpage/slot-sp.png'
 import jiliLogo from '@/assets/subpage/slot-sp1.png'
 import cq9Logo from '@/assets/subpage/slot-sp2.png'
 import swgLogo from '@/assets/subpage/slot-sp3.png'
@@ -14,18 +14,18 @@ import liveImage5 from '@/assets/subpage/live-slot5.png'
 import liveImage6 from '@/assets/subpage/live-slot6.png'
 
 const providers = [
-  { key: 'PG', name: 'PG', logo: pgLogo },
+  { key: 'SEXY', name: 'SEXY', logo: SEXYLogo },
   { key: 'JILI', name: 'JILI', logo: jiliLogo },
   { key: 'FC', name: 'CQ9', logo: cq9Logo },
   { key: 'AMBS', name: 'SWG', logo: swgLogo },
   { key: 'BP', name: 'KA', logo: kaLogo }
 ]
 
-const selectedProvider = ref('PG')
+const selectedProvider = ref('SEXY')
 const gamesPerPage = 6
 
 const pageState = ref({
-  PG: 1,
+  SEXY: 1,
   JILI: 1,
   CQ9: 1,
   SWG: 1,
@@ -33,41 +33,41 @@ const pageState = ref({
 })
 
 const games = ref([
-  { id: 1, title: 'Fortune King...', provider: 'PG', image: liveImage1, badge: 'PG' },
-  { id: 2, title: 'Dinosaur Tyc...', provider: 'PG', image: liveImage2, badge: 'PG' },
-  { id: 3, title: 'Happy Fishing', provider: 'PG', image: liveImage3, badge: 'PG' },
-  { id: 4, title: 'Ocean King ...', provider: 'PG', image: liveImage4, badge: 'PG' },
-  { id: 5, title: 'All-Star Fish...', provider: 'PG', image: liveImage5, badge: 'PG' },
-  { id: 6, title: 'Boom Legend', provider: 'PG', image: liveImage6, badge: 'PG' },
+  { id: 1, title: 'Fortune King...', provider: 'SEXY', image: liveImage1, badge: 'SEXY' },
+  { id: 2, title: 'Dinosaur Tyc...', provider: 'SEXY', image: liveImage2, badge: 'SEXY' },
+  { id: 3, title: 'Happy Fishing', provider: 'SEXY', image: liveImage3, badge: 'SEXY' },
+  { id: 4, title: 'Ocean King ...', provider: 'SEXY', image: liveImage4, badge: 'SEXY' },
+  { id: 5, title: 'All-Star Fish...', provider: 'SEXY', image: liveImage5, badge: 'SEXY' },
+  { id: 6, title: 'Boom Legend', provider: 'SEXY', image: liveImage6, badge: 'SEXY' },
   
 
-  { id: 1, title: 'FC Game 1', provider: 'JILI', image: liveImage1, badge: 'PG' },
-    { id: 2, title: 'FC Game 2', provider: 'JILI', image: liveImage1, badge: 'PG' },
-    { id: 3, title: 'FC Game 3', provider: 'JILI', image: liveImage1, badge: 'PG' },
-    { id: 4, title: 'FC Game 4', provider: 'JILI', image: liveImage1, badge: 'PG' },
-    { id: 5, title: 'FC Game 5', provider: 'JILI', image: liveImage1, badge: 'PG' },
-    { id: 6, title: 'FC Game 6', provider: 'JILI', image: liveImage1, badge: 'PG' },
-    { id: 7, title: 'FC Game 7', provider: 'JILI', image: liveImage1, badge: 'PG' },
-    { id: 8, title: 'FC Game 8', provider: 'JILI', image: liveImage1, badge: 'PG' },
-    { id: 9, title: 'FC Game 9', provider: 'JILI', image: liveImage1, badge: 'PG' },
-    { id: 10, title: 'FC Game 10', provider: 'JILI', image: liveImage1, badge: 'PG' },
-    { id: 11, title: 'FC Game 11', provider: 'JILI', image: liveImage1, badge: 'PG' },
+  { id: 1, title: 'FC Game 1', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
+    { id: 2, title: 'FC Game 2', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
+    { id: 3, title: 'FC Game 3', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
+    { id: 4, title: 'FC Game 4', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
+    { id: 5, title: 'FC Game 5', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
+    { id: 6, title: 'FC Game 6', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
+    { id: 7, title: 'FC Game 7', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
+    { id: 8, title: 'FC Game 8', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
+    { id: 9, title: 'FC Game 9', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
+    { id: 10, title: 'FC Game 10', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
+    { id: 11, title: 'FC Game 11', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
 
 
-  { id: 1, title: 'CQ9 Game 1', provider: 'FC', image: liveImage1, badge: 'PG' },
-  { id: 2, title: 'CQ9 Game 2', provider: 'FC', image: liveImage1, badge: 'PG' },
-  { id: 3, title: 'CQ9 Game 3', provider: 'FC', image: liveImage1, badge: 'PG' },
-  { id: 4, title: 'CQ9 Game 4', provider: 'FC', image: liveImage1, badge: 'PG' },
+  { id: 1, title: 'CQ9 Game 1', provider: 'FC', image: liveImage1, badge: 'SEXY' },
+  { id: 2, title: 'CQ9 Game 2', provider: 'FC', image: liveImage1, badge: 'SEXY' },
+  { id: 3, title: 'CQ9 Game 3', provider: 'FC', image: liveImage1, badge: 'SEXY' },
+  { id: 4, title: 'CQ9 Game 4', provider: 'FC', image: liveImage1, badge: 'SEXY' },
 
-  { id: 1, title: 'SWG Game 1', provider: 'AMBS', image: liveImage1, badge: 'PG' },
-  { id: 2, title: 'SWG Game 2', provider: 'AMBS', image: liveImage1, badge: 'PG' },
-  { id: 3, title: 'SWG Game 3', provider: 'AMBS', image: liveImage1, badge: 'PG' },
-  { id: 4, title: 'SWG Game 4', provider: 'AMBS', image: liveImage1, badge: 'PG' },
+  { id: 1, title: 'SWG Game 1', provider: 'AMBS', image: liveImage1, badge: 'SEXY' },
+  { id: 2, title: 'SWG Game 2', provider: 'AMBS', image: liveImage1, badge: 'SEXY' },
+  { id: 3, title: 'SWG Game 3', provider: 'AMBS', image: liveImage1, badge: 'SEXY' },
+  { id: 4, title: 'SWG Game 4', provider: 'AMBS', image: liveImage1, badge: 'SEXY' },
   
-  { id: 1, title: 'KA Game 1', provider: 'BP', image: liveImage1, badge: 'PG' },
-  { id: 2, title: 'KA Game 2', provider: 'BP', image: liveImage1, badge: 'PG' },
-  { id: 3, title: 'KA Game 3', provider: 'BP', image: liveImage1, badge: 'PG' },
-  { id: 4, title: 'KA Game 4', provider: 'BP', image: liveImage1, badge: 'PG' }
+  { id: 1, title: 'KA Game 1', provider: 'BP', image: liveImage1, badge: 'SEXY' },
+  { id: 2, title: 'KA Game 2', provider: 'BP', image: liveImage1, badge: 'SEXY' },
+  { id: 3, title: 'KA Game 3', provider: 'BP', image: liveImage1, badge: 'SEXY' },
+  { id: 4, title: 'KA Game 4', provider: 'BP', image: liveImage1, badge: 'SEXY' }
 ])
 
 function changeProvider(provider) {

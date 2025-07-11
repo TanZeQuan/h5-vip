@@ -41,33 +41,33 @@ const games = ref([
   { id: 6, title: 'Graffiti Rush', provider: 'PG', image: slotImage6, badge: 'PG' },
   
 
-  { id: 1, title: 'FC Game 1', provider: 'JILI', image: slotImage1, badge: 'PG' },
-    { id: 2, title: 'FC Game 2', provider: 'JILI', image: slotImage6, badge: 'PG' },
-    { id: 3, title: 'FC Game 3', provider: 'JILI', image: slotImage2, badge: 'PG' },
-    { id: 4, title: 'FC Game 4', provider: 'JILI', image: slotImage3, badge: 'PG' },
-    { id: 5, title: 'FC Game 5', provider: 'JILI', image: slotImage4, badge: 'PG' },
-    { id: 6, title: 'FC Game 6', provider: 'JILI', image: slotImage6, badge: 'PG' },
-    { id: 7, title: 'FC Game 7', provider: 'JILI', image: slotImage1, badge: 'PG' },
-    { id: 8, title: 'FC Game 8', provider: 'JILI', image: slotImage2, badge: 'PG' },
-    { id: 9, title: 'FC Game 9', provider: 'JILI', image: slotImage1, badge: 'PG' },
-    { id: 10, title: 'FC Game 10', provider: 'JILI', image: slotImage4, badge: 'PG' },
-    { id: 11, title: 'FC Game 11', provider: 'JILI', image: slotImage1, badge: 'PG' },
+  { id: 1, title: 'FC Game 1', provider: 'JILI', image: slotImage1, badge: 'JILI' },
+    { id: 2, title: 'FC Game 2', provider: 'JILI', image: slotImage6, badge: 'JILI' },
+    { id: 3, title: 'FC Game 3', provider: 'JILI', image: slotImage2, badge: 'JILI' },
+    { id: 4, title: 'FC Game 4', provider: 'JILI', image: slotImage3, badge: 'JILI' },
+    { id: 5, title: 'FC Game 5', provider: 'JILI', image: slotImage4, badge: 'JILI' },
+    { id: 6, title: 'FC Game 6', provider: 'JILI', image: slotImage6, badge: 'JILI' },
+    { id: 7, title: 'FC Game 7', provider: 'JILI', image: slotImage1, badge: 'JILI' },
+    { id: 8, title: 'FC Game 8', provider: 'JILI', image: slotImage2, badge: 'JILI' },
+    { id: 9, title: 'FC Game 9', provider: 'JILI', image: slotImage1, badge: 'JILI' },
+    { id: 10, title: 'FC Game 10', provider: 'JILI', image: slotImage4, badge: 'JILI' },
+    { id: 11, title: 'FC Game 11', provider: 'JILI', image: slotImage1, badge: 'JILI' },
 
 
-  { id: 1, title: 'CQ9 Game 1', provider: 'FC', image: slotImage1, badge: 'PG' },
-  { id: 2, title: 'CQ9 Game 2', provider: 'FC', image: slotImage2, badge: 'PG' },
-  { id: 3, title: 'CQ9 Game 3', provider: 'FC', image: slotImage2, badge: 'PG' },
-  { id: 4, title: 'CQ9 Game 4', provider: 'FC', image: slotImage3, badge: 'PG' },
+  { id: 1, title: 'CQ9 Game 1', provider: 'FC', image: slotImage1, badge: 'FC' },
+  { id: 2, title: 'CQ9 Game 2', provider: 'FC', image: slotImage2, badge: 'FC' },
+  { id: 3, title: 'CQ9 Game 3', provider: 'FC', image: slotImage2, badge: 'FC' },
+  { id: 4, title: 'CQ9 Game 4', provider: 'FC', image: slotImage3, badge: 'FC' },
 
-  { id: 1, title: 'SWG Game 1', provider: 'AMBS', image: slotImage4, badge: 'PG' },
-  { id: 2, title: 'SWG Game 2', provider: 'AMBS', image: slotImage2, badge: 'PG' },
-  { id: 3, title: 'SWG Game 3', provider: 'AMBS', image: slotImage3, badge: 'PG' },
-  { id: 4, title: 'SWG Game 4', provider: 'AMBS', image: slotImage2, badge: 'PG' },
+  { id: 1, title: 'SWG Game 1', provider: 'AMBS', image: slotImage4, badge: 'AMBS' },
+  { id: 2, title: 'SWG Game 2', provider: 'AMBS', image: slotImage2, badge: 'AMBS' },
+  { id: 3, title: 'SWG Game 3', provider: 'AMBS', image: slotImage3, badge: 'AMBS' },
+  { id: 4, title: 'SWG Game 4', provider: 'AMBS', image: slotImage2, badge: 'AMBS' },
   
-  { id: 1, title: 'KA Game 1', provider: 'BP', image: slotImage2, badge: 'PG' },
-  { id: 2, title: 'KA Game 2', provider: 'BP', image: slotImage5, badge: 'PG' },
-  { id: 3, title: 'KA Game 3', provider: 'BP', image: slotImage4, badge: 'PG' },
-  { id: 4, title: 'KA Game 4', provider: 'BP', image: slotImage3, badge: 'PG' }
+  { id: 1, title: 'KA Game 1', provider: 'BP', image: slotImage2, badge: 'BP' },
+  { id: 2, title: 'KA Game 2', provider: 'BP', image: slotImage5, badge: 'BP' },
+  { id: 3, title: 'KA Game 3', provider: 'BP', image: slotImage4, badge: 'BP' },
+  { id: 4, title: 'KA Game 4', provider: 'BP', image: slotImage3, badge: 'BP' }
 ])
 
 function changeProvider(provider) {

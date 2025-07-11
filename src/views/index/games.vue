@@ -5,8 +5,9 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 function handleMoreClick() {
-  router.push('/more-games') // Replace with your actual route path
+  router.push('/more-games')
 }
+
 // Hot game images
 import hotGame1 from '@/assets/hot-games/hot-gm1.png'
 import hotGame2 from '@/assets/hot-games/hot-gm2.png'

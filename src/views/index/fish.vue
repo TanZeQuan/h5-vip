@@ -33,41 +33,41 @@ const pageState = ref({
 })
 
 const games = ref([
-  { id: 1, title: 'Fortune King Jackpot', provider: 'PG', image: fishImage1, badge: 'PG' },
-  { id: 2, title: 'Dinosaur Tycoon II', provider: 'PG', image: fishImage2, badge: 'PG' },
-  { id: 3, title: 'Happy Fishing', provider: 'PG', image: fishImage3, badge: 'PG' },
-  { id: 4, title: 'Ocean King Jackpot', provider: 'PG', image: fishImage4, badge: 'PG' },
-  { id: 5, title: 'All-Star Fishing', provider: 'PG', image: fishImage5, badge: 'PG' },
-  { id: 6, title: 'Boom Legend', provider: 'PG', image: fishImage6, badge: 'PG' },
+  { id: 1, title: 'Fortune King Jackpot', provider: 'PG', image: fishImage1, badge: 'JILI' },
+  { id: 2, title: 'Dinosaur Tycoon II', provider: 'PG', image: fishImage2, badge: 'JILI' },
+  { id: 3, title: 'Happy Fishing', provider: 'PG', image: fishImage3, badge: 'JILI' },
+  { id: 4, title: 'Ocean King Jackpot', provider: 'PG', image: fishImage4, badge: 'JILI' },
+  { id: 5, title: 'All-Star Fishing', provider: 'PG', image: fishImage5, badge: 'JILI' },
+  { id: 6, title: 'Boom Legend', provider: 'PG', image: fishImage6, badge: 'JILI' },
   
 
-  { id: 1, title: 'FC Game 1', provider: 'JILI', image: fishImage1, badge: 'PG' },
-    { id: 2, title: 'FC Game 2', provider: 'JILI', image: fishImage2, badge: 'PG' },
-    { id: 3, title: 'FC Game 3', provider: 'JILI', image: fishImage3, badge: 'PG' },
-    { id: 4, title: 'FC Game 4', provider: 'JILI', image: fishImage5, badge: 'PG' },
-    { id: 5, title: 'FC Game 5', provider: 'JILI', image: fishImage4, badge: 'PG' },
-    { id: 6, title: 'FC Game 6', provider: 'JILI', image: fishImage2, badge: 'PG' },
-    { id: 7, title: 'FC Game 7', provider: 'JILI', image: fishImage6, badge: 'PG' },
-    { id: 8, title: 'FC Game 8', provider: 'JILI', image: fishImage5, badge: 'PG' },
-    { id: 9, title: 'FC Game 9', provider: 'JILI', image: fishImage3, badge: 'PG' },
-    { id: 10, title: 'FC Game 10', provider: 'JILI', image: fishImage1, badge: 'PG' },
-    { id: 11, title: 'FC Game 11', provider: 'JILI', image: fishImage2, badge: 'PG' },
+  { id: 1, title: 'FC Game 1', provider: 'JILI', image: fishImage1, badge: 'JILI' },
+    { id: 2, title: 'FC Game 2', provider: 'JILI', image: fishImage2, badge: 'JILI' },
+    { id: 3, title: 'FC Game 3', provider: 'JILI', image: fishImage3, badge: 'JILI' },
+    { id: 4, title: 'FC Game 4', provider: 'JILI', image: fishImage5, badge: 'JILI' },
+    { id: 5, title: 'FC Game 5', provider: 'JILI', image: fishImage4, badge: 'JILI' },
+    { id: 6, title: 'FC Game 6', provider: 'JILI', image: fishImage2, badge: 'JILI' },
+    { id: 7, title: 'FC Game 7', provider: 'JILI', image: fishImage6, badge: 'JILI' },
+    { id: 8, title: 'FC Game 8', provider: 'JILI', image: fishImage5, badge: 'JILI' },
+    { id: 9, title: 'FC Game 9', provider: 'JILI', image: fishImage3, badge: 'JILI' },
+    { id: 10, title: 'FC Game 10', provider: 'JILI', image: fishImage1, badge: 'JILI' },
+    { id: 11, title: 'FC Game 11', provider: 'JILI', image: fishImage2, badge: 'JILI' },
 
 
-  { id: 1, title: 'CQ9 Game 1', provider: 'FC', image: fishImage4, badge: 'PG' },
-  { id: 2, title: 'CQ9 Game 2', provider: 'FC', image: fishImage6, badge: 'PG' },
-  { id: 3, title: 'CQ9 Game 3', provider: 'FC', image: fishImage3, badge: 'PG' },
-  { id: 4, title: 'CQ9 Game 4', provider: 'FC', image: fishImage2, badge: 'PG' },
+  { id: 1, title: 'CQ9 Game 1', provider: 'FC', image: fishImage4, badge: 'JILI' },
+  { id: 2, title: 'CQ9 Game 2', provider: 'FC', image: fishImage6, badge: 'JILI' },
+  { id: 3, title: 'CQ9 Game 3', provider: 'FC', image: fishImage3, badge: 'JILI' },
+  { id: 4, title: 'CQ9 Game 4', provider: 'FC', image: fishImage2, badge: 'JILI' },
 
-  { id: 1, title: 'SWG Game 1', provider: 'AMBS', image: fishImage2, badge: 'PG' },
-  { id: 2, title: 'SWG Game 2', provider: 'AMBS', image: fishImage1, badge: 'PG' },
-  { id: 3, title: 'SWG Game 3', provider: 'AMBS', image: fishImage5, badge: 'PG' },
-  { id: 4, title: 'SWG Game 4', provider: 'AMBS', image: fishImage3, badge: 'PG' },
+  { id: 1, title: 'SWG Game 1', provider: 'AMBS', image: fishImage2, badge: 'JILI' },
+  { id: 2, title: 'SWG Game 2', provider: 'AMBS', image: fishImage1, badge: 'JILI' },
+  { id: 3, title: 'SWG Game 3', provider: 'AMBS', image: fishImage5, badge: 'JILI' },
+  { id: 4, title: 'SWG Game 4', provider: 'AMBS', image: fishImage3, badge: 'JILI' },
   
-  { id: 1, title: 'KA Game 1', provider: 'BP', image: fishImage1, badge: 'PG' },
-  { id: 2, title: 'KA Game 2', provider: 'BP', image: fishImage2, badge: 'PG' },
-  { id: 3, title: 'KA Game 3', provider: 'BP', image: fishImage6, badge: 'PG' },
-  { id: 4, title: 'KA Game 4', provider: 'BP', image: fishImage3, badge: 'PG' }
+  { id: 1, title: 'KA Game 1', provider: 'BP', image: fishImage1, badge: 'JILI' },
+  { id: 2, title: 'KA Game 2', provider: 'BP', image: fishImage2, badge: 'JILI' },
+  { id: 3, title: 'KA Game 3', provider: 'BP', image: fishImage6, badge: 'JILI' },
+  { id: 4, title: 'KA Game 4', provider: 'BP', image: fishImage3, badge: 'JILI' }
 ])
 
 function changeProvider(provider) {
