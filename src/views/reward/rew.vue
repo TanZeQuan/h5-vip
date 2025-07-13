@@ -46,8 +46,8 @@ const loadUser = () => {
   }
 }
 
-onMounted(loadUser)
-onActivated(loadUser) // Optional if you're using <keep-alive>
+// onMounted(loadUser)
+// onActivated(loadUser) // Optional if you're using <keep-alive>
 
 const actions = reactive([
   { id: 'bonus', title: 'Bonus', icon: giftIcon, color: 'bonus', hasNotification: true, notificationCount: 1 },
@@ -58,7 +58,11 @@ const actions = reactive([
 
 const avatarImage = computed(() => avatar)
 const goBack = () => router.push('/')
-const handleSignIn = () => emit('sign-in')
+
+const handleSignIn = () => {
+  emit('sign-in')
+  router.push('/sign') // navigate to /deposit
+}
 
 const handleBonus = (action) => {
   action.hasNotification = false

@@ -20,28 +20,29 @@ const goBack = () => {
   router.push('/') // Navigate to home page
 }
 
-onMounted(() => {
-  const storedUser = localStorage.getItem('user')
-  if (!storedUser) {
-    router.push('/login')
-    return
-  }
+// onMounted(() => {
+//   const storedUser = localStorage.getItem('user')
+//   if (!storedUser) {
+//     router.push('/login')
+//     return
+//   }
 
-  try {
-    const parsed = JSON.parse(storedUser)
-    user.value.username = parsed.username || ''
-    user.value.nickname = parsed.nickname || ''
-    user.value.balance.bitcoin = parsed.balance?.bitcoin || 0
-  } catch (err) {
-    console.error('Failed to parse user:', err)
-  }
-})
+//   try {
+//     const parsed = JSON.parse(storedUser)
+//     user.value.username = parsed.username || ''
+//     user.value.nickname = parsed.nickname || ''
+//     user.value.balance.bitcoin = parsed.balance?.bitcoin || 0
+//   } catch (err) {
+//     console.error('Failed to parse user:', err)
+//   }
+// })
 
 const quickActions = ref([
-  { name: 'Deposit' },
-  { name: 'Withdrawal' },
+  { name: 'Deposit', url: '/deposit' },
+  { name: 'Withdrawal', url: '/withdraw' },
   { name: 'My Cards' }
 ])
+
 
 const menuItems = ref([
   { title: 'Reward Center', icon: '🏆', iconClass: 'trophy-icon', hasNotification: true, notificationCount: 1 },
@@ -69,8 +70,12 @@ const refreshBalance = () => {
   console.log('Refreshing balance...')
 }
 
-const handleQuickAction = (action) => {
-  console.log(`${action.name} clicked`)
+function handleQuickAction(action) {
+  if (action.url) {
+    router.push(action.url)
+  } else {
+    console.warn('No URL for', action.name)
+  }
 }
 
 const handleMenuClick = (item) => {

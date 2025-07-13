@@ -93,6 +93,12 @@ const routes = [
     meta: { hideNavBottom: true }
   },
   {
+    path: '/sign',
+    name: 'sign',
+    component: () => import('../views/sign/sign.vue'),
+    meta: { hideNavBottom: true }
+  },
+  {
     path: '/deposit-record',
     name: 'dep-record',
     component: () => import('../views/deposit/dep-record.vue'),
