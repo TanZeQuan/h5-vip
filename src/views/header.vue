@@ -253,7 +253,7 @@ const goToCashback = () => router.push('/reward')
         </span>
       </button>
       
-      <button class="dropdown-item" @click="goTo('/support')">
+      <button class="dropdown-item" @click="goTo('')">
         <span class="dropdown-content">
           <van-icon name="service" class="dropdown-icon" />
           <span>Customer Service</span>
@@ -707,27 +707,23 @@ const goToCashback = () => router.push('/reward')
   cursor: pointer;
 }
 
-.wallet-am{
+.wallet-am {
   display: flex;
   align-items: center;
-  font-weight: bold;
-  margin-top:-10px;
-  position: relative;
-  overflow: hidden;
-  width:40px;
-  height:auto;
-  cursor:pointer;
+  gap: 6px; /* spacing between ₿ and number */
 }
+
+.wallet-amount {
+  font-size: 16px;
+  font-weight: 600;
+  color: #dadada;
+  margin-right:8px;
+  margin-top:-10px;
+}
+
 .wallet-icon {
   width:20px;
   height:20px;
-}
-
-/* Wallet amount */
-.wallet-amount {
-  font-size: 15px;
-  color: rgba(230, 240, 255, 0.89);
-  margin-right:20px;
 }
 
 .withdraw-btn {
@@ -781,5 +777,4 @@ const goToCashback = () => router.push('/reward')
   display: flex;
   align-items: center;
 }
-
 </style>

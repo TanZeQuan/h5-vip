@@ -1,24 +1,50 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-import SEXYLogo from '@/assets/subpage/slot-sp.png'
-import jiliLogo from '@/assets/subpage/slot-sp1.png'
-import cq9Logo from '@/assets/subpage/slot-sp2.png'
-import swgLogo from '@/assets/subpage/slot-sp3.png'
-import kaLogo from '@/assets/subpage/slot-sp4.png'
-import liveImage1 from '@/assets/subpage/live-slot1.png'
-import liveImage2 from '@/assets/subpage/live-slot2.png'
-import liveImage3 from '@/assets/subpage/live-slot3.png'
-import liveImage4 from '@/assets/subpage/live-slot4.png'
-import liveImage5 from '@/assets/subpage/live-slot5.png'
-import liveImage6 from '@/assets/subpage/live-slot6.png'
+import SEXYLogo from '@/assets/Subpage/live-pic1.png'
+import jiliLogo from '@/assets/Subpage/live-pic2.png'
+import cq9Logo from '@/assets/Subpage/live-pic3.png'
+import swgLogo from '@/assets/Subpage/live-pic4.png'
+import kaLogo from '@/assets/Subpage/live-pic5.png'
+import liveImage1 from '@/assets/Subpage/live-slot1.png'
+import liveImage2 from '@/assets/Subpage/live-slot2.png'
+import liveImage3 from '@/assets/Subpage/live-slot3.png'
+import liveImage4 from '@/assets/Subpage/live-slot4.png'
+import liveImage5 from '@/assets/Subpage/live-slot5.png'
+import liveImage6 from '@/assets/Subpage/live-slot6.png'
+
+//WM SECTION
+import liveWM1 from '@/assets/live/live-wm1.png'
+import liveWM2 from '@/assets/live/live-wm2.png'
+import liveWM3 from '@/assets/live/live-wm3.png'
+import liveWM4 from '@/assets/live/live-wm4.png'
+import liveWM5 from '@/assets/live/live-wm5.png'
+import liveWM6 from '@/assets/live/live-wm6.png'
+
+//BTG SESSION
+import liveBTG1 from '@/assets/live/live-btg.png'
+
+//AB SESSION
+import liveAB1 from '@/assets/live/live-ab1.png'
+import liveAB2 from '@/assets/live/live-ab2.png'
+import liveAB3 from '@/assets/live/live-ab3.png'
+import liveAB4 from '@/assets/live/live-ab4.png'
+import liveAB5 from '@/assets/live/live-ab5.png'
+
+//CQ9 SESSION
+import liveCQ91 from '@/assets/live/live-cq91.png'
+import liveCQ92 from '@/assets/live/live-cq92.png'
+import liveCQ93 from '@/assets/live/live-cq93.png'
+import liveCQ94 from '@/assets/live/live-cq94.png'
+import liveCQ95 from '@/assets/live/live-cq95.png'
+import liveCQ96 from '@/assets/live/live-cq96.png'
 
 const providers = [
   { key: 'SEXY', name: 'SEXY', logo: SEXYLogo },
-  { key: 'JILI', name: 'JILI', logo: jiliLogo },
-  { key: 'FC', name: 'CQ9', logo: cq9Logo },
-  { key: 'AMBS', name: 'SWG', logo: swgLogo },
-  { key: 'BP', name: 'KA', logo: kaLogo }
+  { key: 'WM', name: 'WM', logo: jiliLogo },
+  { key: 'BTG', name: 'BTG', logo: cq9Logo },
+  { key: 'AB', name: 'AB', logo: swgLogo },
+  { key: 'CQ9', name: 'CQ9', logo: kaLogo }
 ]
 
 const selectedProvider = ref('SEXY')
@@ -41,33 +67,34 @@ const games = ref([
   { id: 6, title: 'Boom Legend', provider: 'SEXY', image: liveImage6, badge: 'SEXY' },
   
 
-  { id: 1, title: 'FC Game 1', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
-    { id: 2, title: 'FC Game 2', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
-    { id: 3, title: 'FC Game 3', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
-    { id: 4, title: 'FC Game 4', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
-    { id: 5, title: 'FC Game 5', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
-    { id: 6, title: 'FC Game 6', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
-    { id: 7, title: 'FC Game 7', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
-    { id: 8, title: 'FC Game 8', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
-    { id: 9, title: 'FC Game 9', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
-    { id: 10, title: 'FC Game 10', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
-    { id: 11, title: 'FC Game 11', provider: 'JILI', image: liveImage1, badge: 'SEXY' },
+  { id: 1, title: 'Se Die', provider: 'WM', image: liveWM1, badge: 'WM' },
+    { id: 2, title: 'Niu Niu', provider: 'WM', image: liveWM2, badge: 'WM' },
+    { id: 3, title: 'Roulette', provider: 'WM', image: liveWM3, badge: 'WM' },
+    { id: 4, title: 'Fan Tan', provider: 'WM', image: liveWM4, badge: 'WM' },
+    { id: 5, title: 'Sicbo', provider: 'WM', image: liveWM5, badge: 'WM' },
+    { id: 6, title: 'Dragon Tiger', provider: 'WM', image: liveWM6, badge: 'WM' },
+    { id: 7, title: 'Se Die', provider: 'WM', image: liveWM1, badge: 'WM' },
+    { id: 8, title: 'Roulette', provider: 'WM', image: liveWM3, badge: 'WM' },
+    { id: 9, title: 'Niu Niu', provider: 'WM', image: liveWM2, badge: 'WM' },
+    { id: 10, title: 'Dragon Tiger', provider: 'WM', image: liveWM6, badge: 'WM' },
+    { id: 11, title: 'Fan Tan', provider: 'WM', image: liveWM4, badge: 'WM' },
 
 
-  { id: 1, title: 'CQ9 Game 1', provider: 'FC', image: liveImage1, badge: 'SEXY' },
-  { id: 2, title: 'CQ9 Game 2', provider: 'FC', image: liveImage1, badge: 'SEXY' },
-  { id: 3, title: 'CQ9 Game 3', provider: 'FC', image: liveImage1, badge: 'SEXY' },
-  { id: 4, title: 'CQ9 Game 4', provider: 'FC', image: liveImage1, badge: 'SEXY' },
+  { id: 1, title: 'BG Live Lobby', provider: 'BTG', image: liveBTG1, badge: 'BTG' },
 
-  { id: 1, title: 'SWG Game 1', provider: 'AMBS', image: liveImage1, badge: 'SEXY' },
-  { id: 2, title: 'SWG Game 2', provider: 'AMBS', image: liveImage1, badge: 'SEXY' },
-  { id: 3, title: 'SWG Game 3', provider: 'AMBS', image: liveImage1, badge: 'SEXY' },
-  { id: 4, title: 'SWG Game 4', provider: 'AMBS', image: liveImage1, badge: 'SEXY' },
+
+  { id: 1, title: 'Allbet Game Lobby', provider: 'AB', image: liveAB1, badge: 'AB' },
+  { id: 2, title: 'BMQ hall', provider: 'AB', image: liveAB2, badge: 'AB' },
+  { id: 3, title: 'VIP hall', provider: 'AB', image: liveAB3, badge: 'AB' },
+  { id: 4, title: 'Multi-Play', provider: 'AB', image: liveAB4, badge: 'AB' },
+  { id: 5, title: 'Dragon Hall', provider: 'AB', image: liveAB5, badge: 'AB' },
   
-  { id: 1, title: 'KA Game 1', provider: 'BP', image: liveImage1, badge: 'SEXY' },
-  { id: 2, title: 'KA Game 2', provider: 'BP', image: liveImage1, badge: 'SEXY' },
-  { id: 3, title: 'KA Game 3', provider: 'BP', image: liveImage1, badge: 'SEXY' },
-  { id: 4, title: 'KA Game 4', provider: 'BP', image: liveImage1, badge: 'SEXY' }
+  { id: 1, title: 'Baccarat AGT06', provider: 'CQ9', image: liveCQ91, badge: 'CQ9' },
+  { id: 2, title: 'Marble Racing MC02', provider: 'CQ9', image: liveCQ92, badge: 'CQ9' },
+  { id: 3, title: 'Baccarat AFT09', provider: 'CQ9', image: liveCQ93, badge: 'CQ9' },
+  { id: 4, title: 'Baccarat AGT05', provider: 'CQ9', image: liveCQ94, badge: 'CQ9' },
+  { id: 5, title: 'Marble Racing MC01', provider: 'CQ9', image: liveCQ95, badge: 'CQ9' },
+  { id: 6, title: 'Baccarat AFT08', provider: 'CQ9', image: liveCQ96, badge: 'CQ9' }
 ])
 
 function changeProvider(provider) {

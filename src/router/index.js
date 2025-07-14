@@ -34,6 +34,18 @@ const routes = [
     meta: { hideNavBottom: true }
   },
   {
+    path: '/ticket',
+    name: 'ticket',
+    component: () => import('../views/ticket/ticket.vue'),
+    meta: { hideNavBottom: true }
+  },
+   {
+    path: '/bonus',
+    name: 'bonus',
+    component: () => import('../views/bonus/bonus.vue'),
+    meta: { hideNavBottom: true }
+  },
+  {
     path: '/forget',
     name: 'forget',
     component: () => import('../views/forget/forget.vue'),
@@ -85,6 +97,12 @@ const routes = [
   path: '/more-games',
   name: 'MoreGames',
   component: () => import('@/views/index/more-games.vue') // Adjust the path accordingly
+  },
+   {
+  path: '/mycard',
+  name: 'card',
+  component: () => import('@/views/mycard/card.vue'), // Adjust the path accordingly
+  meta: { hideNavBottom: true }
   },
   {
     path: '/deposit',

@@ -124,7 +124,7 @@ onMounted(() => {
 
       <div class="form-group">
         <div class="input-container">
-          <span class="input-icon">📄</span>
+          <span class="input-icon">👤</span>
           <input v-model="form.nickname" class="input-field" placeholder="Please enter your Full Name" />
         </div>
       </div>

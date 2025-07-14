@@ -3,14 +3,28 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const gold = ref(0)
 
+onMounted(() => {
+  const userStr = localStorage.getItem('user')
+  if (userStr) {
+    try {
+      const user = JSON.parse(userStr)
+      gold.value = user.game_data?.gold || 0
+    } catch (e) {
+      console.error('解析用户数据失败:', e)
+    }
+  }
+})
 const user = ref({
   username: '',
   nickname: '',
   balance: {
     bitcoin: 0
-  }
+  },
+  vip_level: 0 // ✅ Add this line
 })
+
 
 const goToNicknamePage = () => {
   router.push('/nickname') // Navigate to nickname page
@@ -20,50 +34,53 @@ const goBack = () => {
   router.push('/') // Navigate to home page
 }
 
-// onMounted(() => {
-//   const storedUser = localStorage.getItem('user')
-//   if (!storedUser) {
-//     router.push('/login')
-//     return
-//   }
+onMounted(() => {
+  const storedUser = localStorage.getItem('user')
+  if (!storedUser) {
+    router.push('/login')
+    return
+  }
 
-//   try {
-//     const parsed = JSON.parse(storedUser)
-//     user.value.username = parsed.username || ''
-//     user.value.nickname = parsed.nickname || ''
-//     user.value.balance.bitcoin = parsed.balance?.bitcoin || 0
-//   } catch (err) {
-//     console.error('Failed to parse user:', err)
-//   }
-// })
+  try {
+    const parsed = JSON.parse(storedUser)
+    user.value.username = parsed.username || ''
+    user.value.nickname = parsed.nickname || ''
+    user.value.balance.bitcoin = parsed.balance?.bitcoin || 0
+    user.value.vip_level = parsed.game_data?.vip_level || 0 // ✅ extract from game_data
+  } catch (err) {
+    console.error('Failed to parse user:', err)
+  }
+})
+
 
 const quickActions = ref([
   { name: 'Deposit', url: '/deposit' },
   { name: 'Withdrawal', url: '/withdraw' },
-  { name: 'My Cards' }
+  { name: 'My Cards', url: '/mycard'}
 ])
 
 
 const menuItems = ref([
-  { title: 'Reward Center', icon: '🏆', iconClass: 'trophy-icon', hasNotification: true, notificationCount: 1 },
-  { title: 'Betting Record', icon: '⚡', iconClass: 'betting-icon', hasNotification: false },
-  { title: 'Profit And Loss', icon: '💰', iconClass: 'profit-icon', hasNotification: false },
-  { title: 'Deposit Record', icon: '💳', iconClass: 'deposit-icon', hasNotification: false },
-  { title: 'Withdrawal Record', icon: '📋', iconClass: 'withdrawal-icon', hasNotification: false },
-  { title: 'Account Record', icon: '🔍', iconClass: 'account-icon', hasNotification: false },
-  { title: 'My Account', icon: '👤', iconClass: 'myaccount-icon', hasNotification: false },
-  { title: 'Security Center', icon: '🔒', iconClass: 'security-icon', hasNotification: false },
-  { title: 'Invite Friends', icon: '👥', iconClass: 'invite-icon', hasNotification: false },
-  { title: 'Manual Rebate', icon: '💵', iconClass: 'rebate-icon', hasNotification: false },
-  { title: 'Internal Message', icon: '📧', iconClass: 'message-icon', hasNotification: false },
-  { title: 'Suggestion', icon: '💬', iconClass: 'suggestion-icon', hasNotification: false },
-  { title: 'Download APP', icon: '📲', iconClass: 'suggestion-icon', hasNotification: false },
-  { title: 'Customer Service', icon: '📞', iconClass: 'suggestion-icon', hasNotification: false },
-  { title: 'Help Center', icon: '❓', iconClass: 'suggestion-icon', hasNotification: false }
+  { title: 'Reward Center', icon: '🏆', iconClass: 'trophy-icon', hasNotification: false, url: '/reward' },
+  { title: 'Betting Record', icon: '⚡', iconClass: 'betting-icon', hasNotification: false, url: '/betting-record' },
+  { title: 'Profit And Loss', icon: '💰', iconClass: 'profit-icon', hasNotification: false, url: '/profit' },
+  { title: 'Deposit Record', icon: '💳', iconClass: 'deposit-icon', hasNotification: false, url: '/deposit-record' },
+  { title: 'Withdrawal Record', icon: '📋', iconClass: 'withdrawal-icon', hasNotification: false, url: '' }, //notyet
+  { title: 'Account Record', icon: '🔍', iconClass: 'account-icon', hasNotification: false, url: '/acc-record' },
+  { title: 'My Account', icon: '👤', iconClass: 'myaccount-icon', hasNotification: false, url: '/my-account' },
+  { title: 'Security Center', icon: '🔒', iconClass: 'security-icon', hasNotification: false, url: '/security-center' },
+  { title: 'Invite Friends', icon: '👥', iconClass: 'invite-icon', hasNotification: false, url: '/share' },
+  { title: 'Manual Rebate', icon: '💵', iconClass: 'rebate-icon', hasNotification: false, url: '' }, //not yet
+  { title: 'Internal Message', icon: '📧', iconClass: 'message-icon', hasNotification: false, url: '/mail' },
+  { title: 'Suggestion', icon: '💬', iconClass: 'suggestion-icon', hasNotification: false, url: '' }, // not yet
+  { title: 'Download APP', icon: '📲', iconClass: 'suggestion-icon', hasNotification: false, url: '' }, // not yet
+  { title: 'Customer Service', icon: '📞', iconClass: 'suggestion-icon', hasNotification: false, url: '' },// not yet
+  { title: 'Help Center', icon: '❓', iconClass: 'suggestion-icon', hasNotification: false, url: '' }// not yet
 ])
 
+
 const handleSignIn = () => {
-  console.log('Sign in clicked')
+  router.push('/sign') // navigate to /deposit
 }
 
 const refreshBalance = () => {
@@ -79,8 +96,13 @@ function handleQuickAction(action) {
 }
 
 const handleMenuClick = (item) => {
-  console.log(`${item.title} clicked`)
+  if (item.url) {
+    router.push(item.url)
+  } else {
+    console.warn(`${item.title} has no URL defined`)
+  }
 }
+
 </script>
 
 <template>
@@ -105,7 +127,7 @@ const handleMenuClick = (item) => {
           <div class="user-details">
             <div class="vip-badge">
               <span class="vip-icon">👤</span>
-              <span>VIP0</span>
+              <span>VIP {{ user.vip_level }}</span>
             </div>
 
             <h3>{{ user.username }} 📱</h3>
@@ -116,7 +138,7 @@ const handleMenuClick = (item) => {
             <div class="balance-section">
               <div class="balance">
                 <span class="coin-icon">₿</span>
-                <span class="balance-amount">{{ user.balance.bitcoin }}</span>
+                <span>{{ gold }}</span>
               </div>
               <button class="refresh-btn" @click="refreshBalance">⟲</button>
             </div>
@@ -286,7 +308,7 @@ const handleMenuClick = (item) => {
 }
 
 .vip-badge {
-  background: #666;
+  background: #949494;
   color: white;
   padding: 4px 8px;
   border-radius: 12px;
@@ -415,6 +437,9 @@ const handleMenuClick = (item) => {
   gap: 8px;
   cursor: pointer;
   transition: transform 0.2s;
+}
+.menu-item:hover {
+  background: transparent !important;
 }
 
 .menu-icon {

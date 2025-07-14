@@ -10,13 +10,28 @@ import avatar from '@/assets/img/man.png'
 const router = useRouter()
 const emit = defineEmits(['back', 'action-clicked', 'sign-in'])
 
+const gold = ref(0)
+
+onMounted(() => {
+  const userStr = localStorage.getItem('user')
+  if (userStr) {
+    try {
+      const user = JSON.parse(userStr)
+      gold.value = user.game_data?.gold || 0
+    } catch (e) {
+      console.error('解析用户数据失败:', e)
+    }
+  }
+})
+
+
 const user = ref({
   username: '',
   nickname: '',
   balance: {
     bitcoin: 0
   },
-  vipLevel: 0,
+  vip_level: 0,
   benefits: {
     current: 0,
     total: 100
@@ -39,46 +54,67 @@ const loadUser = () => {
     user.value.username = parsed.username || ''
     user.value.nickname = parsed.nickname || ''
     user.value.balance.bitcoin = parsed.balance?.bitcoin || 0
-    user.value.vipLevel = parsed.vipLevel || 0
-    user.value.benefits = parsed.benefits || { current: 0, total: 100 }
+
+    // ✅ 从 game_data 提取 VIP 等级
+    user.value.vip_level = parsed.game_data?.vip_level || 0
+
+    // ✅ 提取当前福利数据（你可根据后端结构自定义）
+    user.value.benefits = {
+      current: parsed.game_data?.vip_level || 0,
+      total: 10 // 假设总 VIP 10 级，如果有准确字段就替换
+    }
   } catch (err) {
     console.error('Failed to parse user:', err)
   }
 }
 
-// onMounted(loadUser)
-// onActivated(loadUser) // Optional if you're using <keep-alive>
+
+onMounted(loadUser)
+onActivated(loadUser)
 
 const actions = reactive([
-  { id: 'bonus', title: 'Bonus', icon: giftIcon, color: 'bonus', hasNotification: true, notificationCount: 1 },
-  { id: 'signin', title: 'Sign In', icon: inviteIcon, color: 'signin', hasNotification: false },
-  { id: 'invite', title: 'Invite Friends', icon: signIcon, color: 'invite', hasNotification: false },
-  { id: 'ticket', title: 'TEMU Ticket', icon: temuIcon, color: 'ticket', hasNotification: false }
+  { 
+    id: 'bonus', 
+    title: 'Bonus', 
+    icon: giftIcon, 
+    color: 'bonus', 
+    route: '/bonus',
+    hasNotification: true,
+  },
+  { 
+    id: 'signin', 
+    title: 'Sign In', 
+    icon: signIcon, 
+    color: 'signin', 
+    hasNotification: false,
+    route: '/sign'
+  },
+  { 
+    id: 'invite', 
+    title: 'Invite Friends', 
+    icon: inviteIcon, 
+    color: 'invite', 
+    hasNotification: false,
+    route: '/share'
+  },
+  { 
+    id: 'ticket', 
+    title: 'TEMU Ticket', 
+    icon: temuIcon, 
+    color: 'ticket', 
+    hasNotification: false,
+    route: '/ticket'
+  }
 ])
 
 const avatarImage = computed(() => avatar)
 const goBack = () => router.push('/')
 
-const handleSignIn = () => {
-  emit('sign-in')
-  router.push('/sign') // navigate to /deposit
-}
-
-const handleBonus = (action) => {
-  action.hasNotification = false
-  action.notificationCount = 0
-  user.value.balance.bitcoin += 0.01
-}
-
-const handleInvite = () => {}
-const handleTicket = () => {}
-
 const handleActionClick = (action) => {
-  switch (action.id) {
-    case 'bonus': handleBonus(action); break
-    case 'signin': handleSignIn(); break
-    case 'invite': handleInvite(); break
-    case 'ticket': handleTicket(); break
+  if (action.route) {
+    router.push(action.route)
+  } else if (action.action) {
+    action.action()
   }
   emit('action-clicked', action)
 }
@@ -103,7 +139,7 @@ const refreshBalance = () => console.log('Refreshing balance...')
 
       <div class="user-card">
         <div class="user-card-overlay">
-          <div class="sign-in-badge" @click="handleSignIn">Sign In</div>
+          <div class="sign-in-badge" @click="() => router.push('/sign')">Sign In</div>
           <div class="user-info">
             <div class="avatar">
               <img :src="avatarImage" alt="Avatar" />
@@ -115,7 +151,7 @@ const refreshBalance = () => console.log('Refreshing balance...')
               </div>
               <div class="balance">
                 <span class="coin-icon">₿</span>
-                <span>{{ user.balance.bitcoin.toFixed(2) }}</span>
+                <span>{{ gold }}</span>
                 <button class="refresh-btn" @click="refreshBalance">⟲</button>
               </div>
             </div>
@@ -124,7 +160,7 @@ const refreshBalance = () => console.log('Refreshing balance...')
           <div class="vip-section">
             <div class="vip-status">
               <span class="crown-icon">👑</span>
-              <span>VIP{{ user.vipLevel }}</span>
+              <span>VIP{{ user.vip_level }}</span>
             </div>
             <div class="benefits">
               Benefits ⚙️
@@ -135,19 +171,19 @@ const refreshBalance = () => console.log('Refreshing balance...')
       </div>
 
       <div class="action-grid">
-        <a
+        <div 
           v-for="action in actions"
-          :key="action.title"
-          href="#"
+          :key="action.id"
           :class="getCardClass(action)"
-          @click.prevent="handleActionClick(action)"
+          @click="handleActionClick(action)"
         >
-          <div class="card-icon">
-            <img :src="action.icon" :alt="action.title + ' Icon'" />
+          <div class="card-content">
+            <div class="card-icon">
+              <img :src="action.icon" :alt="action.title + ' Icon'" />
+            </div>
+            <div class="card-title">{{ action.title }}</div>
           </div>
-          <div class="card-title">{{ action.title }}</div>
-          <div class="card-decoration"></div>
-        </a>
+        </div>
       </div>
     </div>
   </div>
@@ -183,7 +219,6 @@ const refreshBalance = () => console.log('Refreshing balance...')
   z-index: 1;
 }
 
-/* Header */
 .header {
   padding: 15px 20px;
   background: transparent;
@@ -212,12 +247,10 @@ const refreshBalance = () => console.log('Refreshing balance...')
   margin-right: 39px;
 }
 
-/* Content */
 .main-content {
   padding: 25px;
 }
 
-/* User Card */
 .user-card {
   background: rgba(236, 236, 236, 0.767);
   border-radius: 20px;
@@ -240,7 +273,7 @@ const refreshBalance = () => console.log('Refreshing balance...')
 
 .sign-in-badge {
   position: absolute;
-  z-index: 1; /* 👈 add this */
+  z-index: 1;
   top: -8px;
   right: 15px;
   background: #e74c3c;
@@ -251,7 +284,6 @@ const refreshBalance = () => console.log('Refreshing balance...')
   font-weight: 600;
   cursor: pointer;
 }
-
 
 .sign-in-badge::before {
   content: '✓';
@@ -268,7 +300,6 @@ const refreshBalance = () => console.log('Refreshing balance...')
   margin-right: 5px;
 }
 
-/* User Info */
 .user-info {
   display: flex;
   align-items: center;
@@ -307,9 +338,8 @@ const refreshBalance = () => console.log('Refreshing balance...')
   font-size: 14px;
   color: #666;
   margin-bottom: 12px;
-  cursor: pointer
+  cursor: pointer;
 }
-
 
 .balance {
   display: flex;
@@ -330,7 +360,6 @@ const refreshBalance = () => console.log('Refreshing balance...')
   font-size: 12px;
 }
 
-/* VIP Section */
 .vip-section {
   display: flex;
   justify-content: space-between;
@@ -360,7 +389,6 @@ const refreshBalance = () => console.log('Refreshing balance...')
   cursor: pointer;
 }
 
-/* Action Grid */
 .action-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -376,29 +404,42 @@ const refreshBalance = () => console.log('Refreshing balance...')
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.action-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-/* Background images */
 .bonus-card {
   background-image: url('@/assets/rewards/rewards-bonus.png');
+  background-size: cover;
 }
 
 .signin-card {
   background-image: url('@/assets/rewards/rewards-invite.png');
+  background-size: cover;
 }
 
 .invite-card {
   background-image: url('@/assets/rewards/rewards-sign.png');
+  background-size: cover;
 }
 
 .ticket-card {
   background-image: url('@/assets/rewards/rewards-ticket.png');
+  background-size: cover;
 }
 
-/* Card Icon */
 .card-icon {
   width: 50px;
   height: 50px;
@@ -420,7 +461,6 @@ const refreshBalance = () => console.log('Refreshing balance...')
   font-weight: 600;
 }
 
-/* Responsive */
 @media (max-width: 480px) {
   .reward-center {
     max-width: 100%;
@@ -434,5 +474,4 @@ const refreshBalance = () => console.log('Refreshing balance...')
     padding: 25px 15px;
   }
 }
-
 </style>

@@ -33,8 +33,6 @@ const getGameImageUrl = (path) => {
 }
 
 
-onMounted(fetchGames)
-
 const totalPages = computed(() => Math.ceil(allGames.value.length / gamesPerPage))
 const games = computed(() => {
   const start = currentPage.value * gamesPerPage
