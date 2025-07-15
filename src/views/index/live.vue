@@ -59,12 +59,12 @@ const pageState = ref({
 })
 
 const games = ref([
-  { id: 1, title: 'Fortune King...', provider: 'SEXY', image: liveImage1, badge: 'SEXY' },
-  { id: 2, title: 'Dinosaur Tyc...', provider: 'SEXY', image: liveImage2, badge: 'SEXY' },
-  { id: 3, title: 'Happy Fishing', provider: 'SEXY', image: liveImage3, badge: 'SEXY' },
-  { id: 4, title: 'Ocean King ...', provider: 'SEXY', image: liveImage4, badge: 'SEXY' },
-  { id: 5, title: 'All-Star Fish...', provider: 'SEXY', image: liveImage5, badge: 'SEXY' },
-  { id: 6, title: 'Boom Legend', provider: 'SEXY', image: liveImage6, badge: 'SEXY' },
+  { id: 1, title: 'Pok-Deng', provider: 'SEXY', image: liveImage1, badge: 'SEXY' },
+  { id: 2, title: 'Extra Sicbo', provider: 'SEXY', image: liveImage2, badge: 'SEXY' },
+  { id: 3, title: 'Thai HiLo', provider: 'SEXY', image: liveImage3, badge: 'SEXY' },
+  { id: 4, title: 'XocDia', provider: 'SEXY', image: liveImage4, badge: 'SEXY' },
+  { id: 5, title: 'Thai FIsh Prawn Crab', provider: 'SEXY', image: liveImage5, badge: 'SEXY' },
+  { id: 6, title: 'Roulette', provider: 'SEXY', image: liveImage6, badge: 'SEXY' },
   
 
   { id: 1, title: 'Se Die', provider: 'WM', image: liveWM1, badge: 'WM' },

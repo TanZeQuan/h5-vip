@@ -21,12 +21,12 @@ import hotGame8 from '@/assets/hot-games/hot-gm8.png'
 const games = [
   { id: 1, title: 'Songkran S...', img: hotGame1, badge: 'PG' },
   { id: 2, title: 'Mahjong Wa...', img: hotGame2, badge: 'PG' },
-  { id: 3, title: 'Thai Hi Lo', img: hotGame3, badge: 'SEXY' },
-  { id: 4, title: 'Happy Fishing', img: hotGame4, badge: 'JILI' },
-  { id: 5, title: 'Lucky Neko', img: hotGame5, badge: 'PG' },
-  { id: 6, title: 'Rich Mahjong', img: hotGame6, badge: 'RSG' },
-  { id: 7, title: 'Thai River...', img: hotGame7, badge: 'PG' },
-  { id: 8, title: 'Golden Empire', img: hotGame8, badge: 'JILI' }
+  { id: 3, title: 'Sweet Jar Combo', img: hotGame3, badge: 'RSG' },
+  { id: 4, title: 'Thai HI LO', img: hotGame4, badge: 'SEXY' },
+  { id: 5, title: 'Happy Fishing', img: hotGame5, badge: 'JILI' },
+  { id: 6, title: 'Lucky Neko', img: hotGame6, badge: 'PG' },
+  { id: 7, title: 'Rich Mahjong', img: hotGame7, badge: 'RSG' },
+  { id: 8, title: 'THai Rivers Wonders', img: hotGame8, badge: 'PG' }
 ]
 </script>
 
@@ -136,9 +136,9 @@ const games = [
   z-index: 1;
   background: linear-gradient(90deg, rgba(255, 245, 226, 0.99), hsla(33, 72%, 79%, 0.99));
   color: #1d212d;
-  font-size: 13px;
+  font-size: 12px;
   font-weight:bold;
-  padding: 3px 10px;
+  padding: 3px 8px;
   border-radius: 3px;
 }
 

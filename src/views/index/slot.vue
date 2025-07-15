@@ -6,12 +6,46 @@ import jiliLogo from '@/assets/subpage/slot-sp1.png'
 import cq9Logo from '@/assets/subpage/slot-sp2.png'
 import swgLogo from '@/assets/subpage/slot-sp3.png'
 import kaLogo from '@/assets/subpage/slot-sp4.png'
+
+//PG SESSION
 import slotImage1 from '@/assets/subpage/slot1.png'
 import slotImage2 from '@/assets/subpage/slot2.png'
 import slotImage3 from '@/assets/subpage/slot3.png'
 import slotImage4 from '@/assets/subpage/slot4.png'
 import slotImage5 from '@/assets/subpage/slot5.png'
 import slotImage6 from '@/assets/subpage/slot6.png'
+
+//JILI SESSION
+import slotJILI1 from '@/assets/slots/slot-jili1.png'
+import slotJILI2 from '@/assets/slots/slot-jili2.png'
+import slotJILI3 from '@/assets/slots/slot-jili3.png'
+import slotJILI4 from '@/assets/slots/slot-jili4.png'
+import slotJILI5 from '@/assets/slots/slot-jili5.png'
+import slotJILI6 from '@/assets/slots/slot-jili6.png'
+
+//FC SESSION
+import slotFC1 from '@/assets/slots/slot-fc1.png'
+import slotFC2 from '@/assets/slots/slot-fc2.png'
+import slotFC3 from '@/assets/slots/slot-fc3.png'
+import slotFC4 from '@/assets/slots/slot-fc4.png'
+import slotFC5 from '@/assets/slots/slot-fc5.png'
+import slotFC6 from '@/assets/slots/slot-fc6.png'
+
+//AMBS SESSION
+import slotAMBS1 from '@/assets/slots/slot-ambs1.png'
+import slotAMBS2 from '@/assets/slots/slot-ambs2.png'
+import slotAMBS3 from '@/assets/slots/slot-ambs3.png'
+import slotAMBS4 from '@/assets/slots/slot-ambs4.png'
+import slotAMBS5 from '@/assets/slots/slot-ambs5.png'
+import slotAMBS6 from '@/assets/slots/slot-ambs6.png'
+
+//BP SESSION
+import slotBP1 from '@/assets/slots/slot-bp1.png'
+import slotBP2 from '@/assets/slots/slot-bp2.png'
+import slotBP3 from '@/assets/slots/slot-bp3.png'
+import slotBP4 from '@/assets/slots/slot-bp4.png'
+import slotBP5 from '@/assets/slots/slot-bp5.png'
+import slotBP6 from '@/assets/slots/slot-bp6.png'
 
 const providers = [
   { key: 'PG', name: 'PG', logo: pgLogo },
@@ -33,41 +67,47 @@ const pageState = ref({
 })
 
 const games = ref([
-  { id: 1, title: 'Diner Frenzy Spins', provider: 'PG', image: slotImage1, badge: 'PG' },
-  { id: 2, title: 'Dead Man Riches', provider: 'PG', image: slotImage2, badge: 'PG' },
-  { id: 3, title: 'Doomsday Rampage', provider: 'PG', image: slotImage3, badge: 'PG' },
-  { id: 4, title: 'Jack the Giant Hunter', provider: 'PG', image: slotImage4, badge: 'PG' },
-  { id: 5, title: 'Knockout Riches', provider: 'PG', image: slotImage5, badge: 'PG' },
-  { id: 6, title: 'Graffiti Rush', provider: 'PG', image: slotImage6, badge: 'PG' },
+  { id: 1, title: 'Jack Giant Hunter', provider: 'PG', image: slotImage1, badge: 'PG' },
+  { id: 2, title: 'Knockout Riches', provider: 'PG', image: slotImage2, badge: 'PG' },
+  { id: 3, title: 'Graffitz Rush', provider: 'PG', image: slotImage3, badge: 'PG' },
+  { id: 4, title: 'Dead Mans Riches', provider: 'PG', image: slotImage4, badge: 'PG' },
+  { id: 5, title: 'Doomday Rampage', provider: 'PG', image: slotImage5, badge: 'PG' },
+  { id: 6, title: 'Treasure Fortune', provider: 'PG', image: slotImage6, badge: 'PG' },
   
 
-  { id: 1, title: 'FC Game 1', provider: 'JILI', image: slotImage1, badge: 'JILI' },
-    { id: 2, title: 'FC Game 2', provider: 'JILI', image: slotImage6, badge: 'JILI' },
-    { id: 3, title: 'FC Game 3', provider: 'JILI', image: slotImage2, badge: 'JILI' },
-    { id: 4, title: 'FC Game 4', provider: 'JILI', image: slotImage3, badge: 'JILI' },
-    { id: 5, title: 'FC Game 5', provider: 'JILI', image: slotImage4, badge: 'JILI' },
-    { id: 6, title: 'FC Game 6', provider: 'JILI', image: slotImage6, badge: 'JILI' },
-    { id: 7, title: 'FC Game 7', provider: 'JILI', image: slotImage1, badge: 'JILI' },
-    { id: 8, title: 'FC Game 8', provider: 'JILI', image: slotImage2, badge: 'JILI' },
-    { id: 9, title: 'FC Game 9', provider: 'JILI', image: slotImage1, badge: 'JILI' },
-    { id: 10, title: 'FC Game 10', provider: 'JILI', image: slotImage4, badge: 'JILI' },
-    { id: 11, title: 'FC Game 11', provider: 'JILI', image: slotImage1, badge: 'JILI' },
+  { id: 1, title: 'Golden Empire 2', provider: 'JILI', image: slotJILI1, badge: 'JILI' },
+    { id: 2, title: 'Mines Grand', provider: 'JILI', image: slotJILI2, badge: 'JILI' },
+    { id: 3, title: 'Clover Coins 3x3', provider: 'JILI', image: slotJILI3, badge: 'JILI' },
+    { id: 4, title: 'Bileini Lady', provider: 'JILI', image: slotJILI4, badge: 'JILI' },
+    { id: 5, title: '3 Witchs Lamp', provider: 'JILI', image: slotJILI5, badge: 'JILI' },
+    { id: 6, title: 'Money Pot', provider: 'JILI', image: slotJILI6, badge: 'JILI' },
+    { id: 7, title: 'Clover Coins 3x3', provider: 'JILI', image: slotJILI3, badge: 'JILI' },
+    { id: 8, title: 'Golden Empire 2', provider: 'JILI', image: slotJILI1, badge: 'JILI' },
+    { id: 9, title: 'Bileini Lady', provider: 'JILI', image: slotJILI4, badge: 'JILI' },
+    { id: 10, title: 'Money Pot', provider: 'JILI', image: slotJILI6, badge: 'JILI' },
+    { id: 11, title: 'Mines Grand', provider: 'JILI', image: slotJILI2, badge: 'JILI' },
 
 
-  { id: 1, title: 'CQ9 Game 1', provider: 'FC', image: slotImage1, badge: 'FC' },
-  { id: 2, title: 'CQ9 Game 2', provider: 'FC', image: slotImage2, badge: 'FC' },
-  { id: 3, title: 'CQ9 Game 3', provider: 'FC', image: slotImage2, badge: 'FC' },
-  { id: 4, title: 'CQ9 Game 4', provider: 'FC', image: slotImage3, badge: 'FC' },
+  { id: 1, title: 'Sugar Bang Bang 2', provider: 'FC', image: slotFC1, badge: 'FC' },
+  { id: 2, title: 'Poker Win', provider: 'FC', image: slotFC2, badge: 'FC' },
+  { id: 3, title: 'Roma Gladiatrix', provider: 'FC', image: slotFC3, badge: 'FC' },
+  { id: 4, title: 'Boxing Riches', provider: 'FC', image: slotFC4, badge: 'FC' },
+  { id: 5, title: 'Chinese New Year Moreways', provider: 'FC', image: slotFC5, badge: 'FC' },
+  { id: 6, title: 'Fortune Goddess', provider: 'FC', image: slotFC6, badge: 'FC' },
 
-  { id: 1, title: 'SWG Game 1', provider: 'AMBS', image: slotImage4, badge: 'AMBS' },
-  { id: 2, title: 'SWG Game 2', provider: 'AMBS', image: slotImage2, badge: 'AMBS' },
-  { id: 3, title: 'SWG Game 3', provider: 'AMBS', image: slotImage3, badge: 'AMBS' },
-  { id: 4, title: 'SWG Game 4', provider: 'AMBS', image: slotImage2, badge: 'AMBS' },
+  { id: 1, title: 'Super Ace X', provider: 'AMBS', image: slotAMBS1, badge: 'AMBS' },
+  { id: 2, title: 'Natural Ace', provider: 'AMBS', image: slotAMBS2, badge: 'AMBS' },
+  { id: 3, title: 'Guardian Wlalih', provider: 'AMBS', image: slotAMBS3, badge: 'AMBS' },
+  { id: 4, title: 'Aztec Legend', provider: 'AMBS', image: slotAMBS4, badge: 'AMBS' },
+  { id: 5, title: 'Tiki Paradise', provider: 'AMBS', image: slotAMBS5, badge: 'AMBS' },
+  { id: 6, title: 'Mafia Ways II', provider: 'AMBS', image: slotAMBS6, badge: 'AMBS' },
   
-  { id: 1, title: 'KA Game 1', provider: 'BP', image: slotImage2, badge: 'BP' },
-  { id: 2, title: 'KA Game 2', provider: 'BP', image: slotImage5, badge: 'BP' },
-  { id: 3, title: 'KA Game 3', provider: 'BP', image: slotImage4, badge: 'BP' },
-  { id: 4, title: 'KA Game 4', provider: 'BP', image: slotImage3, badge: 'BP' }
+  { id: 1, title: 'Hit Mahjong', provider: 'BP', image: slotBP1, badge: 'BP' },
+  { id: 2, title: 'Tiger Train', provider: 'BP', image: slotBP2, badge: 'BP' },
+  { id: 3, title: 'Luck of Amazon', provider: 'BP', image: slotBP3, badge: 'BP' },
+  { id: 4, title: 'Santa in the Summer', provider: 'BP', image: slotBP4, badge: 'BP' },
+  { id: 5, title: 'Hot Safari Run', provider: 'BP', image: slotBP5, badge: 'BP' },
+  { id: 6, title: 'Magic Candy Factory', provider: 'BP', image: slotBP6, badge: 'BP' }
 ])
 
 function changeProvider(provider) {
@@ -232,7 +272,7 @@ function prevPage() {
 .provider-tabs-img {
   display: flex;
   gap: 6px;
-  margin: 25px 0;
+  margin: 20px 0;
 }
 
 .provider-item {
@@ -325,7 +365,7 @@ function prevPage() {
   color: #1d212d;
   font-size: 13px;
   font-weight: bold;
-  padding: 3px 10px;
+  padding: 3px 8px;
   border-radius: 3px;
 }
 

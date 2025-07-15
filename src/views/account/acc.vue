@@ -158,8 +158,7 @@ const handleMenuClick = (item) => {
       </div>
 
       <div class="member-center">
-        <h2 class="section-title">Member Center</h2>
-
+        <h2 class="section-title">Member Center</h2>>
         <div class="menu-grid">
           <div
             v-for="item in menuItems"
@@ -371,8 +370,8 @@ const handleMenuClick = (item) => {
   background: #f0f0f0;
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 25px;
+  height: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -391,10 +390,10 @@ const handleMenuClick = (item) => {
   background: #f8f8f8;
   border: none;
   border-radius: 20px;
-  margin-left: -5px;
-  padding: 6px 10px; /* ⬅️ Smaller padding */
-  margin:8px;
-  font-size: 14px;
+  margin-left: -3px;
+  padding: 6px 6px; /* ⬅️ Smaller padding */
+  margin:5px;
+  font-size: 13px;
   font-weight: 500;
   color: #333;
   cursor: pointer;
@@ -418,10 +417,16 @@ const handleMenuClick = (item) => {
 }
 
 .section-title {
-  font-size: 16px;
+  display: inline-block;
+  padding: 5px 13px;
+  background-color: #dfdfdf; /* light gray background */
+  border-radius: 999px; /* fully rounded pill shape */
+  font-size: 12px;
   font-weight: 600;
+  color: #000;
+  position: relative;
   margin-bottom: 20px;
-  color: #252525;
+  line-height: 1;
 }
 
 .menu-grid {

@@ -134,7 +134,7 @@ function handleLoginSuccess(data) {
 .header {
   background: #2d1b4e;
   color: white;
-  padding: 12px 20px;
+  padding: 5px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -145,11 +145,10 @@ function handleLoginSuccess(data) {
 }
 
 .back-arrow {
-  font-size: 2rem;
+  font-size: 40px;
+  margin-left:10px;
+  margin-top:-10px;
   cursor: pointer;
-  padding: 0 10px;
-  font-weight: 300;
-  transition: transform 0.2s;
 }
 
 .back-arrow:hover {
@@ -159,7 +158,7 @@ function handleLoginSuccess(data) {
 .header-title {
   flex: 1;
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   letter-spacing: 0.5px;
 }

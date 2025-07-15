@@ -6,12 +6,44 @@ import jiliLogo from '@/assets/subpage/slot-sp1.png'
 import cq9Logo from '@/assets/subpage/fish-pic2.png'
 import swgLogo from '@/assets/subpage/fish-pic4.png'
 import kaLogo from '@/assets/subpage/fish-pic5.png'
+
+// JILI SESSION
 import fishImage1 from '@/assets/subpage/fish-slot1.png'
 import fishImage2 from '@/assets/subpage/fish-slot2.png'
 import fishImage3 from '@/assets/subpage/fish-slot3.png'
 import fishImage4 from '@/assets/subpage/fish-slot4.png'
 import fishImage5 from '@/assets/subpage/fish-slot5.png'
 import fishImage6 from '@/assets/subpage/fish-slot6.png'
+
+// FC SESSION
+import fishFC1 from '@/assets/fish/fish-fc1.png'
+import fishFC2 from '@/assets/fish/fish-fc2.png'
+import fishFC3 from '@/assets/fish/fish-fc3.png'
+import fishFC4 from '@/assets/fish/fish-fc4.png'
+import fishFC5 from '@/assets/fish/fish-fc5.png'
+
+// CQ9 SESSION
+import fishCQ91 from '@/assets/fish/fish-cq91.png'
+import fishCQ92 from '@/assets/fish/fish-cq92.png'
+import fishCQ93 from '@/assets/fish/fish-cq93.png'
+import fishCQ94 from '@/assets/fish/fish-cq94.png'
+import fishCQ95 from '@/assets/fish/fish-cq95.png'
+
+// SWG SESSION
+import fishSWG1 from '@/assets/fish/fish-swg1.png'
+import fishSWG2 from '@/assets/fish/fish-swg2.png'
+import fishSWG3 from '@/assets/fish/fish-swg3.png'
+import fishSWG4 from '@/assets/fish/fish-swg4.png'
+import fishSWG5 from '@/assets/fish/fish-swg5.png'
+import fishSWG6 from '@/assets/fish/fish-swg6.png'
+
+// KA SESSION
+import fishKA1 from '@/assets/fish/fish-ka1.png'
+import fishKA2 from '@/assets/fish/fish-ka2.png'
+import fishKA3 from '@/assets/fish/fish-ka3.png'
+import fishKA4 from '@/assets/fish/fish-ka4.png'
+import fishKA5 from '@/assets/fish/fish-ka5.png'
+import fishKA6 from '@/assets/fish/fish-ka6.png'
 
 const providers = [
   { key: 'JILI', name: 'JILI', logo: jiliLogo },
@@ -34,40 +66,45 @@ const pageState = ref({
 
 const games = ref([
   { id: 1, title: 'Fortune King Jackpot', provider: 'JILI', image: fishImage1, badge: 'JILI' },
-  { id: 2, title: 'Dinosaur Tycoon II', provider: 'JILI', image: fishImage2, badge: 'JILI' },
+  { id: 2, title: 'Dainosaur Tycoon II', provider: 'JILI', image: fishImage2, badge: 'JILI' },
   { id: 3, title: 'Happy Fishing', provider: 'JILI', image: fishImage3, badge: 'JILI' },
   { id: 4, title: 'Ocean King Jackpot', provider: 'JILI', image: fishImage4, badge: 'JILI' },
   { id: 5, title: 'All-Star Fishing', provider: 'JILI', image: fishImage5, badge: 'JILI' },
   { id: 6, title: 'Boom Legend', provider: 'JILI', image: fishImage6, badge: 'JILI' },
   
 
-  { id: 1, title: 'FC Game 1', provider: 'FC', image: fishImage1, badge: 'JILI' },
-    { id: 2, title: 'FC Game 2', provider: 'FC', image: fishImage2, badge: 'JILI' },
-    { id: 3, title: 'FC Game 3', provider: 'FC', image: fishImage3, badge: 'JILI' },
-    { id: 4, title: 'FC Game 4', provider: 'FC', image: fishImage5, badge: 'JILI' },
-    { id: 5, title: 'FC Game 5', provider: 'FC', image: fishImage4, badge: 'JILI' },
-    { id: 6, title: 'FC Game 6', provider: 'FC', image: fishImage2, badge: 'JILI' },
-    { id: 7, title: 'FC Game 7', provider: 'FC', image: fishImage6, badge: 'JILI' },
-    { id: 8, title: 'FC Game 8', provider: 'FC', image: fishImage5, badge: 'JILI' },
-    { id: 9, title: 'FC Game 9', provider: 'FC', image: fishImage3, badge: 'JILI' },
-    { id: 10, title: 'FC Game 10', provider: 'FC', image: fishImage1, badge: 'JILI' },
-    { id: 11, title: 'FC Game 11', provider: 'FC', image: fishImage2, badge: 'JILI' },
+  { id: 1, title: 'Gods Grant Fortune', provider: 'FC', image: fishFC1, badge: 'FC' },
+    { id: 2, title: 'Star Hunter', provider: 'FC', image: fishFC2, badge: 'FC' },
+    { id: 3, title: 'Fierce Fishing', provider: 'FC', image: fishFC3, badge: 'FC' },
+    { id: 4, title: 'Bao Chuan Fishing', provider: 'FC', image: fishFC4, badge: 'FC' },
+    { id: 5, title: 'Monkey King Fishing', provider: 'FC', image: fishFC5, badge: 'FC' },
+    { id: 6, title: 'Star Hunter', provider: 'FC', image: fishFC2, badge: 'FC' },
+    { id: 7, title: 'Monkey King Fishing', provider: 'FC', image: fishFC5, badge: 'FC' },
+    { id: 8, title: 'Fierce Fishing', provider: 'FC', image: fishFC3, badge: 'FC' },
+    { id: 9, title: 'Star Hunter', provider: 'FC', image: fishFC2, badge: 'FC' },
+    { id: 10, title: 'Bao Chuan Fishing', provider: 'FC', image: fishFC4, badge: 'FC' },
+    { id: 11, title: 'Gods Grant Fortune', provider: 'FC', image: fishFC1, badge: 'FC' },
 
 
-  { id: 1, title: 'CQ9 Game 1', provider: 'CQ9', image: fishImage4, badge: 'JILI' },
-  { id: 2, title: 'CQ9 Game 2', provider: 'CQ9', image: fishImage6, badge: 'JILI' },
-  { id: 3, title: 'CQ9 Game 3', provider: 'CQ9', image: fishImage3, badge: 'JILI' },
-  { id: 4, title: 'CQ9 Game 4', provider: 'CQ9', image: fishImage2, badge: 'JILI' },
+  { id: 1, title: 'Onestick Fishing', provider: 'CQ9', image: fishCQ91, badge: 'CQ9' },
+  { id: 2, title: 'Hero Fishing', provider: 'CQ9', image: fishCQ92, badge: 'CQ9' },
+  { id: 3, title: 'Lucky Fishing', provider: 'CQ9', image: fishCQ93, badge: 'CQ9' },
+  { id: 4, title: 'Oneshot Fishing', provider: 'CQ9', image: fishCQ94, badge: 'CQ9' },
+  { id: 5, title: 'Paradise', provider: 'CQ9', image: fishCQ95, badge: 'CQ9' },
 
-  { id: 1, title: 'SWG Game 1', provider: 'SWG', image: fishImage2, badge: 'JILI' },
-  { id: 2, title: 'SWG Game 2', provider: 'SWG', image: fishImage1, badge: 'JILI' },
-  { id: 3, title: 'SWG Game 3', provider: 'SWG', image: fishImage5, badge: 'JILI' },
-  { id: 4, title: 'SWG Game 4', provider: 'SWG', image: fishImage3, badge: 'JILI' },
+  { id: 1, title: 'Cash Cow', provider: 'SWG', image: fishSWG1, badge: 'SWG' },
+  { id: 2, title: 'Genesis Fish', provider: 'SWG', image: fishSWG2, badge: 'SWG' },
+  { id: 3, title: 'Vintage Fish', provider: 'SWG', image: fishSWG3, badge: 'SWG' },
+  { id: 4, title: 'Likui Fishing', provider: 'SWG', image: fishSWG4, badge: 'SWG' },
+  { id: 5, title: 'Arcade Fishing', provider: 'SWG', image: fishSWG5, badge: 'SWG' },
+  { id: 6, title: 'Dragon Treasure', provider: 'SWG', image: fishSWG6, badge: 'SWG' },
   
-  { id: 1, title: 'KA Game 1', provider: 'KA', image: fishImage1, badge: 'JILI' },
-  { id: 2, title: 'KA Game 2', provider: 'KA', image: fishImage2, badge: 'JILI' },
-  { id: 3, title: 'KA Game 3', provider: 'KA', image: fishImage6, badge: 'JILI' },
-  { id: 4, title: 'KA Game 4', provider: 'KA', image: fishImage3, badge: 'JILI' }
+  { id: 1, title: 'Road Hunting', provider: 'KA', image: fishKA1, badge: 'JILI' },
+  { id: 2, title: 'Legend Of Monkey', provider: 'KA', image: fishKA2, badge: 'JILI' },
+  { id: 3, title: 'Ocean Vacation', provider: 'KA', image: fishKA3, badge: 'JILI' },
+  { id: 4, title: 'Crazy Party', provider: 'KA', image: fishKA4, badge: 'JILI' },
+  { id: 5, title: 'Dragon Palace Adventure', provider: 'KA', image: fishKA5, badge: 'JILI' },
+  { id: 6, title: 'Undersea Killer', provider: 'KA', image: fishKA6, badge: 'JILI' }
 ])
 
 function changeProvider(provider) {
