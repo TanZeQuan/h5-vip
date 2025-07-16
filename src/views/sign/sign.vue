@@ -43,7 +43,7 @@ const goBack = () => {
 }
 
 const avatarUrl =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='35' r='15' fill='%23ddd'/%3E%3Cpath d='M25 75 Q50 60 75 75' fill='%23ddd'/%3E%3C/svg%3E"
+  "data:image/svg+xml,%3Csvg xmlns='https://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='35' r='15' fill='%23ddd'/%3E%3Cpath d='M25 75 Q50 60 75 75' fill='%23ddd'/%3E%3C/svg%3E"
 
 const signedInDays = ref([])
 

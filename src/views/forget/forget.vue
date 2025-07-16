@@ -36,7 +36,7 @@ const sendCode = async () => {
 
   try {
     const bodyData = `email=${encodeURIComponent(email.value)}`
-    const response = await fetch('http://192.168.0.122/silver/reset/request_reset.php', {
+    const response = await fetch('https://192.168.0.122/silver/reset/request_reset.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: bodyData
@@ -74,7 +74,7 @@ const handleResetPassword = async () => {
   try {
     const bodyData = `email=${encodeURIComponent(email.value)}&code=${encodeURIComponent(code.value)}&new_password=${encodeURIComponent(newPassword.value)}`
 
-    const response = await fetch('http://192.168.0.122/silver/reset/reset_password.php', {
+    const response = await fetch('https://192.168.0.122/silver/reset/reset_password.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: bodyData

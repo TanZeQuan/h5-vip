@@ -25,7 +25,7 @@ const handleSubmit = async () => {
   const userId = user.user_id
 
   try {
-    const response = await fetch('http://192.168.0.122/silver/user/user_update_nickname.php', {
+    const response = await fetch('https://192.168.0.122/silver/user/user_update_nickname.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `user_id=${encodeURIComponent(userId)}&nickname=${encodeURIComponent(nickname.value)}`

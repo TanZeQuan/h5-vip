@@ -49,7 +49,7 @@ const loopedUsers = computed(() => [...users, ...users])
 const scrollSpeed = 20
 
 // ✅ Example referral link (update this based on actual logic if needed)
-// const referralLink = ref('http://vip999.113thvip.com/?referralCode=pix8455')
+// const referralLink = ref('https://vip999.113thvip.com/?referralCode=pix8455')
 </script>
 
 
@@ -110,7 +110,7 @@ const scrollSpeed = 20
         <!-- Referral Link -->
         <div class="link-container">
           <span class="link-icon">🔗</span>
-          <span class="link-text">http://vip999.113thvip.com/?referralCode=pix8455 {{ referralLink }}</span>
+          <span class="link-text">https://vip999.113thvip.com/?referralCode=pix8455 {{ referralLink }}</span>
           <button class="copy-button" @click="copyToClipboard">Copy</button>
         </div>
       </div>

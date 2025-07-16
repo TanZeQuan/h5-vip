@@ -8,7 +8,7 @@ const gamesPerPage = 6
 
 const fetchGames = async () => {
   try {
-    const res = await fetch('http://192.168.0.122/silver/user/game_list.php?status=1')
+    const res = await fetch('https://192.168.0.122/silver/user/game_list.php?status=1')
     const data = await res.json()
 
     if (data.success && Array.isArray(data.data)) {
@@ -27,9 +27,9 @@ onMounted(fetchGames)
 
 const getGameImageUrl = (path) => {
   if (!path || typeof path !== 'string') return ''
-  return path.startsWith('http')
+  return path.startsWith('https')
     ? path
-    : `http://192.168.0.122/${path.replace(/^\/+/, '')}`
+    : `https://192.168.0.122/${path.replace(/^\/+/, '')}`
 }
 
 
@@ -122,6 +122,8 @@ const prevPage = () => {
   background: linear-gradient(90deg, #fff5e2, #f1d2a8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 
@@ -231,6 +233,8 @@ const prevPage = () => {
   background: linear-gradient(90deg, #fff5e2, #f1d2a8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;

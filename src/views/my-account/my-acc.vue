@@ -37,7 +37,7 @@ const handleSubmit = async () => {
     if (form.phone) params.append('phone', form.phone)
     if (form.birthday) params.append('date', form.birthday)
 
-    const res = await fetch('http://192.168.0.122/silver/user/user_update_nickname.php', {
+    const res = await fetch('https://192.168.0.122/silver/user/user_update_nickname.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'

@@ -41,7 +41,7 @@ const handleRegister = async () => {
     params.append('password', password.value)
     if (phone.value) params.append('phone', phone.value)
 
-    const res = await axios.post('http://192.168.0.122/silver/user/user_register.php', params, {
+    const res = await axios.post('https://192.168.0.122/silver/user/user_register.php', params, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }

@@ -45,7 +45,7 @@ const handleLogin = async () => {
     formData.append('username', username.value)
     formData.append('password', password.value)
 
-    const response = await fetch('http://192.168.0.122/silver/user/user_Login.php', {
+    const response = await fetch('https://192.168.0.122/silver/user/user_Login.php', {
       method: 'POST',
       body: formData
     })
