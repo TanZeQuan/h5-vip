@@ -153,12 +153,12 @@ function shakeGiftBox() {
   text-align: right;
   color: #999;
   font-size: 12px;
-  padding: 10px 20px;
+  padding: 10px 3px;
   font-weight: bold;
 }
 
 .referral-list {
-  padding: 0 10px 20px;
+  padding: 0 0 10px;
 }
 
 .referral-item:last-child {
@@ -179,6 +179,7 @@ function shakeGiftBox() {
   align-items: center;
   justify-content: center;
   position: relative;
+  margin-left:-13px;
 }
 
 .medal-top {
@@ -200,7 +201,7 @@ function shakeGiftBox() {
 }
 
 .referral-title {
-  font-size: 15px;
+  font-size: 13px;
   color: #333;
   margin-bottom: 5px;
 }
@@ -263,26 +264,39 @@ function shakeGiftBox() {
 /* Each tier gets a unique border color */
 .medal-pink {
   background-image: linear-gradient(180deg, #f3f7fb 0, #e0e9f1);
+  opacity: 0.7; /* Half transparent */
+  pointer-events: none; /* Optional: disables clicking */
 }
+
 
 .medal-green {
   background-image: linear-gradient(180deg, #f3f7fb 0, #e0e9f1);
+   opacity: 0.7; /* Half transparent */
+  pointer-events: none; /* Optional: disables clicking */
 }
 
 .medal-blue {
   background-image: linear-gradient(180deg, #f3f7fb 0, #e0e9f1);
+   opacity: 0.7; /* Half transparent */
+  pointer-events: none; /* Optional: disables clicking */
 }
 
 .medal-purple {
   background-image: linear-gradient(180deg, #f3f7fb 0, #e0e9f1);
+   opacity: 0.7; /* Half transparent */
+  pointer-events: none; /* Optional: disables clicking */
 }
 
 .medal-teal {
   background-image: linear-gradient(180deg, #f3f7fb 0, #e0e9f1);
+   opacity: 0.7; /* Half transparent */
+  pointer-events: none; /* Optional: disables clicking */
 }
 
 .medal-gold {
   background-image: linear-gradient(180deg, #f3f7fb 0, #e0e9f1);
+   opacity: 0.7; /* Half transparent */
+  pointer-events: none; /* Optional: disables clicking */
 }
 
 

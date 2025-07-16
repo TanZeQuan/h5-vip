@@ -714,7 +714,7 @@ const goToCashback = () => router.push('/reward')
 }
 
 .wallet-amount {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 600;
   color: #dadada;
   margin-right:8px;
