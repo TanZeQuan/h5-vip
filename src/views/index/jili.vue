@@ -8,11 +8,10 @@ const gamesPerPage = 6
 
 const fetchGames = async () => {
   try {
-    const res = await fetch('https://192.168.0.122/silver/user/game_list.php?status=1')
+    const res = await fetch('/api/user/game_list.php?status=1') // ← this is good
     const data = await res.json()
 
     if (data.success && Array.isArray(data.data)) {
-      // 只保留 JILI 分类的游戏
       allGames.value = data.data.filter(game => game.category_name === 'JILI')
     } else {
       console.error('加载失败：', data.message)
@@ -22,14 +21,15 @@ const fetchGames = async () => {
   }
 }
 
+
 onMounted(fetchGames)
 
 
 const getGameImageUrl = (path) => {
   if (!path || typeof path !== 'string') return ''
-  return path.startsWith('https')
+  return path.startsWith('http')
     ? path
-    : `https://192.168.0.122/${path.replace(/^\/+/, '')}`
+    : `https://192.168.0.122/silver/${path.replace(/^\/+/, '')}`
 }
 
 
