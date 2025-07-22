@@ -27,9 +27,16 @@ onMounted(fetchGames)
 
 const getGameImageUrl = (path) => {
   if (!path || typeof path !== 'string') return ''
-  return path.startsWith('http')
-    ? path
-    : `https://192.168.0.122/silver/${path.replace(/^\/+/, '')}`
+  return path.startsWith('https')
+    ?
+    path
+    : (() => {
+      let cleanedPath = path.replace(/^\/+/, ''); // 移除开头的斜杠
+      if (cleanedPath.startsWith('silver/')) {
+        cleanedPath = cleanedPath.substring('silver/'.length); // 移除第一个 'silver/'
+      }
+      return `https://192.168.0.122/silver/${cleanedPath}`; // 统一使用http并拼接正确路径
+    })();
 }
 
 
@@ -61,10 +68,14 @@ const prevPage = () => {
         </div>
         <div class="section-actions">
           <button class="nav-btn" @click="prevPage">
-            <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6" /></svg>
+            <svg viewBox="0 0 24 24">
+              <polyline points="15,18 9,12 15,6" />
+            </svg>
           </button>
           <button class="nav-btn" @click="nextPage">
-            <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6" /></svg>
+            <svg viewBox="0 0 24 24">
+              <polyline points="9,18 15,12 9,6" />
+            </svg>
           </button>
         </div>
       </div>
@@ -73,19 +84,10 @@ const prevPage = () => {
         <div class="my-game-item" v-for="game in games" :key="game.id">
           <div class="my-game-tag" v-if="game.category_name">{{ game.category_name }}</div>
           <a :href="game.url" target="_blank" v-if="game.url">
-          <img
-            :src="getGameImageUrl(game.image_url)"
-            class="my-game-image"
-            :alt="game.game_name"
-            style="cursor: pointer"
-          />
+            <img :src="getGameImageUrl(game.image_url)" class="my-game-image" :alt="game.game_name"
+              style="cursor: pointer" />
           </a>
-          <img
-            v-else
-            :src="getGameImageUrl(game.image_url)"
-            class="my-game-image"
-            :alt="game.game_name"
-          />
+          <img v-else :src="getGameImageUrl(game.image_url)" class="my-game-image" :alt="game.game_name" />
           <div class="my-game-name">{{ game.game_name }}</div>
         </div>
       </div>
@@ -131,11 +133,13 @@ const prevPage = () => {
   width: 30px;
   margin-right: 8px;
 }
+
 .section-actions {
   display: flex;
   align-items: center;
   gap: 6px;
 }
+
 .section-title {
   font-size: 18px;
   font-weight: bold;
@@ -152,7 +156,7 @@ const prevPage = () => {
   width: 30px;
   height: 30px;
   object-fit: contain;
-  margin-top:-6px;
+  margin-top: -6px;
 }
 
 .nav-btn {
@@ -163,10 +167,12 @@ const prevPage = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #283046 !important; /* Dark blue background */
+  background-color: #283046 !important;
+  /* Dark blue background */
   border: none !important;
-  border-radius: 0 !important; /* Square corners */
-  
+  border-radius: 0 !important;
+  /* Square corners */
+
 }
 
 .nav-btn svg {
@@ -175,6 +181,7 @@ const prevPage = () => {
   width: 12px;
   height: 12px;
 }
+
 .nav-btn.see-all {
   display: inline-flex;
   align-items: center;
@@ -188,7 +195,8 @@ const prevPage = () => {
   background-clip: text;
   color: transparent;
   border: none;
-  white-space: nowrap; /* 防止文字换行 */
+  white-space: nowrap;
+  /* 防止文字换行 */
 }
 
 /* Grid */

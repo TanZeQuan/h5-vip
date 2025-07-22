@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import Components from 'unplugin-vue-components/vite'
 import { VantResolver } from '@vant/auto-import-resolver'
-
+ 
 export default defineConfig({
   server: {
     port: 8080,
@@ -16,7 +16,8 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
         rewrite: path => path.replace(/^\/api/, '')
-      }
+      },
+      allowedHosts: ['.ngrok-free.app'] // 如果你用的是 Vite 5+
     }
   },
   resolve: {

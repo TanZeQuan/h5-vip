@@ -40,42 +40,38 @@ const handleLogin = async () => {
 
   isLoading.value = true
 
-  try {
-    const formData = new FormData()
-    formData.append('username', username.value)
-    formData.append('password', password.value)
-
-    const response = await fetch('https://192.168.0.122/silver/user/user_Login.php', {
-      method: 'POST',
-      body: formData
-    })
-
-    const result = await response.json()
-
-    if (result.success) {
-      successMessage.value = result.message
-
-      // ✅ Save user data
-      localStorage.setItem('user', JSON.stringify(result.data))
-
-      // ✅ Save username only if Remember Me is checked
-      if (rememberMe.value) {
-        localStorage.setItem('rememberedUsername', username.value)
-      } else {
-        localStorage.removeItem('rememberedUsername')
-      }
-
-      // ✅ Redirect to homepage
-      router.push('/')
-    } else {
-      errorMessage.value = result.message
-    }
-  } catch (error) {
-    errorMessage.value = '登录失败，请检查网络连接'
-  } finally {
-    isLoading.value = false
+  // ✅ Simulated user database (can replace with anything)
+  const dummyUser = {
+    username: 'demo',
+    password: '123456',
+    name: 'Demo User',
+    role: 'admin'
   }
+
+  await new Promise(resolve => setTimeout(resolve, 800)) // Fake delay
+
+  if (username.value === dummyUser.username && password.value === dummyUser.password) {
+    // ✅ Store user data
+    localStorage.setItem('user', JSON.stringify(dummyUser))
+
+    if (rememberMe.value) {
+      localStorage.setItem('rememberedUsername', username.value)
+    } else {
+      localStorage.removeItem('rememberedUsername')
+    }
+
+    successMessage.value = '登录成功，正在跳转...'
+
+    setTimeout(() => {
+      router.push('/')
+    }, 800)
+  } else {
+    errorMessage.value = '用户名或密码错误'
+  }
+
+  isLoading.value = false
 }
+
 </script>
 
 

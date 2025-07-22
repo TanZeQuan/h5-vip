@@ -35,7 +35,7 @@ const goBack = () => {
 }
 
 onMounted(() => {
-  const storedUser = localStorage.getItem('user')
+  const storedUser = localStorage.getItem('user') //UNCLOCK FOR AFTER LOGIN FUNCTION
   if (!storedUser) {
     router.push('/login')
     return

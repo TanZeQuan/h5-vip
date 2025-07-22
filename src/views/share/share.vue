@@ -7,7 +7,7 @@ import ShareRecord from '@/views/share/share-record.vue'
 
 const router = useRouter()
 
-// ✅ Redirect if not logged in
+// ✅ Redirect if not logged in ************ UNCOMMENT FOR AFTERLOGIN VIEW PAGE FUNCTION *********
 onMounted(() => {
   const user = localStorage.getItem('user')
   if (!user) {

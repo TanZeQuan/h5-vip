@@ -69,7 +69,7 @@ const loadUser = () => {
 }
 
 
-onMounted(loadUser)
+onMounted(loadUser) //UNLCIK FOR AFTER LOGIN FUNCTION
 onActivated(loadUser)
 
 const actions = reactive([
