@@ -5,6 +5,7 @@ import Components from 'unplugin-vue-components/vite'
 import { VantResolver } from '@vant/auto-import-resolver'
  
 export default defineConfig({
+  base: '/h5-vip/',
   server: {
     port: 8080,
     open: true,

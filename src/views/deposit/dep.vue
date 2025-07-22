@@ -302,16 +302,16 @@ const proceed = () => {
 .amount-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: 0.25rem; /* tighter spacing */
+  margin-bottom: 0.5rem;
 }
 
 .amount-button {
   background: white;
   border: 1px solid #d1d5db;
   border-radius: 0.25rem;
-  padding: 0.75rem 0.5rem;
-  font-size: 0.875rem;
+  padding: 0.5rem 0.3rem;   /* reduced padding */
+  font-size: 0.875rem;      /* smaller font size */
   cursor: pointer;
   transition: all 0.2s;
 }
